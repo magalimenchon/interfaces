@@ -1,0 +1,11 @@
+.slide{
+    width: 200px;
+}
+.range{
+    width: 300px;
+    display: flex;
+    margin: 1.7vh;
+}
+.ranges{
+    display: flex;
+}

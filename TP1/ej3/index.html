@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Rectangulo</title>
+    <script src="rectangle.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Elegir color de rectángulo:</h1>
+        <div class="ranges">
+            <div class="range">
+                <label>Red:</label>
+                <input type="range" min="0" max="255" value="255" id="js-r" class="slide">
+                <p><span id="value-r"></span></p>
+            </div>
+            <div class="range">
+                <label>Green:</label>
+                <input type="range" min="0" max="255" value="255" id="js-g" class="slide">
+                <p><span id="value-g"></span></p>
+            </div>
+            <div class="range">
+                <label>Blue:</label>
+                <input type="range" min="0" max="255" value="0" id="js-b" class="slide">
+                <p><span id="value-b"></span></p>
+            </div>
+            <div class="range">
+                <label>Opacity/Transparency:</label>
+                <input type="range" min="0" max="255" value="255" id="js-a" class="slide">
+                <p><span id="value-a"></span></p>
+            </div class="range">
+        </div>
+        <canvas id="myCanvas" width="500" height="500">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+</body>
+
+</html>
