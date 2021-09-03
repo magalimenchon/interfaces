@@ -19,8 +19,8 @@ function IniciarPagina() {
         (desplazamiento eje x), de RGB(109, 156, 54) a RGB(172, 158, 59)
 
     */
-    /*---------------start------------------------*/
 
+    /*---------------start------------------------*/
 
     //VARIABLES
 
@@ -41,8 +41,10 @@ function IniciarPagina() {
     let coefficient = 255 / (width / 3);
 
     //INVOCACIONES FUNCIONES
+    
     drawRectangle(imageData, r, g, b, a);
     ctx.putImageData(imageData, 0, 0);
+
 
     /*---------------functions------------------------*/
 

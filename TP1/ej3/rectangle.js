@@ -43,7 +43,8 @@ function IniciarPagina() {
     outputB.innerHTML = b;
     outputA.innerHTML = a;
 
-    /*---------------functions------------------------*/
+
+    /*-----------------events--------------------------*/
 
     //--CAMBIOS EN RANGO--
     rangeR.oninput = function () {
@@ -68,6 +69,8 @@ function IniciarPagina() {
     }
 
 
+    /*---------------functions------------------------*/
+    
     //--RECTANGULO--
 
     function updateRectangle() {
