@@ -14,11 +14,13 @@ function IniciarPagina() {
     let ctx = canvas.getContext("2d");
     let width = canvas.width;
     let height = canvas.height;
-    let imageData = ctx.createImageData(width, height);
+    //let imageData = ctx.createImageData(width, height);
 
     //INVOCACIONES FUNCIONES
-    drawRectangle(imageData, r, g, b, a);
-    ctx.putImageData(imageData, 0, 0);
+    //drawRectangle(imageData, r, g, b, a);
+    //ctx.putImageData(imageData, 0, 0);
+
+    /*-----------------events--------------------------*/
 
     /*---------------functions------------------------*/
 
