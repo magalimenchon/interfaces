@@ -25,8 +25,11 @@ function IniciarPagina() {
     //imageDisc.src = "pexels-photo.jpg";
 
     //--filter--
+    //GrayScale
     const quantityCompositionColor = 3;
+    //Negative
     const maxbits = 255;
+    //Blur
     let matrixBoxBlur = [];
     const BoxBlurWidth = 3;
     const BoxBlurHeight = 3;
@@ -38,6 +41,7 @@ function IniciarPagina() {
         //GrayscaleFilter();
         //NegativeFilter();
         //BlurFilter();
+        //BrightnessFilter(0.5);
     }
     /*---------------functions------------------------*/
 
@@ -45,6 +49,29 @@ function IniciarPagina() {
         ctx.drawImage(image, 0, 0);
     }
 
+    /*BRIGHTNESS */
+    function BrightnessFilter(coefficientBritness) {
+
+        let imageData = ctx.getImageData(0, 0, width, height);
+
+        for (let x = 0; x < width; x++) {
+            for (let y = 0; y < height; y++) {
+                let r = getRed(imageData, x, y);
+                let g = getGreen(imageData, x, y);
+                let b = getBlue(imageData, x, y);
+                let a = getOpacity(imageData, x, y);
+                //Se le incrementa el porcentaje de cada parámetro de color por igual.
+                //rango de brillo [-1, 1] Siendo 0 el valor de la imagen original.
+                r += coefficientBritness*maxbits;
+                g += coefficientBritness*maxbits;
+                b += coefficientBritness*maxbits;
+                setPixel(imageData, x, y, r, g, b, a);
+            }
+        }
+        /* Dibujar la información de píxeles en el lienzo.
+           Si se proporciona un rectángulo solo se pintan los píxeles del mismo. */
+        ctx.putImageData(imageData, 0, 0);
+    }
     /*BLUR FILTER */
     function BlurFilter() {
 
