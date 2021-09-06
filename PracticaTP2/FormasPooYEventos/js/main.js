@@ -57,7 +57,7 @@ function IniciarPagina() {*/
 
         //si ya hay una figura seleccionada y con down "la dejé de seleccionar" --> la des-resalto.
         if(lastClickedFigure != null){
-            lastClickedFigure.setResultado(false);
+            lastClickedFigure.setResaltado(false);
             lastClickedFigure = null;
         }
         //busca si dentro de todas las figuras, alguna fue clickeada
@@ -68,7 +68,7 @@ function IniciarPagina() {*/
         
         //si encontró algo, se resalta y se guarda la última seleccionada. 
         if(clickFig != null){
-            clickFig.setResultado(true);
+            clickFig.setResaltado(true);
             lastClickedFigure = clickFig;
         }
         //dibujo todas las figuras

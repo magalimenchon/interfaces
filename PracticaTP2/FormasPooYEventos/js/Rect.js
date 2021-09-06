@@ -40,7 +40,7 @@ function IniciarPagina() {*/
                     //si está más a la derecha, tiene que estar dentro del rango del rectangulo.
                     //En y: si está mas arriba de donde arranca el rectangulo, no lo tomo
                     //si está más abajo, tiene que estar dentro del rango del rectangulo.
-            return !(x < this.posX || x > this.posX * this.width || y < this.posY || y > this.posY* this.height);
+            return !(x < this.posX || x > this.posX + this.width || y < this.posY || y > this.posY + this.height);
         };
     }
 
