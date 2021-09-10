@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const width = canvas.width;
     const height = canvas.height;
 
+    // boton select
+   const selectButton = document.getElementById("js-select-filters");
+
     //GrayScale Filter
     const quantityCompositionColor = 3;
 
@@ -86,8 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
-    window.onload = () => {
+    selectButton.addEventListener('change', (e) => {
+        if (e.target.value == "gray-scale")
         grayscaleFilter();
-    }
+    });
     //#endRegion
 });

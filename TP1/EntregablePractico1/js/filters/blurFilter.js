@@ -129,11 +129,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //#endRegion
+
+    //#regionEvents
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "blur")
             blurFilter();
     })
-    //#regionEvents
-    
     //#endRegion
 });

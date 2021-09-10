@@ -7,14 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //Canvas
-    const canvas = document.querySelector('#js-canvas');
+    let canvas = document.querySelector('#js-canvas');
     const ctx = canvas.getContext("2d");
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
 
     //Selector color
     const selectorColor = document.querySelector('#js-input-color');
-    // const hexadecimalColor = document.querySelector('#js-input-hexadecimal-color');
 
     //Stroke thickness
     const range = document.querySelector('#js-input-thickness');
@@ -41,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Arranca a dibujar:
     function startDraw(e) {
         isMouseDown = true;
-        // ctx.beginPath();
         //Dibuja también cuando clickea
         draw(e);
     };
@@ -94,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonPencil.addEventListener('click', () => {
         borrar = false;
         canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mouseup', endDraw);
+        window.addEventListener('mouseup', endDraw);
         canvas.addEventListener('mousemove', draw);
     });
 
@@ -102,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonErase.addEventListener('click', () => {
         borrar = true;
         canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mouseup', endDraw);
+        window.addEventListener('mouseup', endDraw);
         canvas.addEventListener('mousemove', draw);
     });
 
@@ -117,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // todavia no funciona
-    function downloadCanvas(){  
+  /*  function downloadCanvas(){  
         // get canvas data  
         var image = canvas.toDataURL();  
       
@@ -125,16 +123,23 @@ document.addEventListener("DOMContentLoaded", () => {
         var tmpLink = document.createElement( 'a' );  
         tmpLink.download = 'image.png'; // set the name of the download file 
         tmpLink.href = image; 
+    }*/
+
+    function downloadCanvas(){
+        /*--------esto solo puede servir para clonar la imagen
+        const dataURI = canvas.toDataURL();  
+       imageConverted.src = dataURI;------------*/
+       const a = document.createElement("a");
+       document.body.appendChild(a);
+       //se le setea la URI con los datos del canvas.
+       a.href = canvas.toDataURL();
+       a.download = "canvas-image.png"
+       //fuerza la descarga automatica por el click con js
+       a.click();
+       document.body.removeChild(a);
+
     }
-    //-----------------------------------------------------------------
-    //Cambio el color del fondo y el value del input indicando el color del pixel
-    // cuando cambia el selector de color.
-    // selectorColor.addEventListener('input', () => {
-    //     let color = selectorColor.value;
-    //     hexadecimalColor.value = color;
-    //     document.body.style.backgroundColor = color;
-    // });
-    //-----------------------------------------------------------------
+
     //#endRegion
 
 });

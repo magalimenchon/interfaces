@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const width = canvas.width;
     const height = canvas.height;
 
+   // boton select
+   const selectButton = document.getElementById("js-select-filters");
+
     //Negative Filter
     const maxbits = 255;
 
@@ -80,8 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
-    window.onload = () => {
-        negativeFilter();
-    }
+    selectButton.addEventListener('change', (e) => {
+        if (e.target.value == "negative")
+            negativeFilter();
+    });
     //#endRegion
 });

@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const width = canvas.width;
     const height = canvas.height;
 
+    // boton select
+   const selectButton = document.getElementById("js-select-filters");
+
     //Brightness Filter
     const coefficientBritness = 0.5;
     const maxbits = 255;    //*************SE REPITE TMB EN GRAYSCALE
@@ -80,8 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
-    window.onload = () => {
-        brightnessFilter(coefficientBritness);
-    }
+    selectButton.addEventListener('change', (e) => {
+        if (e.target.value == "brightness")
+            brightnessFilter(coefficientBritness);
+    });
     //#endRegion
 });
