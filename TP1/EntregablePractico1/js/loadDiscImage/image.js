@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //Imagen
     const imageDisc = new Image();
     imageDisc.src = "images/image.jpg";
-    //imageDisc.src = "pexels-photo.jpg";
+    //imageDisc.src = "images/pexels-photo.jpg";
+
+    const uploadImage = document.querySelector('#js-upload-image');
 
 
     //---Functions---
@@ -43,5 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //#endRegion
+
+    uploadImage.addEventListener('change', (e) =>{
+        const imageUpload = new Image();
+        imageUpload.src = URL.createObjectURL(e.target.files[0]);
+        imageUpload.onload = () => {
+            drawImageInCanvas(imageUpload);
+        }
+    });
+
 
 });

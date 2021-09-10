@@ -9,7 +9,7 @@
     <!--JS - LOAD_DISC_IMAGE -->
     <script src="js/loadDiscImage/image.js"></script>
     <!--JS - FILTERS -->
-    <script src="js/filters/filters.js"></script>
+
     <script src="js/filters/grayscaleFilter.js"></script>
     <script src="js/filters/negativeFilter.js"></script>
     <script src="js/filters/blurFilter.js"></script>
@@ -39,6 +39,10 @@
             </div>
             <div class="menu-item">
                 <button id="js-button-erase"><i class="fas fa-eraser"></i></button>
+            </div>
+            <div class="menu-item">
+                <input type="file" accept="image/jpeg, image/png" name="image" style="display: none;" id="js-upload-image">
+                <label for="js-upload-image" style="cursor: pointer;">Upload Image</label>
             </div>
             <div class="menu-item">
                 <button id="js-button-reset">Borrar Canvas</button>
