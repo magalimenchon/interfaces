@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +11,61 @@
     <!--JS - FILTERS -->
     <!--<script src="js/filters/grayscaleFilter.js"></script>-->
     <!--<script src="js/filters/negativeFilter.js"></script>-->
-    <!--<script src="js/filters/blurFilter.js"></script>-->
-    <script src="js/filters/brightnessFilter.js"></script>
+    <script src="js/filters/blurFilter.js"></script>
+    <!-- <script src="js/filters/brightnessFilter.js"></script> -->
     <!--JS - DRAW -->
-    <script src="js/draw/pencil.js"></script>
-   
+    <script src="js/draw/tools.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div>
-        <!-------------------------------------->
-        <input type="text" id="js-input-hexadecimal-color">
-        <!-------------------------------------->
-        <input type="color" id="js-input-color">
-        <button id="js-button-pencil">lapiz</button>
+    <div class="grid-container">
+        <div class="menu">
+            <!-------------------------------------->
+            <!-- <input type="text" id="js-input-hexadecimal-color"> -->
+            <!-------------------------------------->
+            <div class="menu-item">
+                <label for="thickness">Grosor:</label>
+                <Input class="range" type="range" value="5" min="1" max="100" id="js-input-thickness"></Input>
+            </div>
+            <div class="menu-item">
+                <label for="color">Color:</label>
+                <input type="color" id="js-input-color">
+            </div>
+            <div class="menu-item">
+                <button class="button" id="js-button-pencil"><i class="fas fa-pencil-alt"></i></button>
+            </div>
+            <div class="menu-item">
+                <button id="js-button-erase"><i class="fas fa-eraser"></i></button>
+            </div>
+            <div class="menu-item">
+                <button id="js-button-reset">Borrar Canvas</button>
+            </div>
+            <div class="menu-item">
+                <button id="js-button-download">Descargar Imagen</button>
+            </div>
+            <div class="menu-item">
+                <label for="filters">Filtros:</label>
+
+                <select name="filters" id="js-select-filters">
+                    <option value="non">--Ninguno--</option>
+                    <option value="negative">Negativo</option>
+                    <option value="brightness">Brillo</option>
+                    <option value="gray-scale">Escala de grises</option>
+                    <option value="blur">Blur</option>
+                </select>
+            </div>
+        </div>
+        <div class="main">
+            <canvas id="js-canvas" width=500 height=500>
+                Your browser does not support the HTML5 canvas tag.
+            </canvas>
+        </div>
     </div>
-    <canvas id="js-canvas" width="500" height="500">
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>
 </body>
+
 </html>

@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const width = canvas.width;
     const height = canvas.height;
 
+    // boton select
+    const selectButton = document.getElementById("js-select-filters");
+
     //Blur Filter
     /*let matrixBoxBlur = [];
     const BoxBlurWidth = 3;
@@ -126,10 +129,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //#endRegion
-
+    selectButton.addEventListener('change', (e) => {
+        if (e.target.value == "blur")
+            blurFilter();
+    })
     //#regionEvents
-    window.onload = () => {
-        blurFilter();
-    }
+    
     //#endRegion
 });
