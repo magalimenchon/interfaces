@@ -13,6 +13,10 @@ body {
     background-color: #FFEDD7;
 }
 
+canvas {
+    background-color: white;
+}
+
 .menu {
     flex-direction: column;
     background-color: #FFEDD7;
