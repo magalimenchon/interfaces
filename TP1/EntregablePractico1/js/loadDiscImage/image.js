@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Imagen
     const imageDisc = new Image();
     imageDisc.src = "images/image.jpg";
+    imageDisc.src = "images/colors.jpg";
     //imageDisc.src = "images/pexels-photo.jpg";
 
     const uploadImage = document.querySelector('#js-upload-image');
