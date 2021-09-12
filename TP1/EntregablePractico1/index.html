@@ -19,6 +19,8 @@
     <script src="js/filters/greenFilter.js"></script>
     <script src="js/filters/blueFilter.js"></script>
     <script src="js/filters/saturationFilter.js"></script>
+    <script src="js/filters/sepiaFilter.js"></script>
+    <script src="js/filters/sobelFilter.js"></script>
     <!--JS - DRAW -->
     <script src="js/draw/tools.js"></script>
     <!-- Font Awesome -->
@@ -37,7 +39,7 @@
             </div>
             <div class="menu-item">
                 <label for="color">Color:</label>
-                <input type="color" id="js-input-color">
+                <input class="input" type="color" id="js-input-color">
             </div>
             <div class="menu-item">
                 <button id="js-button-pencil"><i class="fas fa-pencil-alt"></i></button>
@@ -47,28 +49,34 @@
             </div>
             <div class="menu-item">
                 <input type="file" accept="image/jpeg, image/png" name="image" style="display: none;" id="js-upload-image">
-                <label class="button" for="js-upload-image" style="cursor: pointer;">Upload Image</label>
-            </div>
-            <div class="menu-item">
-                <button id="js-button-reset">Borrar Canvas</button>
+                <label class="button" for="js-upload-image" style="cursor: pointer;">Subir Imagen</label>
             </div>
             <div class="menu-item">
                 <button id="js-button-download">Descargar Imagen</button>
             </div>
             <div class="menu-item">
-                <label for="filters">Filtros:</label>
+                <button id="js-button-reset">Borrar Canvas</button>
+            </div>
+            
+            <div class="menu-item">
+                <button id="js-button-limpiar">Limpiar Imagen</button>
+            </div>
+            <div class="menu-item">
+                <label>Filtros:</label>
 
                 <select name="filters" id="js-select-filters">
                     <option value="non">--Ninguno--</option>
-                    <option value="negative">Negativo</option>
-                    <option value="brightness">Brillo</option>
-                    <option value="gray-scale">Escala de grises</option>
-                    <option value="blur">Blur</option>
-                    <option value="binary">Binarización</option>
                     <option value="red">Rojo</option>
                     <option value="green">Verde</option>
                     <option value="blue">Azul</option>
+                    <option value="negative">Negativo</option>
+                    <option value="brightness">Brillo</option>
+                    <option value="gray-scale">Escala de grises</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="binary">Binarización</option>
                     <option value="saturation">Saturación</option>
+                    <option value="blur">Blur</option>
+                    <option value="sobel">Sobel</option>
                 </select>
             </div>
         </div>
