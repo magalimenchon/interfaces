@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const height = canvas.height;
 
     // boton select
-   const selectButton = document.getElementById("js-select-filters");
+    const selectButton = document.getElementById("js-select-filters");
 
     //---Functions---
 
     //#regionSepiaFilter
 
-  
+
     function sepiaFilter() {
 
         const imageData = ctx.getImageData(0, 0, width, height);
@@ -30,8 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 g = getGreen(imageData, x, y);
                 b = getBlue(imageData, x, y);
                 a = getOpacity(imageData, x, y);
-       
-                //Asigna nuevos colores a partir de 
+
+                /*Asigna nuevos colores a partir de valores de tonos recomendados por Microsoft.
+                  Si alguno de los coeficientes de cada parámetro de color sobrepasa del valor
+                  máximo 255 se setea este valor. */
                 let newR = Math.min((0.393 * r) + (0.769 * g) + (0.189 * b), 255.0); //new red
                 let newG = Math.min((0.349 * r) + (0.686 * g) + (0.168 * b), 255.0); //new green
                 let newB = Math.min((0.272 * r) + (0.534 * g) + (0.131 * b), 255.0); //new blue
@@ -56,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
         imageData.data[index + 3] = a;
     }
 
-   /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
-     que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
@@ -90,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Cuando cambia el selector a Sepia aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "sepia")
-        sepiaFilter();
+            sepiaFilter();
     });
     //#endRegion
 });
