@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             s = 0
         }
         else {
-            s = substraction / (1.0 - Math.abs((2.0*l) - 1.0));
+            s = substraction / (1.0 - Math.abs(2.0*l - 1.0));
         }
         
 
@@ -102,7 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hsl_to_rgb_convertion(hsl) {
         //referencia: https://www.rapidtables.com/convert/color/hsl-to-rgb.html
-        let h = hsl[0];
+        
+        // modulo de hue para que tome valores entre 0 y 360
+        let h = Math.abs(hsl[0]);
         let s = hsl[1];
         let l = hsl[2];
         let r, g, b, c, x, m;
@@ -140,6 +142,9 @@ document.addEventListener("DOMContentLoaded", () => {
             r = Math.round((r + m) * 255);
             g = Math.round((g + m) * 255);
             b = Math.round((b + m) * 255);
+        }
+        else{
+            console.log(hsl);
         }
 
         return [r, g, b];

@@ -27,30 +27,41 @@ document.addEventListener("DOMContentLoaded", () => {
         coordenada RGB con este promedio. Finalmente se actualiza la imagen con esta información.*/
     function sobelFilter() {
 
+        // matriz kernel usada para detectar bordes en el eje X, al evaluarse produce un contraste de 
+        // valores entre columnas
         let kernelDireccionX = [[-47, 0, 47],
                                 [-162, 0, 162],
                                 [-47, 0, 47]];
         
+        // matriz kernel usada para detectar bordes en el eje Y, al evaluarse produce un contraste de 
+        // valores entre filas
         let kernelDireccionY = [[-47, -162, -47],
                                 [0, 0, 0],
                                 [47, 162, 47]];
 
+        // obtengo imagenes del canvas para trabajar por separado
         const ctxImageData = ctx.getImageData(0, 0, width, height);
 
-        var imageDataX = ctx.getImageData(0, 0, width, height);
-        var imageDataY = ctx.getImageData(0, 0, width, height);
+        let imageDataX = ctx.getImageData(0, 0, width, height);
+        let imageDataY = ctx.getImageData(0, 0, width, height);
 
+        // primero aplico un filtro de escala de grises
         const imageDataG = grayscaleFilter(ctxImageData);
 
+        // multiplico la matriz kernel punto a punto para detectar la probabilidad de bordes en el eje X
         imageDataX = kernelMultiplication(imageDataG, imageDataX, kernelDireccionX);
+        // hago lo mismo para detectar bordes en el eje Y
         imageDataY = kernelMultiplication(imageDataG, imageDataY, kernelDireccionY);
 
+        // hago un merge de los dos mapas de bits
         let imageDataMerged = mergeImages(imageDataX, imageDataY);
+
         /* Dibujar la información de píxeles en el lienzo.
            Si se proporciona un rectángulo solo se pintan los píxeles del mismo. */
         ctx.putImageData(imageDataMerged, 0, 0);
     }
 
+    // une dos imagenes superponiendolas y eligiendo pixel a pixel los que tienen mayor luz o color
     function mergeImages(imgX, imgY){
 
         let r, a;
@@ -58,10 +69,18 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let x = 0; x < width; x++) {
             for (let y = 0; y < height; y++) {
                 
+                // al ser escala de grises r=g=b tomo cualquiera de los 3 colores
                 let redX = getRed(imgX, x, y);
                 let redY = getRed(imgY, x, y);
 
-                r = (redX + redY)/2;
+                // elige el pixel con mayor luz o color
+                if (redX > redY)
+                    r = redX;
+                else
+                    r = redY;
+
+                // opcion para hacer un promedio de las dos imagenes
+                // r = (redX + redY)/2;
                      
                 a = getOpacity(imgX, x, y);
 
@@ -72,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return imgX;
     }
 
+    // recorre una imagen y evalua la matriz kernel punto a punto
     function kernelMultiplication(imageDataFixed, imageData, kernelDireccion) {
         
         let r, a;
@@ -90,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return imageData;
     }
 
+    // filtro de escala de grises
     function grayscaleFilter(imageData) {
         let r, g, b, a;
 
@@ -109,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return imageData;
     }
 
+    // multiplica la matriz kernel en un punto de la imagen, tomando sus pixeles vecinos
     function Convolution(imageData, matrix, x, y) {
         
         //fila 1
@@ -124,13 +146,17 @@ document.addEventListener("DOMContentLoaded", () => {
         let pos21 = getRed(imageData, x, y + 1);
         let pos22 = getRed(imageData, x + 1, y + 1);
 
+        // resultado obtiene la probabilidad de un borde en un punto multiplicando dos matrices 3x3
         let result = ((pos00 * matrix[0][0]) + (pos01 * matrix[0][1]) + (pos02 * matrix[0][2]) +
             (pos10 * matrix[1][0]) + (pos11 * matrix[1][1]) + (pos12 * matrix[1][2]) +
             (pos20 * matrix[2][0]) + (pos21 * matrix[2][1]) + (pos22 * matrix[2][2]));
 
+        // valor maximo = (47*255 + 162*255 + 47*255) = 65280
+
+        // uso regla de 3 para pasarlo a color
+        // un numero mas alto significa mas probabilidad de borde
         result = Math.abs(result*255/65280);
        
-
         return result;
     }
 
