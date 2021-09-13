@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Negativo aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "negative")
             negativeFilter();

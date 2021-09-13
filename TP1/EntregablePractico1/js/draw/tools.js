@@ -114,21 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
         downloadCanvas();
     })
 
-    // todavia no funciona
-  /*  function downloadCanvas(){  
-        // get canvas data  
-        var image = canvas.toDataURL();  
-      
-        // create temporary link  
-        var tmpLink = document.createElement( 'a' );  
-        tmpLink.download = 'image.png'; // set the name of the download file 
-        tmpLink.href = image; 
-    }*/
 
+    //Permite descargar la imagen de lo realizado en canvas por medio de los datos obtenidos de la URI
     function downloadCanvas(){
-        /*--------esto solo puede servir para clonar la imagen
-        const dataURI = canvas.toDataURL();  
-       imageConverted.src = dataURI;------------*/
+
        const a = document.createElement("a");
        document.body.appendChild(a);
        //se le setea la URI con los datos del canvas.

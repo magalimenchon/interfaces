@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectButton = document.getElementById("js-select-filters");
 
     //Binary Filter
-    const quantityCompositionColor = 3;
+    const quantityCompositionColor = 3; //Cantidad de componentes de color del pixel
     const limit = 127/3;  //Promedio si fuese el gris.
 
     //---Functions---
@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 g = getGreen(imageData, x, y);
                 b = getBlue(imageData, x, y);
                 a = getOpacity(imageData, x, y);
-                //promedio de los 3 parámwtros de color, para saber si se aproxima más a un color
+                //promedio de los 3 parámetros de color, para saber si se aproxima más a un color
                 //claro (se pinta de blanco) u oscuro (se pinta de negro).
                 let colorsAVG = (r + g + b) / quantityCompositionColor;
-                if (colorsAVG < limit) {    //si es más oscuro, el limite es menor.
+                if (colorsAVG < limit) {    //si es más oscuro, el límite es mayor.
                     setPixel(imageData, x, y, black, black, black, a);
                 }
                 else {
@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getRed(imageData, x, y) {
-        //*************¿DEBERÍAN SER CONSTANTES EN VEZ DE LET?
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
@@ -88,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Binarización aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "binary")
             binaryFilter();

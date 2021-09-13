@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getRed(imageData, x, y) {
-           //*************¿DEBERÍAN SER CONSTANTES EN VEZ DE LET?
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
@@ -89,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Escala de grises aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "gray-scale")
         grayscaleFilter();

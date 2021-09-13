@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Sepia aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "sepia")
         sepiaFilter();

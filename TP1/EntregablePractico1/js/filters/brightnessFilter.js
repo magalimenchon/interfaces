@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Brightness Filter
     const coefficientBritness = 0.5;
-    const maxbits = 255;    //*************SE REPITE TMB EN GRAYSCALE
+    const maxbits = 255;
 
 
     //---Functions---
@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Brillo aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "brightness")
             brightnessFilter(coefficientBritness);

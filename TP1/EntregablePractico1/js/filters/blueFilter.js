@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getBlue(imageData, x, y) {
-        //*************¿DEBERÍAN SER CONSTANTES EN VEZ DE LET?
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 2];
     }
@@ -64,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Azul aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "blue")
             blueFilter();

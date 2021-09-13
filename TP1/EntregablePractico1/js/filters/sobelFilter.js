@@ -195,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Sobel aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "sobel")
             sobelFilter();

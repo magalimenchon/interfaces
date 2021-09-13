@@ -14,11 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // boton select
     const selectButton = document.getElementById("js-select-filters");
 
-    //Blur Filter
-    /*let matrixBoxBlur = [];
-    const BoxBlurWidth = 3;
-    const BoxBlurHeight = 3;*/
-
     //---Functions---
 
     //#regionBlurFilter
@@ -131,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //#endRegion
 
     //#regionEvents
+    //Cuando cambia el selector a Binarización aplica el filtro correspondiente
     selectButton.addEventListener('change', (e) => {
         if (e.target.value == "blur")
             blurFilter();
