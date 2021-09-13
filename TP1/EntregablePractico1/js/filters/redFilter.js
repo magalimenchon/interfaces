@@ -49,12 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
         imageData.data[index + 2] = b;
         imageData.data[index + 3] = a;
     }
-
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
 
+    /*Obtiene el dato de la coordenada de alpha en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 3 (última) en relación a sus 4 datos correspondientes. */
     function getOpacity(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 3];

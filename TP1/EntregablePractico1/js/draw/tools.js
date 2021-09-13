@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Canvas
     let canvas = document.querySelector('#js-canvas');
     const ctx = canvas.getContext("2d");
-    let canvasWidth = canvas.width;
-    let canvasHeight = canvas.height;
 
     //Selector color
     const selectorColor = document.querySelector('#js-input-color');
@@ -25,13 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Goma
     const buttonErase = document.getElementById("js-button-erase");
     let borrar = false;
-
-    //Boton Borrado de Canvas
-    const buttonEraseCanvas = document.getElementById("js-button-reset");
-
-    //Boton Descarga de canvas
-    const buttonDownloadCanvas = document.getElementById("js-button-download");
-
 
     //---Functions---
 
@@ -50,12 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
         //Corta la continuación del trazado de la línea.
         ctx.beginPath();
     };
-
-    // Limpia el canvas completo
-    function clearCanvas(){
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-    }
 
     //Está dibujando una linea:
     function draw(e) {
@@ -103,31 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('mouseup', endDraw);
         canvas.addEventListener('mousemove', draw);
     });
-
-    //Evento borra el canvas por completo
-    buttonEraseCanvas.addEventListener('click', () => {
-        clearCanvas();
-    })
-    
-    //Evento para descargar el canvas
-    buttonDownloadCanvas.addEventListener('click', () => {
-        downloadCanvas();
-    })
-
-
-    //Permite descargar la imagen de lo realizado en canvas por medio de los datos obtenidos de la URI
-    function downloadCanvas(){
-
-       const a = document.createElement("a");
-       document.body.appendChild(a);
-       //se le setea la URI con los datos del canvas.
-       a.href = canvas.toDataURL();
-       a.download = "canvas-image.png"
-       //fuerza la descarga automatica por el click con js
-       a.click();
-       document.body.removeChild(a);
-
-    }
 
     //#endRegion
 

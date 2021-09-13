@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Binary Filter
     const quantityCompositionColor = 3; //Cantidad de componentes de color del pixel
-    const limit = 127/3;  //Promedio si fuese el gris.
+    const limit = 127;  //si fuese el gris.
 
     //---Functions---
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 //promedio de los 3 parámetros de color, para saber si se aproxima más a un color
                 //claro (se pinta de blanco) u oscuro (se pinta de negro).
                 let colorsAVG = (r + g + b) / quantityCompositionColor;
-                if (colorsAVG < limit) {    //si es más oscuro, el límite es mayor.
+                if (colorsAVG < limit) {    //si es más oscuro, el promedio es menor.
                     setPixel(imageData, x, y, black, black, black, a);
                 }
                 else {
@@ -64,21 +64,29 @@ document.addEventListener("DOMContentLoaded", () => {
         imageData.data[index + 3] = a;
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
 
+    /*Obtiene el dato de la coordenada de G en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 1 en relación a sus 4 datos correspondientes. */
     function getGreen(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 1];
     }
 
+    /*Obtiene el dato de la coordenada de B en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 2 en relación a sus 4 datos correspondientes. */
     function getBlue(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 2];
     }
 
+    /*Obtiene el dato de la coordenada de alpha en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 3 (última) en relación a sus 4 datos correspondientes. */
     function getOpacity(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 3];

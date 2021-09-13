@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
          *@param sx coordenada 'x' de la esquina superior izquierda del contexto del que se extraeran los datos de la imagen.
          *@param sy coordenada 'y' de la esquina superior izquierda del rectángulo del que se extraerá el ImageData.
          *@param sw el ancho del contexto.
-         *@paran sh el largo del lienzo.
+         *@param sh el largo del lienzo.
         */
         const imageData = ctx.getImageData(0, 0, width, height);
         let r, g, b, a;
@@ -65,21 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
         imageData.data[index + 3] = a;
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
 
+    /*Obtiene el dato de la coordenada de G en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 1 en relación a sus 4 datos correspondientes. */
     function getGreen(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 1];
     }
 
+    /*Obtiene el dato de la coordenada de B en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 2 en relación a sus 4 datos correspondientes. */
     function getBlue(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 2];
     }
 
+    /*Obtiene el dato de la coordenada de alpha en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 3 (última) en relación a sus 4 datos correspondientes. */
     function getOpacity(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 3];

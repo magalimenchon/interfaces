@@ -34,13 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 b = getBlue(imageData, x, y);
                 a = getOpacity(imageData, x, y);
 
+                //Consigue la equivalencia de RGB a HSL
                 let hsl = rgb_to_hsl_convertion(r, g, b);
 
-                //Incremento el porcentaje de saturación
+                //Incrementa el porcentaje de saturación (Elemento en posición i del Array === Saturación)
                 hsl[1] = hsl[1] + (hsl[1] * coefficient);
 
+                //Convierte los datos del modelo de color HSL con la saturación incrementada a RGB.
                 let rgb = hsl_to_rgb_convertion(hsl);
 
+                //Setea esos nuevos valores al mapa de bits
                 setPixel(imageData, x, y, rgb[0], rgb[1], rgb[2], a);
             }
         }
@@ -49,7 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.putImageData(imageData, 0, 0);
     }
 
+    //Convierte de RGB a su equivalencia en el modelo de color HSL y retorna un arreglo con el valor de los 3 parámetros
     function rgb_to_hsl_convertion(r, g, b) {
+        //referencia: https://www.rapidtables.com/convert/color/rgb-to-hsl.html
+
+        let h, s, l;
+
         //Se divide cada parámetro de color por 255.0 (para que quede flotante)
         r = r / 255.0;
         g = g / 255.0;
@@ -59,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let minimum = Math.min(r, g, b);
         let maximum = Math.max(r, g, b);
 
-        let h, s, l;
         //Se calcula la diferencia entre el máximo y el mínimo:
         let substraction = maximum - minimum;
 
@@ -76,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             h = 60 * (((b - r) / substraction) + 2);
         }
         else if (maximum == b) {
-            //green = 120º en Hue
+            //blue = 240º en Hue
             h = 60 * (((r - g) / substraction) + 4);
         }
         //Componente brillo
@@ -90,10 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
             s = substraction / (1.0 - Math.abs(2.0*l - 1.0));
         }
         
-
         return [h, s, l];
     }
 
+    //Retorna un arreglo con 3 parámetros de RGB equivalentes a ciertos valores de HSL dados por parámetro.
     function hsl_to_rgb_convertion(hsl) {
         //referencia: https://www.rapidtables.com/convert/color/hsl-to-rgb.html
         
@@ -103,35 +110,39 @@ document.addEventListener("DOMContentLoaded", () => {
         let l = hsl[2];
         let r, g, b, c, x, m;
 
+        //Si se encuentra entre el rango de valores posibles para cada uno de los parámetros de HSL
         if (h >= 0 && h < 360.0 && s >= 0.0 && s <= 100.0 && l >= 0.0 && l <= 100.0) {
+
             c = (1.0 - Math.abs((2 * l) - 1)) * s;
             x = c * (1.0 - Math.abs((h / 60.0) % 2.0 - 1.0));
             m = l - c / 2;
-            if (h >= 0.0 && h < 60.0) {
+            //Segun entorno a que matiz se encuentre
+            if (h >= 0.0 && h < 60.0) {     //Entre rojos y amarillos
                 r = c;
                 g = x;
                 b = 0;
-            } else if (h >= 60.0 && h < 120.0) {
+            } else if (h >= 60.0 && h < 120.0) {    //Entre amarillos y verdes
                 r = x;
                 g = c;
                 b = 0;
-            } else if (h >= 120.0 && h < 180.0) {
+            } else if (h >= 120.0 && h < 180.0) {   //Entre verdes y cyans
                 r = 0;
                 g = c;
                 b = x;
-            } else if (h >= 180.0 && h < 240.0) {
+            } else if (h >= 180.0 && h < 240.0) {   //Entre cyans y azules
                 r = 0;
                 g = x;
                 b = c;
-            } else if (h >= 240.0 && h < 300.0) {
+            } else if (h >= 240.0 && h < 300.0) {   //Entre azules y magentas
                 r = x;
                 g = 0;
                 b = c;
-            } else if (h >= 300.0 && h < 360.0) {
+            } else if (h >= 300.0 && h < 360.0) {   //Entre magentas y rojos
                 r = c;
                 g = 0;
                 b = x;
             }
+
             r = Math.round((r + m) * 255);
             g = Math.round((g + m) * 255);
             b = Math.round((b + m) * 255);
@@ -152,21 +163,29 @@ document.addEventListener("DOMContentLoaded", () => {
         imageData.data[index + 3] = a;
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
 
+    /*Obtiene el dato de la coordenada de G en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 1 en relación a sus 4 datos correspondientes. */
     function getGreen(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 1];
     }
 
+    /*Obtiene el dato de la coordenada de B en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 2 en relación a sus 4 datos correspondientes. */
     function getBlue(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 2];
     }
 
+    /*Obtiene el dato de la coordenada de alpha en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 3 (última) en relación a sus 4 datos correspondientes. */
     function getOpacity(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 3];

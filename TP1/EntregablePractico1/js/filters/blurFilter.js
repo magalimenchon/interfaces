@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.putImageData(imageData, 0, 0);
     }
 
+    //Calcula el promedio del parámetro rojo entre el pixel y sus celdas vecinas contiguas.
     function avgRed(imageData, x, y) {
         //fila 1
         let pos00 = getRed(imageData, x - 1, y - 1);
@@ -58,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return (pos00 + pos01 + pos02 + pos10 + pos11 + pos12 + pos20 + pos21 + pos22) / 9;
     }
+
+    //Calcula el promedio del parámetro verde entre el pixel y sus celdas vecinas contiguas.
     function avgGreen(imageData, x, y) {
         //fila 1
         let pos00 = getGreen(imageData, x - 1, y - 1);
@@ -74,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return (pos00 + pos01 + pos02 + pos10 + pos11 + pos12 + pos20 + pos21 + pos22) / 9;
     }
+
+    //Calcula el promedio del parámetro azul entre el pixel y sus celdas vecinas contiguas.
     function avgBlue(imageData, x, y) {
         //fila 1
         let pos00 = getBlue(imageData, x - 1, y - 1);
@@ -91,21 +96,29 @@ document.addEventListener("DOMContentLoaded", () => {
         return (pos00 + pos01 + pos02 + pos10 + pos11 + pos12 + pos20 + pos21 + pos22) / 9;
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 0 (inicial) en relación a sus 4 datos correspondientes. */
     function getRed(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 0];
     }
 
+    /*Obtiene el dato de la coordenada de G en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 1 en relación a sus 4 datos correspondientes. */
     function getGreen(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 1];
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 2 en relación a sus 4 datos correspondientes. */
     function getBlue(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 2];
     }
 
+    /*Obtiene el dato de la coordenada de R en el arreglo de imageData del pixel determinado,
+      que se encuentra en la posición 3 (última) en relación a sus 4 datos correspondientes. */
     function getOpacity(imageData, x, y) {
         let index = (x + y * imageData.width) * 4;
         return imageData.data[index + 3];
