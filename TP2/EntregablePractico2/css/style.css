@@ -1,0 +1,57 @@
+.grid-container{
+    font-family: sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 6fr 6fr 1fr;
+    grid-gap: 10px;
+    grid-template-areas: 
+    "tablero tablero tablero menu"
+    "tablero tablero tablero menu"
+    "footer footer footer footer";
+}
+
+.tablero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: tablero;
+    background-color: blanchedalmond;
+}
+
+.menu{
+    padding: 20px;
+    grid-area: menu;
+    background-color: blueviolet;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    grid-area: footer;
+    background-color: brown;
+}
+
+.menu-item{
+    margin: 10px;
+}
+
+canvas{
+    
+    border: solid black 1px;
+}
+
+#canvas-layer1{
+    position: absolute;
+    z-index: 3;
+}
+
+#canvas-layer2{
+    position: absolute;
+    z-index: 2;
+}
+
+#canvas-layer3{
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+}

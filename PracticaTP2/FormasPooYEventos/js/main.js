@@ -9,7 +9,7 @@ function IniciarPagina() {*/
     let canvasHeight = canvas.height;
 
     const CANT_FIG = 30;
-
+    
     let figures = [];
     let lastClickedFigure = null;
     //flag
