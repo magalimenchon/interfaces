@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id ="canvas" width="1200" height="2000" style="border: 1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <script>
+        let canvas;
+        let ctx;
+        let dx = 5;
+        let dy = 5;
+        let x = 150;
+        let y = 100;
+        let WIDTH = 800;
+        let HEIGHT = 600;
+
+        //holds all our rectangles
+        let shapes = [];
+
+        //Box object to hold data for all drawn rects
+        function Box(){
+            this.x = 0;
+            this.y = 0;
+            this.w = 10;    //default width and height?
+            this.h = 10;
+            this.selected = false;
+            this.fill = '#141444';
+        }
+
+        //Initialize a new Box, add it, and invalidate the canvas
+        function addRect(x, y, w, h, fill){
+            let rect = new Box;
+            rect.x = x;
+            rect.y = y;
+            rect.w = w;
+            rect.h = h;
+            rect.fill = fill;
+            shapes.push(rect);
+            return rect;
+        }
+
+        //Draws this shapes to a given context
+        Box.prototype.draw = function(ctx){
+            ctx.fillStyle = this.fill;
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+        }
+
+        function init(){
+            canvas = document.getElementById("canvas");
+            ctx = canvas.getContext("2d");
+
+            //add our events. Up and down are for dragging,
+                //double click is for making new boxes
+                //canvas.onmousedown = mouseDown;
+            let Box1 = addRect(40, 40, 100, 100, '#FFC02B');
+            let Box2 = addRect(140, 140, 100, 100, '#FFC02B');
+            let Box3 = addRect(240, 0, 100, 100, '#FFC02B');
+            let Box4 = addRect(0, 240, 100, 100, '#FFC02B');
+
+            let imageObj = new Image();
+            imageObj.onload = function(){
+                Box1.fill = ctx.createPattern(imageObj, "no-repeat");
+                Box2.fill = ctx.createPattern(imageObj, "no-repeat");
+                Box3.fill = ctx.createPattern(imageObj, "no-repeat");
+                Box4.fill = ctx.createPattern(imageObj, "no-repeat");
+
+                for (let i = 0; i < shapes.length; i++) {
+                    shapes[i].draw(ctx);
+                }
+            };
+            imageObj.src = "perro.jpg"
+        }
+        init();
+    </script>
+</body>
+</html>
