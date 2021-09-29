@@ -8,5 +8,9 @@ class Juego {
 
     jugar(){
         
+       // this.jugador1.getTurno().habilitarTurno();
+
+
+
     }
 }

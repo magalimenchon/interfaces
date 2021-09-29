@@ -113,11 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // dibuja algunas transparencias en la capa 1 (no funciona bien)
         ctx1.fillStyle = "rgba(255, 255, 255, 1)";
-        ctx1.beginPath();
-        ctx1.arc(iniX *3, iniY*3, radius, 0, 2 * Math.PI);
+       // ctx1.beginPath();
+       //Deberian pasarse a la hora de construir el tablero
+       const maxX= 7;
+       const maxY = 6;
+       const widthPixelsTablero = width - iniX;
+       const heightPixelsTablero = height - iniY;
+        for (let x = 0; x < maxX; x++) {
+            for (let y = 0; y < maxY; y++) {
+                ctx1.beginPath();
+                //ctx1.arc(iniX * 3 +(x*70), iniY * 3 +(y*75), radius, 0, 2 * Math.PI);
+                ctx1.arc(x * (widthPixelsTablero/maxX) + (widthPixelsTablero/maxX),
+                                y * (heightPixelsTablero/maxY) + (heightPixelsTablero/maxX), radius, 0, 2 * Math.PI);
+                //ctx1.arc(iniX *3*x, iniY*3*x, radius, 0, 2 * Math.PI);
+                ctx1.fill();
+                ctx1.closePath();
+            }
+            
+        }
+        /*ctx1.arc(iniX *3, iniY*3, radius, 0, 2 * Math.PI);
         ctx1.arc(iniX *3*2, iniY*3*2, radius, 0, 2 * Math.PI);
         ctx1.arc(iniX *3*3, iniY*3*3, radius, 0, 2 * Math.PI);
-        ctx1.arc(iniX *3*4, iniY*3*4, radius, 0, 2 * Math.PI);
+        ctx1.arc(iniX *3*4, iniY*3*4, radius, 0, 2 * Math.PI);*/
         ctx1.fill();
         ctx1.closePath();
         
