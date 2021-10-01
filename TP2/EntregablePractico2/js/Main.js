@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let radius = 30;
 
         // dibujo un rectangulo azul en la capa 1
-        ctx1.fillStyle = "rgba(80, 80, 255, 0.5)";
+        ctx1.fillStyle = "rgba(80, 80, 255, 1)";
         ctx1.fillRect(iniX, iniY, width, height);
 
         // dibuja algunas transparencias en la capa 1 (no funciona bien)
@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
        const maxY = 6;
        const widthPixelsTablero = width - iniX;
        const heightPixelsTablero = height - iniY;
+       //----------Habria que guardar cada circulo en la matriz?
         for (let x = 0; x < maxX; x++) {
             for (let y = 0; y < maxY; y++) {
                 ctx1.beginPath();
@@ -135,15 +136,91 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.arc(iniX *3*2, iniY*3*2, radius, 0, 2 * Math.PI);
         ctx1.arc(iniX *3*3, iniY*3*3, radius, 0, 2 * Math.PI);
         ctx1.arc(iniX *3*4, iniY*3*4, radius, 0, 2 * Math.PI);*/
+        /*ctx1.fill();
+        ctx1.closePath();*/
+        //QUITAR PARA VER LOS ESPACIOS
+        drawFichasEnTablero(maxX, maxY, widthPixelsTablero,  heightPixelsTablero);
+    }
+
+    //Prueba de renderizar todas las fichas en el tablero
+    function drawFichasEnTablero(maxX, maxY, widthPixelsTablero,  heightPixelsTablero){
+        // ctx1.beginPath();
+       //Deberian pasarse a la hora de construir el tablero
+      /* const maxX= 7;
+       const maxY = 6;
+       const widthPixelsTablero = width - iniX;
+       const heightPixelsTablero = height - iniY;*/
+       //----------Habria que guardar cada circulo en la matriz?
+        for (let x = 0; x < maxX; x++) {
+            for (let y = 0; y < maxY; y++) {
+                ctx1.beginPath();
+                //ctx1.arc(iniX * 3 +(x*70), iniY * 3 +(y*75), radius, 0, 2 * Math.PI);
+                let ficha1 = new Ficha(x * (widthPixelsTablero/maxX) + (widthPixelsTablero/maxX),
+                y * (heightPixelsTablero/maxY) + (heightPixelsTablero/maxX), "#FF0000", ctx1);
+                ficha1.draw();
+                ctx1.fill();
+                ctx1.closePath();
+            }
+            
+        }
+    }
+
+    //Dibujar una ficha en la posición dada
+    function drawFichasEnTablero(maxX, maxY, widthPixelsTablero,  heightPixelsTablero){
+        // ctx1.beginPath();
+       //Deberian pasarse a la hora de construir el tablero
+      /* const maxX= 7;
+       const maxY = 6;
+       const widthPixelsTablero = width - iniX;
+       const heightPixelsTablero = height - iniY;*/
+       //----------Habria que guardar cada circulo en la matriz?
+        for (let x = 0; x < maxX; x++) {
+            for (let y = 0; y < maxY; y++) {
+                ctx1.beginPath();
+                //ctx1.arc(iniX * 3 +(x*70), iniY * 3 +(y*75), radius, 0, 2 * Math.PI);
+                let ficha1 = new Ficha(x * (widthPixelsTablero/maxX) + (widthPixelsTablero/maxX),
+                y * (heightPixelsTablero/maxY) + (heightPixelsTablero/maxX), "#FF0000", ctx1);
+                ficha1.draw();
+                ctx1.fill();
+                ctx1.closePath();
+            }
+            
+        }
+    }
+    //Renderizar la ficha que tiró el jugador
+    function drawFichaJugadaEnTablero(celdaPosX, celdaPosY, fillFicha){
+
+        //Opcion 1:
+        //Matriz render sería una matriz que guarda los datos de las posiciones
+        //donde deberían ir todas las fichas
+        //Dependiendo el jugador, se le setea el fill que le llega por parámetro
+
+        //Punto del eje X que debe estar el centro de la ficha.
+        matrixRender[celdaPosX][celdaPosY].posX;
+        //Punto del eje Y que debe estar el centro de la ficha.
+        matrixRender[celdaPosX][celdaPosY].posY;
+        ctx1.beginPath();
+        let ficha1 = new Ficha(posX, posY, fillFicha, ctx1);
+        ficha1.draw();
         ctx1.fill();
         ctx1.closePath();
+
+
+        //Opcion 2:
+        //Matriz render sería una matriz que guarda una estructura completa de fichas,
+        //que conforme tiran las fichas le cambia la imagen, pero 
+        ficha = matrixRender[celdaPosX][celdaPosY];
+        ficha.setFill(fillFicha);
+        ficha.draw();
         
     }
+
+
+
 
     drawTablero();
 
     addFichas();
-
 
     // como las canvas estan superpuestos aplico los listeners a la capa delantera
     canvas1.addEventListener('mousedown', onMouseDown, false);
