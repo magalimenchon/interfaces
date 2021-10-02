@@ -15,6 +15,10 @@ class Ficha {
         this.fill = fill;
     }
 
+    getFill(){
+        return this.fill;
+    }
+
     setPosition(x, y) {
         this.posX = x;
         this.posY = y;
