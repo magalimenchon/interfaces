@@ -6,14 +6,19 @@ class Ficha {
         this.radius = 30;
         this.fill = fill;
         this.resaltado = false;
-        this.resaltadoEstilo = 'red';
+        this.resaltadoEstilo = '#fff';
         this.ctx = context;
         this.loadedImg = false;
-        this.jugador = j;
+        //nuevo
+        this.visitada = false;
     }
 
-    getJugador(){
-        return this.jugador;
+    setVisitada(visitada) {
+        this.visitada = visitada;
+    }
+
+    getVisitada(){
+        return this.visitada;
     }
 
     setFill(fill) {

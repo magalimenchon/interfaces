@@ -19,9 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let canvasHeight = canvas3.height;
 
     // instancia e imprime la matrix por consola
-    const tablero = new Tablero(7, 6, ctx2);
+    let matX = 7;
+    let matY = 6;
 
-    tablero.drawTablero();
+    const tablero = new Tablero(matX, matY, ctx2);
+
+   // tablero.drawTablero();
 
     let fichas = [];
     let lastClickedFicha = null;
@@ -106,38 +109,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-    //Renderizar la ficha que tiró el jugador
-    function drawFichaJugadaEnTablero(celdaPosX, celdaPosY, fillFicha){
-
-        //Opcion 1:
-        //Matriz render sería una matriz que guarda los datos de las posiciones
-        //donde deberían ir todas las fichas
-        //Dependiendo el jugador, se le setea el fill que le llega por parámetro
-
-        //Punto del eje X que debe estar el centro de la ficha.
-        matrixRender[celdaPosX][celdaPosY].posX;
-        //Punto del eje Y que debe estar el centro de la ficha.
-        matrixRender[celdaPosX][celdaPosY].posY;
-        ctx1.beginPath();
-        let ficha1 = new Ficha(posX, posY, fillFicha, ctx1);
-        ficha1.draw();
-     
-
-
-        //Opcion 2:
-        //Matriz render sería una matriz que guarda una estructura completa de fichas,
-        //que conforme tiran las fichas le cambia la imagen, pero 
-        ficha = matrixRender[celdaPosX][celdaPosY];
-        ficha.setFill(fillFicha);
-        ficha.draw();
-        
-    }
-
     addFichas();
 
     // como las canvas estan superpuestos aplico los listeners a la capa delantera
     canvas1.addEventListener('mousedown', onMouseDown, false);
     window.addEventListener('mouseup', onMouseUp, false);
     canvas1.addEventListener('mousemove', onMouseMove, false);
+
+    //Manejo del menú
+    let buttonReiniciar = document.querySelector('#js-btn-reiniciar');
+    let buttonJugar = document.querySelector('#js-btn-jugar');
+    //para aclarar como se juega, las fichas se tiran solo x arriba, etc.
+    let buttonInstrucciones = document.querySelector('#js-btn-instrucciones');
+
+
+    //Mas variables
+    //let cantidadFichasJugadores = matX * matY / 2;
+
+    buttonJugar.addEventListener('click', () => {
+        new Juego(tablero, null, null);
+    });
+
+    buttonReiniciar.addEventListener('click', () => {
+        new Juego(tablero, null, null);
+    });
 });

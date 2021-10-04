@@ -20,6 +20,10 @@ class Tablero {
             }
         }
         this.matrix = matrix;
+
+        //quizas vaya en juego?
+        //define si el turno actual pertenece al jugador 1 o 2.
+        this.turnoActual = null;
     }
 
     getMatrix() {
@@ -43,25 +47,14 @@ class Tablero {
         return null;
     }
 
-    //Busca en determinada columna un espacio libre,
-    //iterando por filas, comenzando desde la última. Sino encuentra retorna null
-    getEspacioLibreEnColumna(column){
-        for (let row = this.matrix.height-1; row >= 0; row--) {
-            if(this.matrix[row][column] == null){
-                return this.matrix[row][column];
-            }
-        }
-        return null;
-    }
-
     drawTablero(){
         let radius = 30;
 
         // dibujo un rectangulo azul en la capa 2
-        this.ctx.fillStyle = "rgba(80, 80, 255, 1)";
+        this.ctx.fillStyle = "#00ffff";
         this.ctx.fillRect(this.iniDibujoX, this.iniDibujoY, this.width, this.height);
 
-        this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        this.ctx.fillStyle = "#222";
 
        //----------Habria que guardar cada circulo en la matriz?
         for (let x = 0; x < this.matX; x++) {
@@ -95,6 +88,10 @@ class Tablero {
                                     lastClickedFicha.getFill(), this.ctx);
                         this.matrix[column][row-1] = ficha;
                         ficha.draw();
+                        //console.log("C", column, "R", row-1);
+                        //nuev0
+                        this.checkGanador(column, row-1);
+                        //
                         return;
                     }
                     else{
@@ -104,43 +101,168 @@ class Tablero {
                                         lastClickedFicha.getFill(), this.ctx);
                             this.matrix[column][row] = ficha;
                             ficha.draw();
+                            //console.log("C", column, "R", row);
+                             //nuev0
+                            this.checkGanador(column, row);
+                            //
                         }
                     }
                 }
             }
-            checkWin();
-        }  
+            //console.log("hola matriz", this.matrix); 
+        } 
     }
 
-    checkWin(){
-        for (let x = 0; x < this.matX-1; x++) {
+    /*
+        checkea si hubo un ganador
+        @param columnFicha columna donde se guarda la última ficha jugada en la matriz.
+        @param rowFicha fila donde se guarda la última ficha jugada en la matriz.
+     */
+    checkGanador(columnFicha, rowFicha){
 
-            for (let y = 0; y < this.matY-1; y++) {
-                
-                if (this.matrix[x][y].getJugador() != null && 
-                this.matrix[x][y].getJugador().equals(this.matrix[x][y+1].getJugador())){
-                    this.matrix[x][y].getJugador().addPuntos("y");
-                    if(this.matrix[x][y].getJugador().getPuntos()){
-                        
+        //-----------COMPROBAR XQ EN CHECK DIAGONALES Y FILA (RECURSION)
+        //contempla 2 veces el console.log del if de coincidencias == 4
+        // (En consola figura 2 veces el ganó)
+
+        //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
+        let fichaDeJugador = this.matrix[columnFicha][rowFicha].getFill();
+
+        //BUSQUEDA POR COLUMNA
+        //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
+        this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0);
+        //BUSQUEDA POR FILA
+        //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
+        this.checkColumna(columnFicha, rowFicha, fichaDeJugador);
+
+        this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador, 0);
+
+        this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador, 0);
+        //BUSQUEDA POR DIAGONAL DERECHA
+        //Siempre sucederá que los elementos que coincidan en diagonal hacia la derecha
+        //con el elemento, daran todos el mismo resultado al hacer columnaFicha+rowFicha
+        //Si la diagonal se dibuja desde la derecha, es porque arranca en fila = 0,
+        //por lo tanto:
+        //let inicDiagDerecha = columnFicha + rowFicha;
+
+        //Si se pasa de rango en la suma, defino que arranque desde el borde correspondiente.
+        /*if(inicDiagDerecha > this.matY)
+            inicDiagDerecha = inicDiagDerecha - this.matY;
+
+        for(let columnActual = inicDiagDerecha; columnActual >= 0; columnActual--){
+            let filaActual = inicDiagDerecha - columnActual;
+            console.log("c"+columnActual+"f"+filaActual);
+            let celda = this.matrix[columnActual][filaActual];
+            if(celda != null){
+                if(celda.getFill() == fichaDeJugador){
+                    coincidencias++;
+                    if(coincidencias == 4){
+                        console.log("Ganó jugador fichas diagonal derecha:" + fichaDeJugador);
+                        return true;
                     }
-
                 }
-                else if(this.matrix[x][y].getJugador() != null){
-                    this.matrix[x][y].getJugador().resetPuntos("y");
+                //Salgo del for de columna
+                else {
+                    coincidencias = 0;
+                    columnActual = -1;
+                }  
+            }
+        }*/
+
+        
+         //BUSQUEDA POR DIAGONAL IZQUIERDA
+        //Siempre sucederá que los elementos que coincidan en diagonal hacia la izquierda
+        //con el elemento, daran todos el mismo resultado al hacer |columnaFicha-rowFicha|
+
+        return false;
+        
+    }
+
+    checkColumna(columnFicha, rowFicha, fichaDeJugador){
+        let coincidencias = 0;
+
+        for(let rowActual = rowFicha; rowActual < this.matY; rowActual++){
+            let celda = this.matrix[columnFicha][rowActual];
+            if(celda.getFill() === fichaDeJugador){
+                coincidencias++;
+                if(coincidencias == 4){
+                    console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
+                    return true;
                 }
-
-
-
+            }
+            //Se sale del for de fila
+            else {
+                return false;
             }
         }
     }
 
-    drawFichaEnTablero(drawX, drawY){
+    checkFila(columnActual, rowFicha, fichaDeJugador, coincidencias){
+        if(coincidencias == 4){
+            console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
+            return true;
+        }
+        else{
+            if(columnActual >= 0 && columnActual < this.matX &&
+                this.matrix[columnActual][rowFicha] != null &&
+                this.matrix[columnActual][rowFicha].getFill() === fichaDeJugador
+                && this.matrix[columnActual][rowFicha].getVisitada() == false){
+                this.matrix[columnActual][rowFicha].setVisitada(true);
+                coincidencias++;
+                this.checkFila(columnActual - 1, rowFicha, fichaDeJugador, coincidencias);
+                this.checkFila(columnActual + 1, rowFicha, fichaDeJugador, coincidencias);
+                this.matrix[columnActual][rowFicha].setVisitada(false);
+            }
+            else{
+                return false;
+            }
+        }
+    }
 
-        let ficha = new Ficha(drawX * (widthPixelsTablero/maxX) + (widthPixelsTablero/maxX),
-            drawY * (heightPixelsTablero/maxY) + (heightPixelsTablero/maxX), "#FF0000", this.ctx);
-        
-        ficha.draw();
-        
+    //Comprobar si funciona
+    checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador, coincidencias){
+        if(coincidencias == 4){
+            console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
+            return true;
+        }
+        else{
+            if( columnActual >= 0 && columnActual < this.matX &&
+                rowActual >= 0 && rowActual < this.matY &&
+                this.matrix[columnActual][rowActual] != null &&
+                this.matrix[columnActual][rowActual].getFill() === fichaDeJugador
+                && this.matrix[columnActual][rowActual].getVisitada() == false){
+
+                this.matrix[columnActual][rowActual].setVisitada(true);
+                coincidencias++;
+                this.checkDiagonalDerecha(columnActual + 1, rowActual - 1, fichaDeJugador, coincidencias);
+                this.checkDiagonalDerecha(columnActual - 1, rowActual + 1, fichaDeJugador, coincidencias);
+                this.matrix[columnActual][rowActual].setVisitada(false);
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
+    checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador, coincidencias){
+        if(coincidencias == 4){
+            console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
+            return true;
+        }
+        else{
+            if( columnActual >= 0 && columnActual < this.matX &&
+                rowActual >= 0 && rowActual < this.matY &&
+                this.matrix[columnActual][rowActual] != null &&
+                this.matrix[columnActual][rowActual].getFill() === fichaDeJugador
+                && this.matrix[columnActual][rowActual].getVisitada() == false){
+                this.matrix[columnActual][rowActual].setVisitada(true);
+                coincidencias++;
+                this.checkDiagonalIzquierda(columnActual - 1, rowActual - 1, fichaDeJugador, coincidencias);
+                this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador, coincidencias);
+                this.matrix[columnActual][rowActual].setVisitada(false);
+            }
+            else{
+                return false;
+            }
+        }
     }
 }

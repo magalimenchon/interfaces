@@ -1,5 +1,7 @@
 .grid-container{
     font-family: sans-serif;
+    color: #fff;
+    text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 6fr 6fr 1fr;
@@ -15,20 +17,24 @@
     justify-content: center;
     align-items: center;
     grid-area: tablero;
-    background-color: blanchedalmond;
+    background-color: #fff;
 }
 
 .menu{
     padding: 20px;
     grid-area: menu;
-    background-color: blueviolet;
+    background-color: #222;;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 700;
+    transition: 0.5s;
 }
 
 .footer{
     display: flex;
     justify-content: center;
     grid-area: footer;
-    background-color: brown;
+    background-color:#222;
 }
 
 .menu-item{
@@ -51,7 +57,27 @@ canvas{
 }
 
 #canvas-layer3{
-    background-color: white;
+    background-color: #222;
     position: absolute;
     z-index: 1;
+}
+
+button{
+    background-color: #222;
+    color:#fff;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 700;
+    transition: 0.5s;
+    border: none;
+    color: aqua;
+    letter-spacing: 6px;
+    text-shadow: 0 0 30px aqua,
+    0 0 60px aqua,
+    0 0 120px aqua;
+    margin: 1em;
+}
+button:hover{
+    color: rgba(255, 255, 255, 0.1);
+    color: rgba(233, 233, 233, 0.1);
 }
