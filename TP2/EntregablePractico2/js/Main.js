@@ -29,8 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function addFichas(){
 
-        let ficha1 = new Ficha(650, 100, "#FF0000", ctx1);
-        let ficha2 = new Ficha(650, 200, "#FFFF00", ctx1);
+        let jugador1 = new Jugador("j1");
+        let jugador2 = new Jugador("j2");
+
+        let ficha1 = new Ficha(650, 100, "#FF0000", ctx1, jugador1);
+        let ficha2 = new Ficha(650, 200, "#FFFF00", ctx1, jugador2);
 
         fichas.push(ficha1);
         fichas.push(ficha2);

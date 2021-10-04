@@ -1,30 +1,33 @@
 class Jugador {
 
-    constructor(cantFichas, nombre) {
-        this.fichas = [];
-        this.CANT_FICHAS = cantFichas;
+    constructor(nombre) {
         this.nombre = nombre;
+        this.puntosX = 0;
+        this.puntosY = 0;
     }
 
-    addFichas(){
-
-        for (let i = 0; i < this.CANT_FICHAS; i++) {
-            this.addFicha();
-            
-        }
-    }
-
-    addFicha(){
-        let ficha = new Ficha(posX, posY, fill, ctx3);
-        fichas.push(ficha);
-        ficha.draw();
-    }
-
-    getTurno(){
-        return this.turno;
+    equals(jugador){
+        if(this.jugador.nombre === jugador.getNombre())
+            return true;
+        else
+            return false;
     }
 
     getNombre(){
         return this.nombre;
+    }
+
+    getPuntos(index){
+        if(index === "x")
+            return this.puntosX;
+        else if (index === "y")
+            return this.puntosY;
+    }
+
+    resetPuntos(index){
+        if(index === "x")
+            this.puntosX = 0;
+        else if (index === "y")
+            this.puntosY = 0;
     }
 }

@@ -1,6 +1,6 @@
 class Ficha {
 
-    constructor(posX, posY, fill, context) {
+    constructor(posX, posY, fill, context, j) {
         this.posX = posX;
         this.posY = posY;
         this.radius = 30;
@@ -9,6 +9,11 @@ class Ficha {
         this.resaltadoEstilo = 'red';
         this.ctx = context;
         this.loadedImg = false;
+        this.jugador = j;
+    }
+
+    getJugador(){
+        return this.jugador;
     }
 
     setFill(fill) {
@@ -54,8 +59,9 @@ class Ficha {
     draw() {
         this.ctx.fillStyle = this.fill;
         this.ctx.beginPath();
-        this.ctx.arc(this.posX, this.posY, this.radius, 0, 2 * Math.PI);
+        this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI*2);
         this.ctx.fill();
+
         if (this.resaltado === true) {
             this.ctx.strokeStyle = this.resaltadoEstilo;
             this.ctx.lineWidth = 2;
@@ -63,7 +69,7 @@ class Ficha {
         }
         this.ctx.closePath();
         const img = new Image();
-        img.src = "../EntregablePractico2/images/coin.png";
+        img.src = "../EntregablePractico2/images/coin3.png";
         if (this.loadedImg) {
             this.ctx.drawImage(img, this.posX - this.radius, this.posY - this.radius, this.radius * 2, this.radius * 2);
         }

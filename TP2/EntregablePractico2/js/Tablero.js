@@ -106,10 +106,33 @@ class Tablero {
                             ficha.draw();
                         }
                     }
-
                 }
             }
+            checkWin();
         }  
+    }
+
+    checkWin(){
+        for (let x = 0; x < this.matX-1; x++) {
+
+            for (let y = 0; y < this.matY-1; y++) {
+                
+                if (this.matrix[x][y].getJugador() != null && 
+                this.matrix[x][y].getJugador().equals(this.matrix[x][y+1].getJugador())){
+                    this.matrix[x][y].getJugador().addPuntos("y");
+                    if(this.matrix[x][y].getJugador().getPuntos()){
+                        
+                    }
+
+                }
+                else if(this.matrix[x][y].getJugador() != null){
+                    this.matrix[x][y].getJugador().resetPuntos("y");
+                }
+
+
+
+            }
+        }
     }
 
     drawFichaEnTablero(drawX, drawY){
