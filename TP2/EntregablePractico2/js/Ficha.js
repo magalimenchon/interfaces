@@ -6,9 +6,19 @@ class Ficha {
         this.radius = 30;
         this.fill = fill;
         this.resaltado = false;
-        this.resaltadoEstilo = 'red';
+        this.resaltadoEstilo = '#fff';
         this.ctx = context;
         this.loadedImg = false;
+        //nuevo
+        this.visitada = false;
+    }
+
+    setVisitada(visitada) {
+        this.visitada = visitada;
+    }
+
+    getVisitada(){
+        return this.visitada;
     }
 
     setFill(fill) {
