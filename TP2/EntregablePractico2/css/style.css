@@ -63,6 +63,7 @@ canvas{
 }
 
 button{
+    cursor: pointer;
     background-color: #222;
     color:#fff;
     text-transform: uppercase;
