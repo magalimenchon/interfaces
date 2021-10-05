@@ -24,6 +24,7 @@ class Tablero {
         //quizas vaya en juego?
         //define si el turno actual pertenece al jugador 1 o 2.
         this.turnoActual = null;
+        this.contador = 0;
     }
 
     getMatrix() {
@@ -126,54 +127,28 @@ class Tablero {
         // (En consola figura 2 veces el ganó)
 
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
+        
         let fichaDeJugador = this.matrix[columnFicha][rowFicha].getFill();
 
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
-        this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0);
+        this.checkColumna(columnFicha, rowFicha, fichaDeJugador);
+        //console.log("contador coincidencias " + this.contador);
         //BUSQUEDA POR FILA
         //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
-        this.checkColumna(columnFicha, rowFicha, fichaDeJugador);
-
-        this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador, 0);
-
-        this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador, 0);
-        //BUSQUEDA POR DIAGONAL DERECHA
-        //Siempre sucederá que los elementos que coincidan en diagonal hacia la derecha
-        //con el elemento, daran todos el mismo resultado al hacer columnaFicha+rowFicha
-        //Si la diagonal se dibuja desde la derecha, es porque arranca en fila = 0,
-        //por lo tanto:
-        //let inicDiagDerecha = columnFicha + rowFicha;
-
-        //Si se pasa de rango en la suma, defino que arranque desde el borde correspondiente.
-        /*if(inicDiagDerecha > this.matY)
-            inicDiagDerecha = inicDiagDerecha - this.matY;
-
-        for(let columnActual = inicDiagDerecha; columnActual >= 0; columnActual--){
-            let filaActual = inicDiagDerecha - columnActual;
-            console.log("c"+columnActual+"f"+filaActual);
-            let celda = this.matrix[columnActual][filaActual];
-            if(celda != null){
-                if(celda.getFill() == fichaDeJugador){
-                    coincidencias++;
-                    if(coincidencias == 4){
-                        console.log("Ganó jugador fichas diagonal derecha:" + fichaDeJugador);
-                        return true;
-                    }
-                }
-                //Salgo del for de columna
-                else {
-                    coincidencias = 0;
-                    columnActual = -1;
-                }  
+        this.checkFila(columnFicha, rowFicha, fichaDeJugador);
+       //No hay coincidencia por fila
+        if(this.coincidencias < 4){
+            this.coincidencias = 0;
+            this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador);
+             //No hay coincidencia por diagonal derecha
+            if(this.coincidencias < 4){
+                this.coincidencias = 0;
+                 //No hay coincidencia por fila
+                this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador);
             }
-        }*/
-
-        
-         //BUSQUEDA POR DIAGONAL IZQUIERDA
-        //Siempre sucederá que los elementos que coincidan en diagonal hacia la izquierda
-        //con el elemento, daran todos el mismo resultado al hacer |columnaFicha-rowFicha|
-
+        }
+        this.coincidencias = 0;
         return false;
         
     }
@@ -197,8 +172,8 @@ class Tablero {
         }
     }
 
-    checkFila(columnActual, rowFicha, fichaDeJugador, coincidencias){
-        if(coincidencias == 4){
+    checkFila(columnActual, rowFicha, fichaDeJugador){
+        if(this.coincidencias == 4){
             console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
             return true;
         }
@@ -208,9 +183,9 @@ class Tablero {
                 this.matrix[columnActual][rowFicha].getFill() === fichaDeJugador
                 && this.matrix[columnActual][rowFicha].getVisitada() == false){
                 this.matrix[columnActual][rowFicha].setVisitada(true);
-                coincidencias++;
-                this.checkFila(columnActual - 1, rowFicha, fichaDeJugador, coincidencias);
-                this.checkFila(columnActual + 1, rowFicha, fichaDeJugador, coincidencias);
+                this.coincidencias++;
+                this.checkFila(columnActual - 1, rowFicha, fichaDeJugador);
+                this.checkFila(columnActual + 1, rowFicha, fichaDeJugador);
                 this.matrix[columnActual][rowFicha].setVisitada(false);
             }
             else{
@@ -220,8 +195,8 @@ class Tablero {
     }
 
     //Comprobar si funciona
-    checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador, coincidencias){
-        if(coincidencias == 4){
+    checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador){
+        if(this.coincidencias == 4){
             console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
             return true;
         }
@@ -233,9 +208,9 @@ class Tablero {
                 && this.matrix[columnActual][rowActual].getVisitada() == false){
 
                 this.matrix[columnActual][rowActual].setVisitada(true);
-                coincidencias++;
-                this.checkDiagonalDerecha(columnActual + 1, rowActual - 1, fichaDeJugador, coincidencias);
-                this.checkDiagonalDerecha(columnActual - 1, rowActual + 1, fichaDeJugador, coincidencias);
+                this.coincidencias++;
+                this.checkDiagonalDerecha(columnActual + 1, rowActual - 1, fichaDeJugador);
+                this.checkDiagonalDerecha(columnActual - 1, rowActual + 1, fichaDeJugador);
                 this.matrix[columnActual][rowActual].setVisitada(false);
             }
             else{
@@ -244,8 +219,8 @@ class Tablero {
         }
     }
 
-    checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador, coincidencias){
-        if(coincidencias == 4){
+    checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador){
+        if(this.coincidencias == 4){
             console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
             return true;
         }
@@ -256,9 +231,9 @@ class Tablero {
                 this.matrix[columnActual][rowActual].getFill() === fichaDeJugador
                 && this.matrix[columnActual][rowActual].getVisitada() == false){
                 this.matrix[columnActual][rowActual].setVisitada(true);
-                coincidencias++;
-                this.checkDiagonalIzquierda(columnActual - 1, rowActual - 1, fichaDeJugador, coincidencias);
-                this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador, coincidencias);
+                this.coincidencias++;
+                this.checkDiagonalIzquierda(columnActual - 1, rowActual - 1, fichaDeJugador);
+                this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador);
                 this.matrix[columnActual][rowActual].setVisitada(false);
             }
             else{
