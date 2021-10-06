@@ -1,6 +1,6 @@
 class Ficha {
 
-    constructor(posX, posY, fill, context, j) {
+    constructor(posX, posY, fill, context) {
         this.posX = posX;
         this.posY = posY;
         this.radius = 30;
@@ -8,6 +8,9 @@ class Ficha {
         this.resaltado = false;
         this.resaltadoEstilo = '#fff';
         this.ctx = context;
+        const img = new Image();
+        img.src = "../EntregablePractico2/images/coin3.png";
+        this.img = img;
         this.loadedImg = false;
         //nuevo
         this.visitada = false;
@@ -73,14 +76,12 @@ class Ficha {
             this.ctx.stroke();
         }
         this.ctx.closePath();
-        const img = new Image();
-        img.src = "../EntregablePractico2/images/coin3.png";
         if (this.loadedImg) {
-            this.ctx.drawImage(img, this.posX - this.radius, this.posY - this.radius, this.radius * 2, this.radius * 2);
+            this.ctx.drawImage(this.img, this.posX - this.radius, this.posY - this.radius, this.radius * 2, this.radius * 2);
         }
         else {
-            img.onload = () => {
-                this.ctx.drawImage(img, this.posX - this.radius, this.posY - this.radius, this.radius * 2, this.radius * 2);
+            this.img.onload = () => {
+                this.ctx.drawImage(this.img, this.posX - this.radius, this.posY - this.radius, this.radius * 2, this.radius * 2);
             }
             this.loadedImg = true;
         }

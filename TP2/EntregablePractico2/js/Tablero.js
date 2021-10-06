@@ -1,9 +1,13 @@
 
 class Tablero {
 
-    constructor(matX, matY, ctx) {
+    constructor(ctx) {
         let tamanioCelda = 70;
         let matrix = [];
+        let winLineSize = parseInt(document.querySelector('#js-select-gameMod').value);
+        let matX = winLineSize+3;
+        let matY = winLineSize+2;
+        this.winLineSize = winLineSize;
         this.matX = matX;
         this.matY = matY;
         this.tamanioCelda = tamanioCelda;
@@ -12,7 +16,6 @@ class Tablero {
         this.iniDibujoX = 50;
         this.iniDibujoY = 70;
         this.ctx = ctx;
-        // esta bien crear la matriz en el constructor??
         for (let x = 0; x < matX; x++) {
             matrix[x] = [];
             for (let y = 0; y < matY; y++) {
@@ -20,7 +23,7 @@ class Tablero {
             }
         }
         this.matrix = matrix;
-
+        
         //quizas vaya en juego?
         //define si el turno actual pertenece al jugador 1 o 2.
         this.turnoActual = null;
@@ -52,6 +55,7 @@ class Tablero {
 
         // dibujo un rectangulo azul en la capa 2
         this.ctx.fillStyle = "#00ffff";
+
         this.ctx.fillRect(this.iniDibujoX, this.iniDibujoY, this.width, this.height);
 
         this.ctx.fillStyle = "#222";
