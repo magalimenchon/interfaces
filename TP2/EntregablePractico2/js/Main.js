@@ -128,9 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     buttonJugar.addEventListener('click', () => {
         new Juego(tablero, null, null);
+        //addFichas();
+
     });
 
     buttonReiniciar.addEventListener('click', () => {
         new Juego(tablero, null, null);
+        //addFichas();
     });
 });

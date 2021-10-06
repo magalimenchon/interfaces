@@ -12,7 +12,7 @@
     "footer footer footer footer";
 }
 
-.tablero{
+.espacio{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@
 .menu{
     padding: 20px;
     grid-area: menu;
-    background-color: #222;;
+    background-color: #222;
     text-transform: uppercase;
     font-size: 1em;
     font-weight: 700;
@@ -81,4 +81,9 @@ button{
 button:hover{
     color: rgba(255, 255, 255, 0.1);
     color: rgba(233, 233, 233, 0.1);
+}
+.ganador{
+    width: 800px;
+    height: 550px;
+    background-color: #222;
 }

@@ -113,6 +113,69 @@ class Tablero {
         }
     }
 
+    //Renderizar el ganador:
+    renderGanador(ganador){
+        let tableroWindow = document.querySelector('.espacio');
+        //Creación del div
+       // let widthTablero ="222px", heightTablero= "222px";
+        //borra todos los hijos del div con clase tablero, es decir, los canvas dentro de él
+        this.borrarHijosNodo(tableroWindow);
+
+        //Se crea un div de renderizado
+        //ganador = "Jugador 1"
+        this.createDiv(tableroWindow, ganador);
+
+
+        /*const divGanador = document.createElement("div");
+        divGanador.className = "ganador";
+
+        console.log(divGanador);
+        tableroWindow.appendChild(divGanador);
+        console.log(tableroWindow);*/
+    }
+
+    borrarHijosNodo(nodo){
+        while (nodo.firstChild) {
+            //obtengo el with y height del tablero.
+            //widthTablero = tablero.firstChild.getAttribute("width");
+            //heightTablero = tablero.firstChild.getAttribute("height");
+            nodo.removeChild(nodo.firstChild);
+        }
+    }
+
+    createDiv(tableroWindow, jugador){
+        const divGanador = document.createElement("div");
+        divGanador.className = "ganador";
+        console.log(divGanador);
+
+        //Añade texto al div
+        // Crea un elemento <h1>
+        this.añadirTexto(divGanador, "h1", "¡¡Felicitaciones!!");
+        // Crea un elemento <h2>
+        this.añadirTexto(divGanador, "h2", "Ha ganado: " + jugador);
+        // Crea un elemento <h4>
+        this.añadirTexto(divGanador, "h4", "Fin de la partida");
+
+        //Se agrega el div al div tablero
+        tableroWindow.appendChild(divGanador);
+        console.log(tableroWindow);
+    }
+
+    añadirTexto(nodoPadre, tipoElementoHijo, textoElegido){
+        const elementoHijo = document.createElement(tipoElementoHijo);
+        const texto = document.createTextNode(textoElegido);
+        elementoHijo.appendChild(texto); 
+        //Se agregan los textos al div
+        nodoPadre.appendChild(elementoHijo);
+    }
+
+    //no anda, no se usa hasta el momento
+    /*newElement(typeElement, className){
+        let newElement = document.createElement(typeElement);
+        newElement.className = className;
+        return newElement;
+    }*/
+
     /*
         checkea si hubo un ganador
         @param columnFicha columna donde se guarda la última ficha jugada en la matriz.
@@ -120,34 +183,30 @@ class Tablero {
      */
     checkGanador(columnFicha, rowFicha) {
 
-        //-----------COMPROBAR XQ EN CHECK DIAGONALES Y FILA (RECURSION)
-        //contempla 2 veces el console.log del if de coincidencias == 4
-        // (En consola figura 2 veces el ganó)
 
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
         let fichaDeJugador = this.matrix[columnFicha][rowFicha].getFill();
 
+       //BUSQUEDA POR FILA
+        //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
+        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= 3){
+            console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
+            this.renderGanador(fichaDeJugador);
+        }
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
-        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= 3)
-            console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
-        //BUSQUEDA POR FILA
-        //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
-        this.checkColumna(columnFicha, rowFicha, fichaDeJugador);
-
-        let result = this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador);
-        console.log(result+1);
-        if (result >= 3) {
+        else if(this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= 4){
+            console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
+            this.renderGanador(fichaDeJugador);
+        }
+        else if(this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= 3){
             console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
-        };
-
-        // this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador, 0);
-        //BUSQUEDA POR DIAGONAL DERECHA
-        //Siempre sucederá que los elementos que coincidan en diagonal hacia la derecha
-        //con el elemento, daran todos el mismo resultado al hacer columnaFicha+rowFicha
-        //Si la diagonal se dibuja desde la derecha, es porque arranca en fila = 0,
-        //por lo tanto:
-        
+            this.renderGanador(fichaDeJugador);
+        }
+        else if(this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= 3){
+            console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
+            this.renderGanador(fichaDeJugador);
+        }
         return false;
 
     }
@@ -159,16 +218,9 @@ class Tablero {
             let celda = this.matrix[columnFicha][rowActual];
             if (celda.getFill() === fichaDeJugador) {
                 coincidencias++;
-                if (coincidencias == 4) {
-                    console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
-                    return true;
-                }
-            }
-            //Se sale del for de fila
-            else {
-                return false;
             }
         }
+        return coincidencias;
     }
 
     checkFila(columnActual, rowFicha, fichaDeJugador) {
@@ -200,7 +252,6 @@ class Tablero {
             this.matrix[x][y].getVisitada() == false);
     }
 
-    //Comprobar si funciona
     checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador) {
 
         let coincidenciaIzq = 0;
@@ -221,26 +272,22 @@ class Tablero {
         return coincidenciaIzq + coincidenciaDer;
     }
 
-    checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador, coincidencias) {
-        if (coincidencias == 4) {
-            console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
-            return true;
+    checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador) {
+        let coincidenciaIzq = 0;
+        let coincidenciaDer = 0;
+
+        this.matrix[columnActual][rowActual].setVisitada(true);
+
+        if (this.checkeoAdyacencia(columnActual - 1, rowActual - 1, fichaDeJugador)) {
+            coincidenciaIzq = 1 + this.checkDiagonalIzquierda(columnActual - 1, rowActual - 1, fichaDeJugador);
         }
-        else {
-            if (columnActual >= 0 && columnActual < this.matX &&
-                rowActual >= 0 && rowActual < this.matY &&
-                this.matrix[columnActual][rowActual] != null &&
-                this.matrix[columnActual][rowActual].getFill() === fichaDeJugador
-                && this.matrix[columnActual][rowActual].getVisitada() == false) {
-                this.matrix[columnActual][rowActual].setVisitada(true);
-                coincidencias++;
-                this.checkDiagonalIzquierda(columnActual - 1, rowActual - 1, fichaDeJugador, coincidencias);
-                this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador, coincidencias);
-                this.matrix[columnActual][rowActual].setVisitada(false);
-            }
-            else {
-                return false;
-            }
+
+        if (this.checkeoAdyacencia(columnActual + 1, rowActual + 1, fichaDeJugador)) {
+            coincidenciaDer = 1 + this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador);
         }
+        
+        this.matrix[columnActual][rowActual].setVisitada(false);
+
+        return coincidenciaIzq + coincidenciaDer;
     }
 }
