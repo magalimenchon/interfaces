@@ -1,6 +1,6 @@
 class Ficha {
 
-    constructor(posX, posY, fill, context) {
+    constructor(posX, posY, fill, context, jugador) {
         this.posX = posX;
         this.posY = posY;
         this.radius = 30;
@@ -12,8 +12,20 @@ class Ficha {
         img.src = "../EntregablePractico2/images/coin3.png";
         this.img = img;
         this.loadedImg = false;
+        this.jugador = jugador;
         //nuevo
         this.visitada = false;
+    }
+
+    equals(ficha){
+        if(this.jugador.equals(ficha.getJugador()))
+            return true;
+        else
+            return false;
+    }
+
+    getJugador(){
+        return this.jugador;
     }
 
     setVisitada(visitada) {

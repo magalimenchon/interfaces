@@ -85,36 +85,34 @@ class Tablero {
                     if (this.matrix[column][row] !== null) {
                         if (row == 0) {
                             console.log("columna llena!!");
-                            return;
+                            return false;
                         }
                         let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
                             ((row - 1) * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
-                            lastClickedFicha.getFill(), this.ctx);
+                            lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
+
                         this.matrix[column][row - 1] = ficha;
+
                         ficha.draw();
-                        //console.log("C", column, "R", row-1);
-                        //nuev0
                         this.checkGanador(column, row - 1);
-                        //
-                        return;
+                        return true;
                     }
                     else {
                         if (row == this.matY - 1) {
                             let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
                                 (row * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
-                                lastClickedFicha.getFill(), this.ctx);
+                                lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
                             this.matrix[column][row] = ficha;
+
                             ficha.draw();
-                            //console.log("C", column, "R", row);
-                            //nuev0
                             this.checkGanador(column, row);
-                            //
+                            return true;
                         }
                     }
                 }
             }
-            //console.log("hola matriz", this.matrix); 
         }
+        return false;
     }
 
     //Renderizar el ganador:
@@ -150,13 +148,13 @@ class Tablero {
     createDiv(tableroWindow, jugador){
         const divGanador = document.createElement("div");
         divGanador.className = "ganador";
-        console.log(divGanador);
+        console.log(jugador);
 
         //Añade texto al div
         // Crea un elemento <h1>
         this.añadirTexto(divGanador, "h1", "¡¡Felicitaciones!!");
         // Crea un elemento <h2>
-        this.añadirTexto(divGanador, "h2", "Ha ganado: " + jugador);
+        this.añadirTexto(divGanador, "h2", "Ha ganado: " + jugador.getNombre());
         // Crea un elemento <h4>
         this.añadirTexto(divGanador, "h4", "Fin de la partida");
 
@@ -189,27 +187,27 @@ class Tablero {
 
 
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
-        let fichaDeJugador = this.matrix[columnFicha][rowFicha].getFill();
+        let fichaDeJugador = this.matrix[columnFicha][rowFicha];
 
        //BUSQUEDA POR FILA
         //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
-        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= 3){
+        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize-1){
             console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador);
+            this.renderGanador(fichaDeJugador.getJugador());
         }
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
-        else if(this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= 4){
+        else if(this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize){
             console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador);
+            this.renderGanador(fichaDeJugador.getJugador());
         }
-        else if(this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= 3){
+        else if(this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize-1){
             console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador);
+            this.renderGanador(fichaDeJugador.getJugador());
         }
-        else if(this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= 3){
+        else if(this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize-1){
             console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador);
+            this.renderGanador(fichaDeJugador.getJugador());
         }
         return false;
 
@@ -220,7 +218,7 @@ class Tablero {
 
         for (let rowActual = rowFicha; rowActual < this.matY; rowActual++) {
             let celda = this.matrix[columnFicha][rowActual];
-            if (celda.getFill() === fichaDeJugador) {
+            if (celda.equals(fichaDeJugador)) {
                 coincidencias++;
             }
         }
@@ -252,7 +250,7 @@ class Tablero {
         return (x >= 0 && x < this.matX &&
             y >= 0 && y < this.matY &&
             this.matrix[x][y] != null &&
-            this.matrix[x][y].getFill() === fichaDeJugador &&
+            this.matrix[x][y].equals(fichaDeJugador) &&
             this.matrix[x][y].getVisitada() == false);
     }
 

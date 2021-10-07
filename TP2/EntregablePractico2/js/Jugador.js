@@ -6,7 +6,7 @@ class Jugador {
     }
 
     equals(jugador){
-        if(this.jugador.nombre === jugador.getNombre())
+        if(this.nombre === jugador.getNombre())
             return true;
         else
             return false;
