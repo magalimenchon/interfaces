@@ -87,3 +87,7 @@ button:hover{
     height: 550px;
     background-color: #222;
 }
+
+.hidden{
+    display: none;
+}

@@ -32,11 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     buttonJugar.addEventListener('click', () => {
+        activebuttonJugar();
+
+    });
+
+    function activebuttonJugar(){
         tablero = new Tablero(ctx2);
         juego = new Juego(tablero, canvas1);
 
         juego.iniciarJuego();
         
+        //buttonJugar.className = "hidden";
+        buttonReiniciar.classList.remove("hidden");
+
         canvas1.addEventListener('mousedown', onMouseDown, false);
         window.addEventListener('mouseup', onMouseUp, false);
         canvas1.addEventListener('mousemove', onMouseMove, false);
@@ -52,8 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function onMouseUp(e){
             juego.onMouseUp(e);
         }
-
-    });
+    }
 
     buttonReiniciar.addEventListener('click', () => {
         tablero = new Tablero(ctx2);

@@ -9,7 +9,7 @@ class Ficha {
         this.resaltadoEstilo = '#fff';
         this.ctx = context;
         const img = new Image();
-        img.src = "../EntregablePractico2/images/coin3.png";
+        img.src = "./images/coin3.png";
         this.img = img;
         this.loadedImg = false;
         this.jugador = jugador;

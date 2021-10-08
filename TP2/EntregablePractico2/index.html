@@ -9,6 +9,7 @@
     <!-- Style Sheet -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Style Sheet -->
+    <script src="js/Timer.js"></script>
     <script src="js/Ficha.js"></script>
     <script src="js/Jugador.js"></script>
     <script src="js/Tablero.js"></script>
@@ -29,7 +30,7 @@
         </div>
         <div class="menu">
             <div class="menu-item">
-                <p>por aca va a ir un timer</p>
+                <p id="js-timer">00:00:00</p>
             </div>
             <div class="menu-item">
                 <label>Modalidad de Juego:</label>
@@ -46,7 +47,7 @@
                 <button id="js-btn-jugar">Comenzar a jugar</button>
             </div>
             <div class="menu-item">
-                <button id="js-btn-reiniciar">Reiniciar</button>
+                <button id="js-btn-reiniciar" class="hidden">Reiniciar</button>
             </div>
             <div class="menu-item">
                 <label for="color">Jugador 1:</label>

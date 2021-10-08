@@ -1,9 +1,10 @@
 class Juego {
 
+    
     constructor(tablero, canvas){
-        let jugador1 = new Jugador("Jugador1", document.querySelector('#js-input-color1').value);
+        let jugador1 = new Jugador("Jugador 1", document.querySelector('#js-input-color1').value);
         this.jugador1 = jugador1;
-        this.jugador2 = new Jugador("Jugador2", document.querySelector('#js-input-color2').value);
+        this.jugador2 = new Jugador("Jugador 2", document.querySelector('#js-input-color2').value);
         this.tablero = tablero;
         this.canvasWidth = canvas.width;
         this.canvasHeight = canvas.height;
@@ -12,8 +13,13 @@ class Juego {
         this.isMouseDown = false;
         this.ctx = canvas.getContext('2d');
         this.turno = jugador1;
-       // this.renderCanvas();
+       //this.renderCanvas();
+        this.porcentajeIncremento = 0
+        this.timer = new Timer();
     }
+
+
+
 
     getTurno(){
         return this.turno;
@@ -33,8 +39,8 @@ class Juego {
 
     addFichas() {
 
-        let ficha1 = new Ficha(650, 100, this.jugador1.getColorFicha(), this.ctx, this.jugador1);
-        let ficha2 = new Ficha(650, 200, this.jugador2.getColorFicha(), this.ctx, this.jugador2);
+        let ficha1 = new Ficha(650 + this.porcentajeIncremento, 100, this.jugador1.getColorFicha(), this.ctx, this.jugador1);
+        let ficha2 = new Ficha(650 + this.porcentajeIncremento, 200, this.jugador2.getColorFicha(), this.ctx, this.jugador2);
 
         this.fichas.push(ficha1);
         this.fichas.push(ficha2);
@@ -98,8 +104,8 @@ class Juego {
         ficha1.setResaltado(false);
         ficha2.setResaltado(false);
 
-        ficha1.setPosition(650, 100);
-        ficha2.setPosition(650, 200);
+        ficha1.setPosition(650 + this.porcentajeIncremento, 100);
+        ficha2.setPosition(650 + this.porcentajeIncremento, 200);
         
         this.drawFichas();
     }
@@ -114,8 +120,26 @@ class Juego {
     }
     
     iniciarJuego(){
-        this.addFichas();
+        //this.timer.iniciarConteo();
         this.tablero.drawTablero();
+       // console.log(this.timer.getTiempo('Sep 06 2022 10:32:53 GMT-0500'));
+       //Timer de 10 minutos
+        let fecha = new Date();
+        this.timer.coundown(fecha.setMinutes(fecha.getMinutes()+10), 'Tiempo agotado');
+        this.setPorcentajePosicionFichas();
+        this.addFichas();
+       
+    }
+
+    //Según el tamaño que se agrandó el tablero acomoda el canvas
+    setPorcentajePosicionFichas(){
+        if(this.tablero.getWinLineSize() > 4){
+            this.porcentajeIncremento = this.canvasWidth - 100 - 650;
+            /*if(this.tablero.getWinLineSize() == 5){
+                this.porcentajeIncremento += 5 * this.tablero.getWinLineSize();
+            }
+            else this.porcentajeIncremento += 9 * this.tablero.getWinLineSize();*/
+        }
     }
 
     renderCanvas(){
