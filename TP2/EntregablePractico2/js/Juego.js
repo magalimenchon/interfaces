@@ -14,7 +14,7 @@ class Juego {
         this.ctx = canvas.getContext('2d');
         this.turno = jugador1;
        //this.renderCanvas();
-        this.porcentajeIncremento = 0
+        this.porcentajeIncremento = 0;
         this.timer = new Timer();
     }
 
@@ -119,9 +119,30 @@ class Juego {
         }
     }
     
+    setCanvas(){
+
+        if(this.tablero.getWinLineSize() >= 5){
+            let canvas1 = document.querySelector('#canvas-layer1');
+            let canvas2 = document.querySelector('#canvas-layer2');
+            let canvas3 = document.querySelector('#canvas-layer3');
+            this.setearCanva(canvas1);
+            this.setearCanva(canvas2);
+            this.setearCanva(canvas3);
+            this.canvasWidth = parseInt(canvas1.getAttribute("width"));
+            this.canvasHeight = parseInt(canvas1.getAttribute("height"));
+        }
+    }
+
+    setearCanva(canvas){
+        canvas.setAttribute("width", this.canvasWidth + this.tablero.getTamanioCelda() * (this.tablero.getWinLineSize()-4));
+        canvas.setAttribute("height", this.canvasHeight + this.tablero.getTamanioCelda() * (this.tablero.getWinLineSize()-4));
+        console.log(canvas);
+    }
+
     iniciarJuego(){
         //this.timer.iniciarConteo();
-        this.tablero.drawTablero();
+        this.setCanvas();
+        this.tablero.draw();
        // console.log(this.timer.getTiempo('Sep 06 2022 10:32:53 GMT-0500'));
        //Timer de 10 minutos
         let fecha = new Date();

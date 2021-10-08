@@ -15,7 +15,7 @@ class Tablero {
         this.height = matY * tamanioCelda;
         this.iniDibujoX = 50;
         this.iniDibujoY = 70;
-        this.setCanvas();
+        // this.setCanvas();
         this.ctx = ctx;
         for (let x = 0; x < matX; x++) {
             matrix[x] = [];
@@ -28,6 +28,10 @@ class Tablero {
         //quizas vaya en juego?
         //define si el turno actual pertenece al jugador 1 o 2.
         this.turnoActual = null;
+    }
+
+    getTamanioCelda(){
+        return this.tamanioCelda;
     }
 
     getWinLineSize(){
@@ -45,25 +49,7 @@ class Tablero {
        el valor base de width y height de cada uno por medio de un porcentaje
        que depende del winLineSize elegido.
      */
-    setCanvas(){
-
-        if(this.winLineSize >= 5){
-            let canvas1 = document.querySelector('#canvas-layer1');
-            let canvas2 = document.querySelector('#canvas-layer2');
-            let canvas3 = document.querySelector('#canvas-layer3');
-            this.setearCanva(canvas1);
-            this.setearCanva(canvas2);
-            this.setearCanva(canvas3);
-        }
-    }
-    setearCanva(canva){
-        let widthCanvas = canva.getAttribute("width");
-        let heightCanvas = canva.getAttribute("height");
-        canva.setAttribute("width", parseInt(widthCanvas) + this.winLineSize * 8);
-        canva.setAttribute("height", parseInt(heightCanvas) + this.winLineSize * 4);
-        console.log(canva);
-    }
-
+  
     getMatrix() {
         return this.matrix;
     }
@@ -85,7 +71,10 @@ class Tablero {
         return null;
     }
 
-    drawTablero() {
+    draw() {
+
+        // this.setCanvas();
+
         let radius = 30;
 
         // dibujo un rectangulo azul en la capa 2

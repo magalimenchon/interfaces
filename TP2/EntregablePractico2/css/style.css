@@ -4,7 +4,7 @@
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 6fr 6fr 1fr;
+    grid-template-rows: 7fr 7fr 1fr;
     grid-gap: 10px;
     grid-template-areas: 
     "tablero tablero tablero menu"
