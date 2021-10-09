@@ -15,6 +15,7 @@ class Juego {
         this.turno = jugador1;
         this.renderTurno();
         this.finalizado = false;
+        this.timer = new Timer();
     }
 
     getTurno() {
@@ -70,22 +71,24 @@ class Juego {
 
     // al hacer click checkea si la ficha cumple las condiciones para ser resaltada y poder jugarla
     onMouseDown(e) {
-        this.isMouseDown = true;
+        if (!this.finalizado) {
+            this.isMouseDown = true;
 
-        if (this.lastClickedFicha != null) {
-            this.lastClickedFicha.setResaltado(false);
-            this.lastClickedFicha = null;
+            if (this.lastClickedFicha != null) {
+                this.lastClickedFicha.setResaltado(false);
+                this.lastClickedFicha = null;
+            }
+
+            let currentFicha = this.findClickedFicha(e.layerX, e.layerY);
+
+            // checkea si hay una ficha clickeada y si es el turno del jugador de esa ficha
+            if (currentFicha != null && this.esTurno(currentFicha)) {
+                currentFicha.setResaltado(true);
+                this.lastClickedFicha = currentFicha;
+            }
+
+            this.drawFichas();
         }
-
-        let currentFicha = this.findClickedFicha(e.layerX, e.layerY);
-
-        // checkea si hay una ficha clickeada y si es el turno del jugador de esa ficha
-        if (currentFicha != null && this.esTurno(currentFicha)) {
-            currentFicha.setResaltado(true);
-            this.lastClickedFicha = currentFicha;
-        }
-
-        this.drawFichas();
     }
 
     // dibuja las fichas a jugar en la capa 1 del canvas
@@ -103,25 +106,64 @@ class Juego {
 
     // si se levanta la tecla del mouse
     onMouseUp(e) {
-        this.isMouseDown = false;
-        this.restartPositions();
-        // si se añadio una ficha al tablero => cambio de turno
-        if (this.tablero.addFicha(e, this.lastClickedFicha))
-            this.changeTurno();
-        // si el tablero esta lleno renderizo un mensaje
-        if (this.tablero.checkMatrizLlena()) {
-            this.terminarJuego("Empate. Tablero completo de fichas");
+        if (!this.finalizado) {
+            this.isMouseDown = false;
+            this.restartPositions();
+            // si se añadio una ficha al tablero => cambio de turno
+            if (this.tablero.addFicha(e, this.lastClickedFicha) && !this.tablero.getGanaron()) {
+                this.changeTurno();
+            }
+            if (this.tablero.getGanaron()) {
+                this.terminarJuego("Ha ganado: " + this.turno.getNombre());
+            }
+            // si el tablero esta lleno renderizo un mensaje
+            if (this.tablero.checkMatrizLlena()) {
+                this.terminarJuego("Empate. Tablero completo de fichas");
+            }
         }
-
     }
 
     //si el mouse está abajo y tengo una figura seleccionada y la puedo desplazar
     //se vuelve a renderizar en cada posicion 
     onMouseMove(e) {
-        if (this.isMouseDown && this.lastClickedFicha != null) {
+        if (this.isMouseDown && this.lastClickedFicha != null && !this.finalizado) {
             this.lastClickedFicha.setPosition(e.layerX, e.layerY);
             this.drawFichas();
         }
+    }
+
+    // renderiza los mensajes en el DOM
+    renderMensaje(textoH2, textoH4) {
+        let divGanador = document.querySelector('#js-div-ganador');
+        divGanador.classList.remove("hidden");
+
+        //Añade texto al div
+        // Crea un elemento <h2>
+        this.añadirTexto(divGanador, "h2", textoH2);
+        // Crea un elemento <h4>
+        this.añadirTexto(divGanador, "h4", textoH4);
+
+        //Se muestra el div al div-tablero
+        divGanador.setAttribute("height", this.canvasHeight);
+        // divGanador.setAttribute("width", this.canvasWidth);
+        divGanador.setAttribute("width", this.canvaswidth);
+
+        this.changeMenu();
+    }
+
+    changeMenu(){
+        let turno = document.querySelector('#js-turno-jugador');
+        let texto = turno.innerHTML;
+        turno.innerHTML = texto.strike();
+    }
+
+    // crea los elementos y añade los textos
+    añadirTexto(nodoPadre, tipoElementoHijo, textoElegido) {
+        const elementoHijo = document.createElement(tipoElementoHijo);
+        const texto = document.createTextNode(textoElegido);
+        elementoHijo.appendChild(texto);
+        //Se agregan los textos al div
+        nodoPadre.appendChild(elementoHijo);
     }
 
     // vuelve a dibujar las fichas en sus pocisiones originales
@@ -152,28 +194,70 @@ class Juego {
     iniciarJuego() {
         this.resetInfo();
         this.resetJuego();
-        this.setCanvas();
-        this.tablero.draw();
-        this.addFichas();
-        this.restartPositions();
+        this.resetRenderizado();
     }
 
     // oculta el div para notificaciones y mensajes
     resetInfo() {
         let divGanador = document.querySelector('#js-div-ganador');
         divGanador.classList.add("hidden");
+        while (divGanador.firstChild) {
+            divGanador.removeChild(divGanador.firstChild);
+        }
+    }
+
+    resetRenderizado(){
+        this.setCanvas();
+        this.resetRenderStateGame()
+        this.tablero.draw();
+        this.addFichas();
+        this.restartPositions();
+    }
+
+    resetRenderStateGame(){
+        let sessionRenderState = document.querySelector('#js-state-game');
+        if(sessionRenderState.matches('.hidden')){
+            sessionRenderState.classList.remove("hidden");
+        }
+
+        let buttonPlay = document.querySelector('#js-btn-jugar');
+        if(buttonPlay.innerHTML !== 'reiniciar'){
+            buttonPlay.innerHTML = 'reiniciar';
+        }
     }
 
     // setea todos los atributos de la clase "Juego" para un nuevo juego
     resetJuego() {
+        this.finalizado = false;
         this.turno = this.jugador1;
-        this.renderTurno();
-        this.jugador1.setColorFicha(document.querySelector('#js-input-color1').value);
-        this.jugador2.setColorFicha(document.querySelector('#js-input-color2').value);
-        this.fichas = [];
+        this.renderNewTurno();
+        this.resetPlayers();
         let canvas2 = document.querySelector('#canvas-layer2');
         let ctx2 = canvas2.getContext('2d');
         this.tablero = new Tablero(ctx2);
+        this.resetTimer();
+    }
+
+    resetTimer(){
+        this.timer.resetTimeOut();
+        this.timer.stopTimer();
+        let fecha = new Date();
+        let incrementalMinutos = this.tablero.getMatY() + 2 * this.tablero.getWinLineSize();
+
+        this.timer.iniciarCuentaRegresiva(fecha.setMinutes(fecha.getMinutes() + incrementalMinutos));
+        
+        const limitTime = setInterval(() => {
+            if(this.timer.isTimeOut()){
+                this.terminarJuego('Tiempo agotado');
+                clearInterval(limitTime);
+            }
+        }, 1000);
+    }
+
+    resetPlayers(){
+        this.jugador1.setColorFicha(document.querySelector('#js-input-color1').value);
+        this.jugador2.setColorFicha(document.querySelector('#js-input-color2').value);
+        this.fichas = [];
     }
 
     // setea las dimensiones de las dos capas de canvas
@@ -196,8 +280,10 @@ class Juego {
 
     // setea los parametros para la finalizacon de un juego
     terminarJuego(mensaje) {
-        this.tablero.renderMensaje(mensaje, "Fin de la partida.");
+        this.renderMensaje(mensaje, "Fin de la partida.");
         this.turno = null;
+        this.tablero.setMatrix();
+        this.timer.stopTimer();
         this.finalizado = true;
     }
 

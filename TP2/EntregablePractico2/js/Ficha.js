@@ -16,14 +16,14 @@ class Ficha {
         this.visitada = false;
     }
 
-    equals(ficha){
-        if(this.jugador.equals(ficha.getJugador()))
+    equals(ficha) {
+        if (this.jugador.equals(ficha.getJugador()))
             return true;
         else
             return false;
     }
 
-    getJugador(){
+    getJugador() {
         return this.jugador;
     }
 
@@ -31,7 +31,7 @@ class Ficha {
         this.visitada = visitada;
     }
 
-    getVisitada(){
+    getVisitada() {
         return this.visitada;
     }
 
@@ -39,7 +39,7 @@ class Ficha {
         this.fill = fill;
     }
 
-    getFill(){
+    getFill() {
         return this.fill;
     }
 
@@ -79,7 +79,7 @@ class Ficha {
     draw() {
         this.ctx.fillStyle = this.fill;
         this.ctx.beginPath();
-        this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI*2);
+        this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
         this.ctx.fill();
 
         if (this.resaltado === true) {

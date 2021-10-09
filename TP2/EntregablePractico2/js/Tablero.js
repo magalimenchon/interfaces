@@ -19,10 +19,15 @@ class Tablero {
         this.matrix = matrix;
         this.inicializarMatriz();
         this.cantFichasMatriz = 0;
+        this.ganaron = false;
     }
 
 
     // getters
+    setMatrix() {
+        this.matrix = [];
+    }
+
     getMatX() {
         return this.matX;
     }
@@ -147,34 +152,10 @@ class Tablero {
     }
 
     // checkea si la matriz esta llena de fichas
-    checkMatrizLlena(){
+    checkMatrizLlena() {
         return this.cantFichasMatriz == this.matX * this.matY;
     }
 
-    // renderiza los mensajes en el DOM
-    renderMensaje(textoH2, textoH4) {
-        let divGanador = document.querySelector('#js-div-ganador');
-        divGanador.classList.remove("hidden");
-
-        //Añade texto al div
-        // Crea un elemento <h2>
-        this.añadirTexto(divGanador, "h2", textoH2);
-        // Crea un elemento <h4>
-        this.añadirTexto(divGanador, "h4", textoH4);
-
-        //Se agrega el div al div-tablero
-        divGanador.setAttribute("height", (this.matY * this.tamanioCelda) + this.tamanioCelda * 2);
-        divGanador.setAttribute("width", (this.matX * this.tamanioCelda) + this.tamanioCelda * 8);
-    }
-
-    // crea los elementos y añade los textos
-    añadirTexto(nodoPadre, tipoElementoHijo, textoElegido) {
-        const elementoHijo = document.createElement(tipoElementoHijo);
-        const texto = document.createTextNode(textoElegido);
-        elementoHijo.appendChild(texto);
-        //Se agregan los textos al div
-        nodoPadre.appendChild(elementoHijo);
-    }
 
     /*
         checkea si hubo un ganador
@@ -187,21 +168,29 @@ class Tablero {
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
         let fichaDeJugador = this.matrix[columnFicha][rowFicha];
 
-        
+
         if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
-            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            this.ganaron = true;
+            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
         else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
-            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            this.ganaron = true;
         }
         else if (this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            this.ganaron = true;
         }
         else if (this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            this.ganaron = true;
         }
-        return false;
+        //return false;
 
+    }
+
+    getGanaron() {
+        return this.ganaron;
     }
 
     //BUSQUEDA POR COLUMNA

@@ -5,22 +5,22 @@ class Jugador {
         this.colorFicha = colorFicha;
     }
 
-    equals(jugador){
-        if(this.nombre === jugador.getNombre())
+    equals(jugador) {
+        if (this.nombre === jugador.getNombre())
             return true;
         else
             return false;
     }
 
-    getNombre(){
+    getNombre() {
         return this.nombre;
     }
 
-    getColorFicha(){
+    getColorFicha() {
         return this.colorFicha;
     }
 
-    setColorFicha(colorFicha){
+    setColorFicha(colorFicha) {
         this.colorFicha = colorFicha;
     }
 

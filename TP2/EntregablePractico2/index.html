@@ -25,27 +25,35 @@
             </canvas>
             <canvas id="canvas-layer2" width=800 height=550>
             </canvas>
-            <div class="ganador hidden" id="js-div-ganador"></div>
+            <div class="ganador hidden" id="js-div-ganador">
+            </div>
         </div>
         <div class="menu">
+            <section id="js-state-game" class="hidden">
+                <div class="menu-item">
+                    <h4>Tiempo partida</h4>
+                    <h2 id="js-timer">00:00:00</h2>
+                </div>
+                <section id="js-turno-div" class="menu-item">
+                    <h3 id="js-turno"></h3>
+                    <h2 id="js-turno-jugador"></h2>
+                </section>
+            </section>
             <div class="menu-item">
-                <p id="js-timer">00:00:00</p>
+                <h3 class="titulo">Nueva partida</h3>
             </div>
             <div class="menu-item">
-                <label>Modalidad de Juego:</label>
-            </div>
-            <div class="menu-item">
-                <select name="modalidad" id="js-select-gameMod">
+                <div class="menu-item">
+                    <label class="menu-item">Modalidad de Juego:</label>
+                </div>
+                <select class="menu-item" name="modalidad" id="js-select-gameMod">
                     <option value="3">3 en linea</option>
                     <option selected value="4">4 en linea</option>
                     <option value="5">5 en linea</option>
                     <option value="6">6 en linea</option>
                 </select>
             </div>
-            <div class="menu-item">
-                <button id="js-btn-jugar">Nuevo Juego</button>
-            </div>
-            <div class="menu-item">
+            <div class="menu-item space">
                 <label for="color">Jugador 1:</label>
                 <input class="input" type="color" value="#DEFFFF" id="js-input-color1">
             </div>
@@ -53,10 +61,9 @@
                 <label for="color">Jugador 2:</label>
                 <input class="input" type="color" value="#234848" id="js-input-color2">
             </div>
-            <section id="js-turno-div" class="menu-item">
-                <h3 id="js-turno"></h3>
-                <h2 id="js-turno-jugador"></h2>
-            </section>
+            <div class="menu-item">
+                <button id="js-btn-jugar">Jugar</button>
+            </div>
         </div>
         <div class="footer">
             <p>Developed by Magalí Menchón & Luciano Scaminaci</p>

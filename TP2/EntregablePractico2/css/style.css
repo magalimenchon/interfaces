@@ -79,10 +79,10 @@ button:hover{
 
 .ganador{
     z-index: 4;
-    width: 600px;
+    width: 650px;
     background-color: rgba(1, 1, 1, 0.70);
     font-weight: bolder;
-    padding: 2em;
+    padding: 2em 0 2em 0;
 }
 
 .hidden{
@@ -92,9 +92,22 @@ button:hover{
 .turno{
     /*background-color: rgba(0, 233, 233, 0.5);*/
     background-color: rgba(0, 233, 233, 0.1);
-    padding: 2em;
+    padding: 2em 0em 2em 0em;
     margin: 2em;
     text-shadow: 0 0 30px aqua,
     0 0 60px aqua,
     0 0 120px aqua;
+}
+
+.titulo{
+    background-color: rgba(0, 233, 233, 0.1);
+    padding: 1em 4em;
+    margin: 4em 0 0 0;
+    text-shadow: 0 0 30px aqua,
+    0 0 60px aqua,
+    0 0 120px aqua;
+}
+
+.space{
+    margin: 1.3em;
 }

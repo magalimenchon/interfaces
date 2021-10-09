@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // --
     let tablero = new Tablero(ctx2);
     let juego = new Juego(tablero, canvas1);
-    let timer = new Timer();
 
     let creacionEventListeners = false;
 
@@ -25,31 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // inicia un nuevo juego
-    function activebuttonJugar(){
-        timer.resetTimer();
-
-        let fecha = new Date();
-        timer.countdown(fecha.setMinutes(fecha.getMinutes()+10), 'Tiempo agotado');
+    function activebuttonJugar() {
 
         juego.iniciarJuego();
- 
+
         // los eventListeners se crean por unica vez
-        if(!creacionEventListeners){
+        if (!creacionEventListeners) {
             canvas1.addEventListener('mousedown', onMouseDown, false);
             window.addEventListener('mouseup', onMouseUp, false);
             canvas1.addEventListener('mousemove', onMouseMove, false);
             creacionEventListeners = true;
         }
-        
-        function onMouseDown(e){
+
+        function onMouseDown(e) {
             juego.onMouseDown(e);
         }
 
-        function onMouseMove(e){
+        function onMouseMove(e) {
             juego.onMouseMove(e);
         }
 
-        function onMouseUp(e){
+        function onMouseUp(e) {
             juego.onMouseUp(e);
         }
     }
