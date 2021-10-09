@@ -8,7 +8,7 @@
     <title>4 En Linea</title>
     <!-- Style Sheet -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Style Sheet -->
+    <!-- JS Files -->
     <script src="js/Timer.js"></script>
     <script src="js/Ficha.js"></script>
     <script src="js/Jugador.js"></script>
@@ -27,6 +27,7 @@
             </canvas>
             <canvas id="canvas-layer3" width=800 height=550>
             </canvas>
+            <div class="ganador hidden" id="js-div-ganador"></div>
         </div>
         <div class="menu">
             <div class="menu-item">
@@ -54,6 +55,10 @@
                 <label for="color">Jugador 2:</label>
                 <input class="input" type="color" value="#234848" id="js-input-color2">
             </div>
+            <section id="js-turno-div" class="menu-item">
+                <h3 id="js-turno"></h3>
+                <h2 id="js-turno-jugador"></h2>
+            </section>
         </div>
         <div class="footer">
             <p>Developed by Magalí Menchón & Luciano Scaminaci</p>

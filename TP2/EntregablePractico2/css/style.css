@@ -79,16 +79,27 @@ button{
     margin: 1em;
 }
 button:hover{
-    color: rgba(255, 255, 255, 0.1);
     color: rgba(233, 233, 233, 0.1);
 }
 
 .ganador{
     z-index: 4;
-    width: 800px;
-    background-color: rgba(233, 233, 233, 0.1);
+    width: 600px;
+    background-color: rgba(1, 1, 1, 0.85);
+    font-weight: bolder;
+    padding: 2em;
 }
 
 .hidden{
     display: none;
+}
+
+.turno{
+    /*background-color: rgba(0, 233, 233, 0.5);*/
+    background-color: rgba(0, 233, 233, 0.1);
+    padding: 2em;
+    margin: 2em;
+    text-shadow: 0 0 30px aqua,
+    0 0 60px aqua,
+    0 0 120px aqua;
 }

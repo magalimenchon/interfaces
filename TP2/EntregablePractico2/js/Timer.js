@@ -11,9 +11,9 @@ class Timer {
         //los segundos van de 0 a 60
         //asigna un 0 adelante para los numeros < a 10, y para los > solo toma los últimos 2 dígitos.
         let segundos =  ( '0' + Math.floor(remainTime % 60)).slice(-2);
-        //Divimos por 60 porque hay 60 segundos en 1 minuto
+        //Dividimos por 60 porque hay 60 segundos en 1 minuto
         let minutos =  ( '0' + Math.floor(remainTime / 60 % 60)).slice(-2);
-        //Divimos por 3660 porque hay 3600 segundos en 1 hora, y hay 24 horas en 1 día
+        //Dividimos por 3660 porque hay 3600 segundos en 1 hora, y hay 24 horas en 1 día
         let horas =  ( '0' + Math.floor(remainTime / 3660 % 24)).slice(-2);
 
         return {

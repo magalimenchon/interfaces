@@ -1,7 +1,7 @@
 class Juego {
 
     
-    constructor(tablero, canvas){
+    constructor(tablero, canvas/*, jugador1, jugador2*/){
         let jugador1 = new Jugador("Jugador 1", document.querySelector('#js-input-color1').value);
         this.jugador1 = jugador1;
         this.jugador2 = new Jugador("Jugador 2", document.querySelector('#js-input-color2').value);
@@ -13,16 +13,17 @@ class Juego {
         this.isMouseDown = false;
         this.ctx = canvas.getContext('2d');
         this.turno = jugador1;
-       //this.renderCanvas();
+        this.renderTurno();
         this.porcentajeIncremento = 0;
-        // this.timer = null;
+        this.finalizado = false;
     }
-
-
-
 
     getTurno(){
         return this.turno;
+    }
+
+    checkFinalizacion(){
+        return this.finalizado;
     }
 
     changeTurno(){
@@ -31,11 +32,28 @@ class Juego {
 
         else if(this.turno.equals(this.jugador2))
             this.turno = this.jugador1;
+
+        this.renderNewTurno();
+    }
+
+    renderNewTurno(){
+        let renderTurno = document.querySelector('#js-turno-jugador');
+        renderTurno.innerHTML = this.turno.getNombre();
+        //renderTurno.style.color = this.turno.getColorFicha();
+    }
+
+    renderTurno(){
+        let divTurno = document.querySelector('#js-turno-div');
+        divTurno.classList.add("turno");
+        let turno = document.querySelector('#js-turno');
+        turno.innerHTML = "Turno";
+        this.renderNewTurno();
     }
 
     esTurno(ficha){
         return ficha.getJugador().equals(this.turno);
     }
+    
 
     addFichas() {
 
@@ -85,6 +103,10 @@ class Juego {
         this.restartPositions();
         if(this.tablero.addFicha(e, this.lastClickedFicha))
             this.changeTurno();
+        if (this.tablero.checkMatrizLlena()) {
+            this.terminarJuego("Empate. Tablero completo de fichas");
+        }
+
     }
 
     onMouseMove(e) {
@@ -121,20 +143,43 @@ class Juego {
         }
     }
     
-
     iniciarJuego(){
-        //this.timer.iniciarConteo();
         this.setCanvas();
+        this.resetInfo();
+        this.resetJuego();
+        //this.tablero.inicializarMatriz();
         this.tablero.draw();
-       // console.log(this.timer.getTiempo('Sep 06 2022 10:32:53 GMT-0500'));
-       //Timer de 10 minutos
-        // this.resetTimer();
-        // this.setPorcentajePosicionFichas();
         this.addFichas();
-       
     }
 
+    resetInfo(){
+        let divGanador = document.querySelector('#js-div-ganador');
+        //divGanador.style.display = "none";
+        //Devuelve true si el elemento sería seleccionado por la cadena
+        //de selección especificada; de lo contrario, retorna false
+       //if(divGanador != null && !divGanador.matches('.hidden'))
+            divGanador.classList.add("hidden");
+           // divGanador.style.zIndex = -1;
+    }
 
+    resetJuego(){
+        this.turno = this.jugador1;
+        this.renderTurno();
+        this.jugador1.setColorFicha(document.querySelector('#js-input-color1').value);
+        this.jugador2.setColorFicha(document.querySelector('#js-input-color2').value);
+        //this.tablero = new Tablero(this.tablero.getContext());
+        this.tablero.inicializarMatriz();
+        this.tablero = null;
+        let canvas2 = document.querySelector('#canvas-layer2');
+        let ctx2 = canvas2.getContext('2d');
+        this.tablero = new Tablero(ctx2);
+        //this.tablero.inicializarMatriz();
+        //let ctx = this.tablero.getContext();
+        //this.tablero = null;
+        //console.log(ctx2);
+        //this.tablero = new Tablero(ctx);
+
+    }
     setCanvas() {
 
         let canvas1 = document.querySelector('#canvas-layer1');
@@ -153,36 +198,11 @@ class Juego {
         canvas.setAttribute("height", (this.tablero.matY * this.tablero.tamanioCelda) + this.tablero.tamanioCelda * 2);
     }
 
-    //Según el tamaño que se agrandó el tablero acomoda el canvas
-    // setPorcentajePosicionFichas(){
-    //     if(this.tablero.getWinLineSize() > 4){
-    //         this.porcentajeIncremento = this.canvasWidth - 100 - 650;
-    //         /*if(this.tablero.getWinLineSize() == 5){
-    //             this.porcentajeIncremento += 5 * this.tablero.getWinLineSize();
-    //         }
-    //         else this.porcentajeIncremento += 9 * this.tablero.getWinLineSize();*/
-    //     }
-    // }
-
-    // renderCanvas(){
-    //     let tableroWindow = document.querySelector('.espacio');
-    //     this.tablero.borrarHijosNodo(tableroWindow);
-    //     this.createCanvas(tableroWindow, 3, 800, 550);
-    //     //console.log(tableroWindow);
-    // }
-
-    // createCanvas(nodoPadre, cantCanvas, widthCanvas, heightCanvas){
-        
-    //     for (let i = 1; i <= cantCanvas; i++) {
-    //         const newCanvas = document.createElement("canvas");
-    //         const stringId ="canvas-layer" + i;
-    //         newCanvas.setAttribute("id", stringId);
-    //         //console.log(newCanvas);
-    //         newCanvas.setAttribute("width", widthCanvas);
-    //         newCanvas.setAttribute("height", heightCanvas);
-
-    //         nodoPadre.appendChild(newCanvas);
-    //     }
-    // }
+    terminarJuego(mensaje){
+        this.tablero.renderMensaje(mensaje, "Fin de la partida.");
+        this.turno = null;
+        //this.tablero = null;
+        this.finalizado = true;
+    }
 
 }

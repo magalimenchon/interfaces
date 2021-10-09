@@ -15,25 +15,16 @@ class Tablero {
         this.height = matY * tamanioCelda;
         this.iniDibujoX = 50;
         this.iniDibujoY = 70;
-        // this.setCanvas();
         this.ctx = ctx;
-        for (let x = 0; x < matX; x++) {
-            matrix[x] = [];
-            for (let y = 0; y < matY; y++) {
-                matrix[x][y] = null;
-            }
-        }
         this.matrix = matrix;
-
-        //quizas vaya en juego?
-        //define si el turno actual pertenece al jugador 1 o 2.
-        this.turnoActual = null;
+        this.inicializarMatriz();
+        this.cantFichasMatriz = 0;
     }
 
-    getMatX(){
+    getMatX() {
         return this.matX;
     }
-    getMatY(){
+    getMatY() {
         return this.matY;
     }
     getTamanioCelda() {
@@ -43,7 +34,9 @@ class Tablero {
     getWinLineSize() {
         return this.winLineSize;
     }
-
+    getContext() {
+        return this.context;
+    }
     getHeight() {
         return this.height;
     }
@@ -51,13 +44,18 @@ class Tablero {
         return this.width;
     }
 
-    /* Modifica los canvas por medio del div que los contiene, incrementando
-       el valor base de width y height de cada uno por medio de un porcentaje
-       que depende del winLineSize elegido.
-     */
-
     getMatrix() {
         return this.matrix;
+    }
+
+    //Inicializa la matriz que va almacenará las fichas que se van tirando en el tablero
+    inicializarMatriz() {
+        for (let x = 0; x < this.matX; x++) {
+            this.matrix[x] = [];
+            for (let y = 0; y < this.matY; y++) {
+                this.matrix[x][y] = null;
+            }
+        }
     }
 
     //Busca la posible columna donde haya tirado la ficha, sino es válida retorna null
@@ -112,7 +110,6 @@ class Tablero {
 
                     if (this.matrix[column][row] !== null) {
                         if (row == 0) {
-                            console.log("columna llena!!");
                             return false;
                         }
                         let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
@@ -123,6 +120,7 @@ class Tablero {
 
                         ficha.draw();
                         this.checkGanador(column, row - 1);
+                        this.cantFichasMatriz++;
                         return true;
                     }
                     else {
@@ -134,6 +132,7 @@ class Tablero {
 
                             ficha.draw();
                             this.checkGanador(column, row);
+                            this.cantFichasMatriz++;
                             return true;
                         }
                     }
@@ -143,52 +142,35 @@ class Tablero {
         return false;
     }
 
-    //Renderizar el ganador:
-    renderGanador(ganador) {
-        let tableroWindow = document.querySelector('.espacio');
-        //Creación del div
-        // let widthTablero ="222px", heightTablero= "222px";
-        //borra todos los hijos del div con clase tablero, es decir, los canvas dentro de él
-        // this.borrarHijosNodo(tableroWindow);
-
-        //Se crea un div de renderizado
-        //ganador = "Jugador 1"
-        this.createDiv(tableroWindow, ganador);
-
-
-        /*const divGanador = document.createElement("div");
-        divGanador.className = "ganador";
-
-        console.log(divGanador);
-        tableroWindow.appendChild(divGanador);
-        console.log(tableroWindow);*/
+    checkMatrizLlena(){
+        return this.cantFichasMatriz == this.matX * this.matY;
     }
 
     borrarHijosNodo(nodo) {
         while (nodo.firstChild) {
-            //obtengo el with y height del tablero.
-            //widthTablero = tablero.firstChild.getAttribute("width");
-            //heightTablero = tablero.firstChild.getAttribute("height");
             nodo.removeChild(nodo.firstChild);
         }
     }
 
-    createDiv(tableroWindow, jugador) {
-        const divGanador = document.createElement("div");
-        divGanador.className = "ganador";
-        console.log(jugador);
+    //createDiv(tableroWindow, jugador) {
+    renderMensaje(textoh2, textoh4) {
+        let divGanador = document.querySelector('#js-div-ganador');
+
+        //if(divGanador != null && divGanador.matches('.hidden')){
+            divGanador.classList.remove("hidden");
+       // divGanador.style.zIndex = 4;
 
         //Añade texto al div
         // Crea un elemento <h2>
-        this.añadirTexto(divGanador, "h2", "Ha ganado: " + jugador.getNombre());
+        this.añadirTexto(divGanador, "h2", textoh2);
         // Crea un elemento <h4>
-        this.añadirTexto(divGanador, "h4", "Fin de la partida");
+        this.añadirTexto(divGanador, "h4", textoh4);
 
-        divGanador.setAttribute("id", "divGanador");
+        //ivGanador.setAttribute("id", "divGanador");
         divGanador.setAttribute("height", (this.matY * this.tamanioCelda) + this.tamanioCelda * 2);
-        //Se agrega el div al div tablero
-        tableroWindow.appendChild(divGanador);
-        console.log(tableroWindow);
+        divGanador.setAttribute("width", (this.matX * this.tamanioCelda) + this.tamanioCelda * 8);
+        //} //Se agrega el div al div tablero
+        //tableroWindow.appendChild(divGanador);
     }
 
     añadirTexto(nodoPadre, tipoElementoHijo, textoElegido) {
@@ -198,13 +180,6 @@ class Tablero {
         //Se agregan los textos al div
         nodoPadre.appendChild(elementoHijo);
     }
-
-    //no anda, no se usa hasta el momento
-    /*newElement(typeElement, className){
-        let newElement = document.createElement(typeElement);
-        newElement.className = className;
-        return newElement;
-    }*/
 
     /*
         checkea si hubo un ganador
@@ -220,22 +195,18 @@ class Tablero {
         //BUSQUEDA POR FILA
         //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
         if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador.getJugador());
+            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
         else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
-            console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador.getJugador());
+            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
         else if (this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador.getJugador());
+            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
         else if (this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
-            this.renderGanador(fichaDeJugador.getJugador());
+            this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
         return false;
 
@@ -248,6 +219,9 @@ class Tablero {
             let celda = this.matrix[columnFicha][rowActual];
             if (celda.equals(fichaDeJugador)) {
                 coincidencias++;
+            }
+            else {
+                rowActual = this.matY;
             }
         }
         return coincidencias;
