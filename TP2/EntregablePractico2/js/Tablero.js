@@ -5,8 +5,8 @@ class Tablero {
         let tamanioCelda = 70;
         let matrix = [];
         let winLineSize = parseInt(document.querySelector('#js-select-gameMod').value);
-        let matX = winLineSize+3;
-        let matY = winLineSize+2;
+        let matX = winLineSize + 3;
+        let matY = winLineSize + 2;
         this.winLineSize = winLineSize;
         this.matX = matX;
         this.matY = matY;
@@ -24,24 +24,30 @@ class Tablero {
             }
         }
         this.matrix = matrix;
-        
+
         //quizas vaya en juego?
         //define si el turno actual pertenece al jugador 1 o 2.
         this.turnoActual = null;
     }
 
-    getTamanioCelda(){
+    getMatX(){
+        return this.matX;
+    }
+    getMatY(){
+        return this.matY;
+    }
+    getTamanioCelda() {
         return this.tamanioCelda;
     }
 
-    getWinLineSize(){
+    getWinLineSize() {
         return this.winLineSize;
     }
 
-    getHeight(){
+    getHeight() {
         return this.height;
     }
-    getWidth(){
+    getWidth() {
         return this.width;
     }
 
@@ -49,7 +55,7 @@ class Tablero {
        el valor base de width y height de cada uno por medio de un porcentaje
        que depende del winLineSize elegido.
      */
-  
+
     getMatrix() {
         return this.matrix;
     }
@@ -71,9 +77,8 @@ class Tablero {
         return null;
     }
 
-    draw() {
 
-        // this.setCanvas();
+    draw() {
 
         let radius = 30;
 
@@ -139,12 +144,12 @@ class Tablero {
     }
 
     //Renderizar el ganador:
-    renderGanador(ganador){
+    renderGanador(ganador) {
         let tableroWindow = document.querySelector('.espacio');
         //Creación del div
-       // let widthTablero ="222px", heightTablero= "222px";
+        // let widthTablero ="222px", heightTablero= "222px";
         //borra todos los hijos del div con clase tablero, es decir, los canvas dentro de él
-        this.borrarHijosNodo(tableroWindow);
+        // this.borrarHijosNodo(tableroWindow);
 
         //Se crea un div de renderizado
         //ganador = "Jugador 1"
@@ -159,7 +164,7 @@ class Tablero {
         console.log(tableroWindow);*/
     }
 
-    borrarHijosNodo(nodo){
+    borrarHijosNodo(nodo) {
         while (nodo.firstChild) {
             //obtengo el with y height del tablero.
             //widthTablero = tablero.firstChild.getAttribute("width");
@@ -168,28 +173,28 @@ class Tablero {
         }
     }
 
-    createDiv(tableroWindow, jugador){
+    createDiv(tableroWindow, jugador) {
         const divGanador = document.createElement("div");
         divGanador.className = "ganador";
         console.log(jugador);
 
         //Añade texto al div
-        // Crea un elemento <h1>
-        this.añadirTexto(divGanador, "h1", "¡¡Felicitaciones!!");
         // Crea un elemento <h2>
         this.añadirTexto(divGanador, "h2", "Ha ganado: " + jugador.getNombre());
         // Crea un elemento <h4>
         this.añadirTexto(divGanador, "h4", "Fin de la partida");
 
+        divGanador.setAttribute("id", "divGanador");
+        divGanador.setAttribute("height", (this.matY * this.tamanioCelda) + this.tamanioCelda * 2);
         //Se agrega el div al div tablero
         tableroWindow.appendChild(divGanador);
         console.log(tableroWindow);
     }
 
-    añadirTexto(nodoPadre, tipoElementoHijo, textoElegido){
+    añadirTexto(nodoPadre, tipoElementoHijo, textoElegido) {
         const elementoHijo = document.createElement(tipoElementoHijo);
         const texto = document.createTextNode(textoElegido);
-        elementoHijo.appendChild(texto); 
+        elementoHijo.appendChild(texto);
         //Se agregan los textos al div
         nodoPadre.appendChild(elementoHijo);
     }
@@ -212,23 +217,23 @@ class Tablero {
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
         let fichaDeJugador = this.matrix[columnFicha][rowFicha];
 
-       //BUSQUEDA POR FILA
+        //BUSQUEDA POR FILA
         //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
-        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize-1){
+        if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
             console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
-        else if(this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize){
+        else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
             console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
-        else if(this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize-1){
+        else if (this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
             console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
-        else if(this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize-1){
+        else if (this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
             console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
@@ -291,7 +296,7 @@ class Tablero {
         if (this.checkeoAdyacencia(columnActual + 1, rowActual - 1, fichaDeJugador)) {
             coincidenciaDer = 1 + this.checkDiagonalDerecha(columnActual + 1, rowActual - 1, fichaDeJugador);
         }
-        
+
         this.matrix[columnActual][rowActual].setVisitada(false);
 
         return coincidenciaIzq + coincidenciaDer;
@@ -310,7 +315,7 @@ class Tablero {
         if (this.checkeoAdyacencia(columnActual + 1, rowActual + 1, fichaDeJugador)) {
             coincidenciaDer = 1 + this.checkDiagonalIzquierda(columnActual + 1, rowActual + 1, fichaDeJugador);
         }
-        
+
         this.matrix[columnActual][rowActual].setVisitada(false);
 
         return coincidenciaIzq + coincidenciaDer;

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    "use strict";
+    // "use strict";
 
     // canvas capa trasera
     let canvas2 = document.querySelector('#canvas-layer2');
@@ -8,18 +8,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // canvas capa delantera
     let canvas1 = document.querySelector('#canvas-layer1');
-    // let ctx1 = canvas1.getContext('2d');
 
     //Manejo del menú
     let buttonJugar = document.querySelector('#js-btn-jugar');
-    
+
 
     buttonJugar.addEventListener('click', () => {
         activebuttonJugar();
 
     });
 
+    let timer = new Timer();
+
     function activebuttonJugar(){
+        timer.resetTimer();
+
+        let fecha = new Date();
+        timer.countdown(fecha.setMinutes(fecha.getMinutes()+10), 'Tiempo agotado');
 
         let tablero = new Tablero(ctx2);
         let juego = new Juego(tablero, canvas1);

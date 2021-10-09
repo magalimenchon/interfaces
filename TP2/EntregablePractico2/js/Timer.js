@@ -2,7 +2,7 @@ class Timer {
 
     constructor() {
         this.timerRender = document.querySelector('#js-timer');
-
+        this.actualizacion = null;
     }
 
     getTiempo(tiempoLimite){
@@ -21,9 +21,9 @@ class Timer {
         }
     }
 
-    coundown(tiempoLimite, mensajeStop){
+    countdown(tiempoLimite, mensajeStop){
 
-        const actualizacion = setInterval(() =>{
+        this.actualizacion = setInterval(() =>{
 
             let tiempoActual = this.getTiempo(tiempoLimite);
             let hora = tiempoActual.horas;
@@ -34,10 +34,14 @@ class Timer {
             //Deja de contar hacia atras cuando se agotan los milisegundos.
             //se quita el timer y se muestra el mensaje
             if(tiempoActual.remainTime <= 1){
-                clearInterval(actualizacion);
+                clearInterval(this.actualizacion);
                 this.timerRender.innerHTML = mensajeStop;
             }
 
         }, 1000);
+    }
+
+    resetTimer(){
+        clearInterval(this.actualizacion);
     }
 }
