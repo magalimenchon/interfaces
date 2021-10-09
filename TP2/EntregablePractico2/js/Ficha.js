@@ -75,6 +75,7 @@ class Ficha {
         this.resaltado = resaltado;
     }
 
+    // dibuja una ficha en su respectiva capa de canvas
     draw() {
         this.ctx.fillStyle = this.fill;
         this.ctx.beginPath();
@@ -98,6 +99,7 @@ class Ficha {
         }
     }
 
+    // checkea si el punto esta dentro del radio de un circulo
     isPointInside(x, y) {
         let _x = this.posX - x;
         let _y = this.posY - y;

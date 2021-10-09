@@ -21,6 +21,8 @@ class Tablero {
         this.cantFichasMatriz = 0;
     }
 
+
+    // getters
     getMatX() {
         return this.matX;
     }
@@ -30,7 +32,6 @@ class Tablero {
     getTamanioCelda() {
         return this.tamanioCelda;
     }
-
     getWinLineSize() {
         return this.winLineSize;
     }
@@ -43,12 +44,11 @@ class Tablero {
     getWidth() {
         return this.width;
     }
-
     getMatrix() {
         return this.matrix;
     }
 
-    //Inicializa la matriz que va almacenará las fichas que se van tirando en el tablero
+    //Inicializa la matriz que almacenará las fichas que se van tirando en el tablero
     inicializarMatriz() {
         for (let x = 0; x < this.matX; x++) {
             this.matrix[x] = [];
@@ -75,18 +75,16 @@ class Tablero {
         return null;
     }
 
-
+    // dibuja el tablero en el canvas
     draw() {
-
         let radius = 30;
 
         // dibujo un rectangulo azul en la capa 2
         this.ctx.fillStyle = "#00ffff";
-
         this.ctx.fillRect(this.iniDibujoX, this.iniDibujoY, this.width, this.height);
 
         this.ctx.fillStyle = "#222";
-
+        //dibuja los circulos en el tablero
         for (let x = 0; x < this.matX; x++) {
             for (let y = 0; y < this.matY; y++) {
                 this.ctx.beginPath();
@@ -108,7 +106,7 @@ class Tablero {
             if (column != null) {
                 for (let row = 0; row < this.matY; row++) {
 
-                    // si hay una ficha en la fila que esta parada la iteracion
+                    // si hay una ficha en la fila celda
                     if (this.matrix[column][row] !== null) {
                         // si la columna esta llena
                         if (row == 0) {
@@ -118,6 +116,7 @@ class Tablero {
                             ((row - 1) * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
                             lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
 
+                        // agrego la ficha en la celda anterior
                         this.matrix[column][row - 1] = ficha;
 
                         ficha.draw();
@@ -131,6 +130,8 @@ class Tablero {
                             let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
                                 (row * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
                                 lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
+
+                            // agrego la ficha en la ultima poscicion
                             this.matrix[column][row] = ficha;
 
                             ficha.draw();
@@ -145,37 +146,28 @@ class Tablero {
         return false;
     }
 
+    // checkea si la matriz esta llena de fichas
     checkMatrizLlena(){
         return this.cantFichasMatriz == this.matX * this.matY;
     }
 
-    borrarHijosNodo(nodo) {
-        while (nodo.firstChild) {
-            nodo.removeChild(nodo.firstChild);
-        }
-    }
-
-    //createDiv(tableroWindow, jugador) {
-    renderMensaje(textoh2, textoh4) {
+    // renderiza los mensajes en el DOM
+    renderMensaje(textoH2, textoH4) {
         let divGanador = document.querySelector('#js-div-ganador');
-
-        //if(divGanador != null && divGanador.matches('.hidden')){
-            divGanador.classList.remove("hidden");
-       // divGanador.style.zIndex = 4;
+        divGanador.classList.remove("hidden");
 
         //Añade texto al div
         // Crea un elemento <h2>
-        this.añadirTexto(divGanador, "h2", textoh2);
+        this.añadirTexto(divGanador, "h2", textoH2);
         // Crea un elemento <h4>
-        this.añadirTexto(divGanador, "h4", textoh4);
+        this.añadirTexto(divGanador, "h4", textoH4);
 
-        //ivGanador.setAttribute("id", "divGanador");
+        //Se agrega el div al div-tablero
         divGanador.setAttribute("height", (this.matY * this.tamanioCelda) + this.tamanioCelda * 2);
         divGanador.setAttribute("width", (this.matX * this.tamanioCelda) + this.tamanioCelda * 8);
-        //} //Se agrega el div al div tablero
-        //tableroWindow.appendChild(divGanador);
     }
 
+    // crea los elementos y añade los textos
     añadirTexto(nodoPadre, tipoElementoHijo, textoElegido) {
         const elementoHijo = document.createElement(tipoElementoHijo);
         const texto = document.createTextNode(textoElegido);
@@ -195,13 +187,10 @@ class Tablero {
         //Se necesita saber de alguna forma q esta jugando el jugador x, por medio de su ficha.
         let fichaDeJugador = this.matrix[columnFicha][rowFicha];
 
-        //BUSQUEDA POR FILA
-        //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
+        
         if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
             this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
-        //BUSQUEDA POR COLUMNA
-        //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
         else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
             this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
         }
@@ -215,6 +204,8 @@ class Tablero {
 
     }
 
+    //BUSQUEDA POR COLUMNA
+    //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
     checkColumna(columnFicha, rowFicha, fichaDeJugador) {
         let coincidencias = 0;
 
@@ -230,6 +221,8 @@ class Tablero {
         return coincidencias;
     }
 
+    //BUSQUEDA POR FILA
+    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la fila y retorna la cantidad de coincidencias
     checkFila(columnActual, rowFicha, fichaDeJugador) {
 
         let coincidenciaIzq = 0;
@@ -250,7 +243,7 @@ class Tablero {
         return coincidenciaIzq + coincidenciaDer;
     }
 
-    // checkea si la celda no esta fuera de la matrix, si no es nula y si es la ficha es del mismo jugador
+    // checkea si la celda no esta fuera de la matrix, si no es nula y si la ficha es del mismo jugador
     checkeoAdyacencia(x, y, fichaDeJugador) {
         return (x >= 0 && x < this.matX &&
             y >= 0 && y < this.matY &&
@@ -259,6 +252,8 @@ class Tablero {
             this.matrix[x][y].getVisitada() == false);
     }
 
+    //BUSQUEDA POR DIAGONAL DERECHA
+    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la diagonal y retorna la cantidad de coincidencias
     checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador) {
 
         let coincidenciaIzq = 0;
@@ -279,6 +274,8 @@ class Tablero {
         return coincidenciaIzq + coincidenciaDer;
     }
 
+    //BUSQUEDA POR DIAGONAL IZQUIERDA
+    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la diagonal y retorna la cantidad de coincidencias
     checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador) {
         let coincidenciaIzq = 0;
         let coincidenciaDer = 0;

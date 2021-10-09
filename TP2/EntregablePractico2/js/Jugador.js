@@ -24,8 +24,4 @@ class Jugador {
         this.colorFicha = colorFicha;
     }
 
-    setNombre(nombre){
-        this.nombre = nombre;
-    }
-
 }
