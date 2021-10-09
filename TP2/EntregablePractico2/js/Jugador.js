@@ -20,17 +20,12 @@ class Jugador {
         return this.colorFicha;
     }
 
-    // getPuntos(index){
-    //     if(index === "x")
-    //         return this.puntosX;
-    //     else if (index === "y")
-    //         return this.puntosY;
-    // }
+    setColorFicha(colorFicha){
+        this.colorFicha = colorFicha;
+    }
 
-    // resetPuntos(index){
-    //     if(index === "x")
-    //         this.puntosX = 0;
-    //     else if (index === "y")
-    //         this.puntosY = 0;
-    // }
+    setNombre(nombre){
+        this.nombre = nombre;
+    }
+
 }

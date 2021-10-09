@@ -13,7 +13,6 @@ class Ficha {
         this.img = img;
         this.loadedImg = false;
         this.jugador = jugador;
-        //nuevo
         this.visitada = false;
     }
 
