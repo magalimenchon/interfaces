@@ -13,12 +13,7 @@ class Juego {
         this.isMouseDown = false;
         this.ctx = canvas.getContext('2d');
         this.turno = jugador1;
-       //this.renderCanvas();
-        this.porcentajeIncremento = 0;
-        // this.timer = null;
     }
-
-
 
 
     getTurno(){
@@ -84,7 +79,7 @@ class Juego {
         this.isMouseDown = false;
         this.restartPositions();
         if(this.tablero.addFicha(e, this.lastClickedFicha))
-            this.changeTurno();
+            this.changeTurno(); 
     }
 
     onMouseMove(e) {
@@ -123,15 +118,11 @@ class Juego {
     
 
     iniciarJuego(){
-        //this.timer.iniciarConteo();
+
         this.setCanvas();
         this.tablero.draw();
-       // console.log(this.timer.getTiempo('Sep 06 2022 10:32:53 GMT-0500'));
-       //Timer de 10 minutos
-        // this.resetTimer();
-        // this.setPorcentajePosicionFichas();
+
         this.addFichas();
-       
     }
 
 
@@ -139,10 +130,8 @@ class Juego {
 
         let canvas1 = document.querySelector('#canvas-layer1');
         let canvas2 = document.querySelector('#canvas-layer2');
-        let canvas3 = document.querySelector('#canvas-layer3');
         this.setearCanva(canvas1);
         this.setearCanva(canvas2);
-        this.setearCanva(canvas3);
         this.canvasWidth = parseInt(canvas1.getAttribute("width"));
         this.canvasHeight = parseInt(canvas1.getAttribute("height"));
     }
@@ -152,37 +141,5 @@ class Juego {
         canvas.setAttribute("width", (this.tablero.matX * this.tablero.tamanioCelda) + this.tablero.tamanioCelda * 3);
         canvas.setAttribute("height", (this.tablero.matY * this.tablero.tamanioCelda) + this.tablero.tamanioCelda * 2);
     }
-
-    //Según el tamaño que se agrandó el tablero acomoda el canvas
-    // setPorcentajePosicionFichas(){
-    //     if(this.tablero.getWinLineSize() > 4){
-    //         this.porcentajeIncremento = this.canvasWidth - 100 - 650;
-    //         /*if(this.tablero.getWinLineSize() == 5){
-    //             this.porcentajeIncremento += 5 * this.tablero.getWinLineSize();
-    //         }
-    //         else this.porcentajeIncremento += 9 * this.tablero.getWinLineSize();*/
-    //     }
-    // }
-
-    // renderCanvas(){
-    //     let tableroWindow = document.querySelector('.espacio');
-    //     this.tablero.borrarHijosNodo(tableroWindow);
-    //     this.createCanvas(tableroWindow, 3, 800, 550);
-    //     //console.log(tableroWindow);
-    // }
-
-    // createCanvas(nodoPadre, cantCanvas, widthCanvas, heightCanvas){
-        
-    //     for (let i = 1; i <= cantCanvas; i++) {
-    //         const newCanvas = document.createElement("canvas");
-    //         const stringId ="canvas-layer" + i;
-    //         newCanvas.setAttribute("id", stringId);
-    //         //console.log(newCanvas);
-    //         newCanvas.setAttribute("width", widthCanvas);
-    //         newCanvas.setAttribute("height", heightCanvas);
-
-    //         nodoPadre.appendChild(newCanvas);
-    //     }
-    // }
 
 }

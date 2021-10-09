@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     //Manejo del menú
     let buttonJugar = document.querySelector('#js-btn-jugar');
 
+    let timer = new Timer();
+
 
     buttonJugar.addEventListener('click', () => {
         activebuttonJugar();
 
     });
-
-    let timer = new Timer();
 
     function activebuttonJugar(){
         timer.resetTimer();

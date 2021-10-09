@@ -24,10 +24,6 @@ class Tablero {
             }
         }
         this.matrix = matrix;
-
-        //quizas vaya en juego?
-        //define si el turno actual pertenece al jugador 1 o 2.
-        this.turnoActual = null;
     }
 
     getMatX(){
@@ -110,7 +106,9 @@ class Tablero {
             if (column != null) {
                 for (let row = 0; row < this.matY; row++) {
 
+                    // si hay una ficha en la fila que esta parada la iteracion
                     if (this.matrix[column][row] !== null) {
+                        // si la columna esta llena
                         if (row == 0) {
                             console.log("columna llena!!");
                             return false;
@@ -126,6 +124,7 @@ class Tablero {
                         return true;
                     }
                     else {
+                        // si no hay fichas pero llego a la ultima fila
                         if (row == this.matY - 1) {
                             let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
                                 (row * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
@@ -220,21 +219,21 @@ class Tablero {
         //BUSQUEDA POR FILA
         //Se busca desde la columna de la última inserción, hasta el maximo de columna de la matriz.
         if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por fila:" + fichaDeJugador);
+            console.log("Ganó jugador por fila:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
         //BUSQUEDA POR COLUMNA
         //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
         else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
-            console.log("Ganó jugador fichas por columna:" + fichaDeJugador);
+            console.log("Ganó jugador por columna:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
         else if (this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por diagonal derecha:" + fichaDeJugador);
+            console.log("Ganó jugador por diagonal derecha:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
         else if (this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            console.log("Ganó jugador fichas por diagonal izquierda:" + fichaDeJugador);
+            console.log("Ganó jugador por diagonal izquierda:" + fichaDeJugador);
             this.renderGanador(fichaDeJugador.getJugador());
         }
         return false;
