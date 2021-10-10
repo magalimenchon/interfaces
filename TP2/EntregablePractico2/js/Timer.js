@@ -1,11 +1,21 @@
 class Timer {
 
+    /**
+     * @description Modelo de instancias de objetos de tipo temporizador
+     */
     constructor() {
         this.timerRender = document.querySelector('#js-timer');
         this.actualizacion = null;
         this.timeOut = false;
     }
 
+    /**
+     * @description obtiene el tiempo restante, segundos, minutos y horas calculando un diferencial
+     * entre este tiempo dado con segundos y el tiempo en segundos en el momento actual
+     * @param {integer} tiempoLimite segundos que va variando conforme al intervalo de conteo
+     * @returns objeto tipo @see Object con integer tiempo restante, integer segundos,
+     * integer minutos e integer horas
+     */
     getTiempo(tiempoLimite) {
         let now = new Date();
         let tiempoRestante = (tiempoLimite - now + 1000) / 1000;
@@ -22,6 +32,13 @@ class Timer {
         }
     }
 
+    /**
+     * @description Por cada intervalo de 1 segundo obtiene el tiempo actual que contiene el
+     * tiempo restante y los respectivos segundos, minutos y horas y lo renderiza por pantalla.
+     * Si el tiempo llegó a 0, detiene el temporizador y actualiza el atributo de control de tiempo
+     * límite para indicar que se cumplió 
+     * @param {integer} tiempoLimite cantidad de tiempo inicial dado por el momento actual + incremento temporal
+     */
     iniciarCuentaRegresiva(tiempoLimite) {
 
         this.actualizacion = setInterval(() => {
@@ -42,15 +59,24 @@ class Timer {
         }, 1000);
     }
 
+    /**
+     * @description limpia el intervalo de tiempo parando el temporizador
+     */
     stopTimer() {
         clearInterval(this.actualizacion);
-        //this.stop = true;
     }
 
+    /**
+     * @description Controla que el contador llegue a 0
+     * @returns boolean si se cumplió el tiempo límite
+     */
     isTimeOut(){
         return this.timeOut;
     }
 
+    /**
+     * @description Restaura el timer actualizando al iniciarlo que no se cumplió el tiempo límite
+     */
     resetTimeOut(){
         this.timeOut = false;
     }

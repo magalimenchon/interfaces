@@ -1,5 +1,13 @@
 class Ficha {
 
+    /**
+     * @description Modelo de instancias para los objetos fichas
+     * @param {integer} posX posición en eje X de la ficha
+     * @param {integer} posY posición en eje X de la ficha
+     * @param {*} fill relleno
+     * @param {*} context cartuchera donde se va a dibujar sobre el lienzo
+     * @param {String} jugador nombre del jugador
+     */
     constructor(posX, posY, fill, context, jugador) {
         this.posX = posX;
         this.posY = posY;
@@ -16,6 +24,12 @@ class Ficha {
         this.visitada = false;
     }
 
+
+    /**
+     * @description Compara si otra ficha tiene el mismo dueño que ésta
+     * @param {Ficha} ficha del tipo @see Ficha
+     * @returns boolean si es una ficha de un mismo jugador
+     */
     equals(ficha) {
         if (this.jugador.equals(ficha.getJugador()))
             return true;
@@ -23,31 +37,62 @@ class Ficha {
             return false;
     }
 
+    /**
+     * @description Retorna el dueño de la ficha
+     * @returns String de nombre de jugador propietario
+     */
     getJugador() {
         return this.jugador;
     }
 
+    /**
+     * @description Marca como visitada a la ficha
+     * @param {boolean} visitada boolean que indica si en el recorrido de busqueda fue visitada.
+     */
     setVisitada(visitada) {
         this.visitada = visitada;
     }
 
+    /**
+     * @description Retorna si la ficha está visitada
+     * @returns boolean si la ficha fue marcada durante el recorrido de busqueda de ganador
+     * @see Juego
+     */
     getVisitada() {
         return this.visitada;
     }
-
-    setFill(fill) {
-        this.fill = fill;
-    }
-
+    
+    /**
+     * @description Obtiene el relleno de la ficha
+     * @returns del tipo @see Image
+     */
     getFill() {
         return this.fill;
     }
 
+    /**
+     * @description Setea el relleno de la ficha
+     * @param {*} fill del tipo @see Image
+     */
+    setFill(fill) {
+        this.fill = fill;
+    }
+
+    /**
+     * @description Setea la posición en el canvas que se encuentra la ficha
+     * @param {integer} x posición en el eje X de la ficha
+     * @param {integer} y posición en el eje Y de la ficha
+     */
     setPosition(x, y) {
         this.posX = x;
         this.posY = y;
     }
 
+
+    /**
+     * @description Retorna la posición en el canvas que se encuentra la ficha
+     * @returns objeto que contiene la posición en eje X y eje Y de la ficha respectivamente.
+     */
     getPosicion() {
         return {
             x: this.getPosX(),
@@ -55,27 +100,43 @@ class Ficha {
         };
     }
 
+    /**
+     * @description Obtiene la posición en el eje X de la ficha
+     * @returns posición en eje Y de la ficha
+     */
     getPosX() {
         return this.posX;
     }
 
+    /**
+     * @description Obtiene la posición en el eje Y de la ficha
+     * @returns posición en eje Y de la ficha
+     */
     getPosY() {
         return this.posY;
     }
 
-    getFill() {
-        return this.fill;
-    }
-
+    /**
+     * @description Obtiene el radio de la ficha
+     * @returns integer de longitud de radio
+     */
     getRadius() {
         return this.radius;
     }
 
+    /**
+     * @description Setea si la ficha se encuentra resaltada
+     * @param {boolean} resaltado par indicar si se encuentra seleccionada
+     */
     setResaltado(resaltado) {
         this.resaltado = resaltado;
     }
 
-    // dibuja una ficha en su respectiva capa de canvas
+    /**
+     * @description Dibuja una ficha en su respectiva capa de canvas.
+     * Chequea que si la ficha debe resaltarse, esta sea resaltada y
+     * si la imagen aún no se cargó la renderiza una vez que se haya cargado.
+     */
     draw() {
         this.ctx.fillStyle = this.fill;
         this.ctx.beginPath();
@@ -99,7 +160,12 @@ class Ficha {
         }
     }
 
-    // checkea si el punto esta dentro del radio de un circulo
+    /**
+     * @description Chequea si el punto esta dentro del radio de la ficha
+     * @param {integer} x posición en el eje X del evento click dentro del canvas
+     * @param {integer} y posición en el eje Y del evento click dentro del canvas
+     * @returns boolean si el click fue realizando dentro de esta ficha
+     */
     isPointInside(x, y) {
         let _x = this.posX - x;
         let _y = this.posY - y;

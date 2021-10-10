@@ -90,7 +90,6 @@ button:hover{
 }
 
 .turno{
-    /*background-color: rgba(0, 233, 233, 0.5);*/
     background-color: rgba(0, 233, 233, 0.1);
     padding: 2em 0em 2em 0em;
     margin: 2em;
@@ -102,10 +101,7 @@ button:hover{
 .titulo{
     background-color: rgba(0, 233, 233, 0.1);
     padding: 1em 4em;
-    margin: 4em 0 0 0;
-    text-shadow: 0 0 30px aqua,
-    0 0 60px aqua,
-    0 0 120px aqua;
+    margin: 4em 0 2em 0;
 }
 
 .space{

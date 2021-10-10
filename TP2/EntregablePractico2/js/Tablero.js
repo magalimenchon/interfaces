@@ -1,6 +1,10 @@
 
 class Tablero {
 
+    /**
+     * @description Molde de instancias de objetos de tipo Tablero
+     * @param {*} ctx contexto en el cual se podrá dibujar el tablero
+     */
     constructor(ctx) {
         let tamanioCelda = 70;
         let matrix = [];
@@ -19,41 +23,91 @@ class Tablero {
         this.matrix = matrix;
         this.inicializarMatriz();
         this.cantFichasMatriz = 0;
-        this.ganaron = false;
+        this.hayGanador = false;
     }
 
-
-    // getters
+    /**
+     * @description resetea la matriz de fichas dentro del tablero
+     */
     setMatrix() {
         this.matrix = [];
     }
 
+    /**
+     * @description devuelve cantidad celdas en eje X del tablero
+     * @returns integer de la cantidad de columnas que tiene la matriz de fichas
+     */
     getMatX() {
         return this.matX;
     }
+
+    /**
+     * @description devuelve cantidad celdas en eje Y del tablero
+     * @returns integer de la cantidad de filas que tiene la matriz de fichas
+     */
     getMatY() {
         return this.matY;
     }
+
+    /**
+     * @description Obtiene el tamaño de una celda
+     * @returns integer del tamaño de cada celda del tablero
+     */
     getTamanioCelda() {
         return this.tamanioCelda;
     }
+    
+    /**
+     * @description parámetro de cantidad de coincidencias para ganar un juego
+     * @returns integer límite buscado para ganar
+     */
     getWinLineSize() {
         return this.winLineSize;
     }
+
+    /**
+     * @description Obtiene herramienta para el renderizado del tablero
+     * @returns instancia de contexto donde se encuentra
+     */
     getContext() {
         return this.context;
     }
+    
+    /**
+     * @description Obtiene la longitud que abarca una celda
+     * @returns integer longitud en eje Y
+     */
     getHeight() {
         return this.height;
     }
+
+    /**
+     * @description Obtiene la longitud que abarca una celda
+     * @returns integer longitud en eje X
+     */
     getWidth() {
         return this.width;
     }
+
+    /**
+     * @description Obtiene la matriz que almacena las instancias de fichas que se van jugando en el tablero
+     * @returns array de array @see array
+     */
     getMatrix() {
         return this.matrix;
     }
 
-    //Inicializa la matriz que almacenará las fichas que se van tirando en el tablero
+    /**
+     * @description Obtiene si algún jugador fue definido ganador
+     * @returns boolean indicando si alguien ganó la partida
+     */
+    getHayGanador() {
+        return this.hayGanador;
+    }
+
+    /**
+     * @description Inicializa la matriz que almacenará las fichas que se van tirando en el tablero
+     */
     inicializarMatriz() {
         for (let x = 0; x < this.matX; x++) {
             this.matrix[x] = [];
@@ -63,7 +117,12 @@ class Tablero {
         }
     }
 
-    //Busca la posible columna donde haya tirado la ficha, sino es válida retorna null
+    /**
+     * @description Busca la posible columna donde haya tirado la ficha, sino es válida retorna null
+     * @param {integer} posXFicha posición en el eje X del canvas donde se lanzó la ficha
+     * @param {integer} posYFicha posición en el eje Y del canvas donde se lanzó la ficha
+     * @returns Integer de columna de la matriz o null
+     */
     getColumnaJugada(posXFicha, posYFicha) {
 
         let posX = posXFicha - this.iniDibujoX;
@@ -80,7 +139,11 @@ class Tablero {
         return null;
     }
 
-    // dibuja el tablero en el canvas
+    /**
+     * @description dibuja el tablero en el canvas, indicandole el color que debe llevar
+     * y renderizando los huecos donde irían las fichas según las dimensiones definidas de
+     * la matriz conforme al tipo de instancia de juego
+     */
     draw() {
         let radius = 30;
 
@@ -104,7 +167,12 @@ class Tablero {
         }
     }
 
-    // añade una ficha al tablero si esta cumple todas las condiciones
+    /**
+     * @description Añade una ficha al tablero si esta cumple todas las condiciones
+     * @param {*} e evento del navegador
+     * @param {Ficha} lastClickedFicha del tipo @see Ficha indicando la ficha clickeada
+     * @returns boolean si pudo agregarse al tablero
+     */
     addFicha(e, lastClickedFicha) {
         if (lastClickedFicha != null) {
             let column = this.getColumnaJugada(e.layerX, e.layerY);
@@ -121,7 +189,7 @@ class Tablero {
                             ((row - 1) * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
                             lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
 
-                        // agrego la ficha en la celda anterior
+                        // agrega la ficha en la celda anterior
                         this.matrix[column][row - 1] = ficha;
 
                         ficha.draw();
@@ -130,13 +198,13 @@ class Tablero {
                         return true;
                     }
                     else {
-                        // si no hay fichas pero llego a la ultima fila
+                        // si no hay fichas pero llego a la última fila
                         if (row == this.matY - 1) {
                             let ficha = new Ficha((column * this.tamanioCelda) + (this.iniDibujoX + this.tamanioCelda / 2),
                                 (row * this.tamanioCelda) + (this.iniDibujoY + this.tamanioCelda / 2),
                                 lastClickedFicha.getFill(), this.ctx, lastClickedFicha.getJugador());
 
-                            // agrego la ficha en la ultima poscicion
+                            // agrega la ficha en la última posición
                             this.matrix[column][row] = ficha;
 
                             ficha.draw();
@@ -151,16 +219,18 @@ class Tablero {
         return false;
     }
 
-    // checkea si la matriz esta llena de fichas
+    /**
+     * @description Chequea si la matriz esta llena de fichas
+     * @returns boolean de atributo que se incrementa cada vez que se agrega una ficha a la matriz
+     */
     checkMatrizLlena() {
         return this.cantFichasMatriz == this.matX * this.matY;
     }
 
-
-    /*
-        checkea si hubo un ganador
-        @param columnFicha columna donde se guarda la última ficha jugada en la matriz.
-        @param rowFicha fila donde se guarda la última ficha jugada en la matriz.
+    /**
+     * @description Chequea si hibo ganador
+     * @param {integer} columnFicha número de columna donde se guarda la última ficha jugada en la matriz.
+     * @param {integer} rowFicha número de fila donde se guarda la última ficha jugada en la matriz.
      */
     checkGanador(columnFicha, rowFicha) {
 
@@ -170,31 +240,27 @@ class Tablero {
 
 
         if (this.checkFila(columnFicha, rowFicha, fichaDeJugador, 0) >= this.winLineSize - 1) {
-            this.ganaron = true;
-            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
+            this.hayGanador = true;
         }
         else if (this.checkColumna(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize) {
-            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
-            this.ganaron = true;
+            this.hayGanador = true;
         }
         else if (this.checkDiagonalDerecha(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
-            this.ganaron = true;
+            this.hayGanador = true;
         }
         else if (this.checkDiagonalIzquierda(columnFicha, rowFicha, fichaDeJugador) >= this.winLineSize - 1) {
-            //this.renderMensaje("Ha ganado: " + fichaDeJugador.getJugador().getNombre(), "Fin de la partida");
-            this.ganaron = true;
+           this.hayGanador = true;
         }
-        //return false;
 
     }
 
-    getGanaron() {
-        return this.ganaron;
-    }
-
-    //BUSQUEDA POR COLUMNA
-    //Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz.
+    /**
+     * @description BUSQUEDA POR COLUMNA: Se busca desde la fila de la última inserción, hasta el maximo de fila de la matriz
+     * @param {integer} columnFicha número de columna donde está la última ficha que se tiró en el tablero
+     * @param {integer} rowFicha  número de fila donde está la última ficha que se tiró en el tablero
+     * @param {Ficha} fichaDeJugador instancia de @see Ficha
+     * @returns integer de cantidad de fichas adyascentes a la ficha analizada
+     */
     checkColumna(columnFicha, rowFicha, fichaDeJugador) {
         let coincidencias = 0;
 
@@ -210,8 +276,14 @@ class Tablero {
         return coincidencias;
     }
 
-    //BUSQUEDA POR FILA
-    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la fila y retorna la cantidad de coincidencias
+    /**
+     * @description BUSQUEDA POR FILA: Se busca de forma recursiva las fichas iguales a la ultima
+     * insertada dentro de la fila y retorna la cantidad de coincidencias
+     * @param {integer} columnActual número de fila donde está la última ficha que se tiró en el tablero
+     * @param {integer} rowFicha número de fila donde está la última ficha que se tiró en el tablero 
+     * @param {Ficha} fichaDeJugador instancia de @see Ficha
+     * @returns integer de cantidad de fichas adyascentes a la ficha analizada
+     */
     checkFila(columnActual, rowFicha, fichaDeJugador) {
 
         let coincidenciaIzq = 0;
@@ -232,7 +304,14 @@ class Tablero {
         return coincidenciaIzq + coincidenciaDer;
     }
 
-    // checkea si la celda no esta fuera de la matrix, si no es nula y si la ficha es del mismo jugador
+    /**
+     * @description Chequea si la celda no esta fuera de la matrix, si no es nula y
+     * si la ficha es del mismo jugador
+     * @param {integer} x número de fila donde está la última ficha que se tiró en el tablero 
+     * @param {integer} y número de columna donde está la última ficha que se tiró en el tablero
+     * @param {Ficha} fichaDeJugador instancia de @see Ficha
+     * @returns boolean
+     */
     checkeoAdyacencia(x, y, fichaDeJugador) {
         return (x >= 0 && x < this.matX &&
             y >= 0 && y < this.matY &&
@@ -241,8 +320,15 @@ class Tablero {
             this.matrix[x][y].getVisitada() == false);
     }
 
-    //BUSQUEDA POR DIAGONAL DERECHA
-    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la diagonal y retorna la cantidad de coincidencias
+    /**
+     * @description BUSQUEDA POR DIAGONAL SUPERIOR DE INICIO A LA DERECHA:
+     * busca de forma recursiva las fichas iguales a la ultima insertada
+     * dentro de la diagonal y retorna la cantidad de coincidencias
+     * @param {integer} columnActual número de de fila donde está la última ficha que se tiró en el tablero
+     * @param {integer} rowActual número de fila donde está la última ficha que se tiró en el tablero 
+     * @param {Ficha} fichaDeJugador instancia de @see Ficha
+     * @returns integer de cantidad de fichas adyascentes a la ficha analizada
+     */
     checkDiagonalDerecha(columnActual, rowActual, fichaDeJugador) {
 
         let coincidenciaIzq = 0;
@@ -263,8 +349,15 @@ class Tablero {
         return coincidenciaIzq + coincidenciaDer;
     }
 
-    //BUSQUEDA POR DIAGONAL IZQUIERDA
-    //busca de forma recursiva las fichas iguales a la ultima insertada dentro de la diagonal y retorna la cantidad de coincidencias
+    /**
+     * @description BUSQUEDA POR DIAGONAL SUPERIOR DE INICIO A LA IZQUIERDA:
+     * busca de forma recursiva las fichas iguales a la ultima insertada dentro de la diagonal y
+     * retorna la cantidad de coincidencias
+     * @param {integer} columnActual número de columna donde está la última ficha que se tiró en el tablero
+     * @param {integer} rowActual número de fila donde está la última ficha que se tiró en el tablero 
+     * @param {Ficha} fichaDeJugador instancia de @see Ficha
+     * @returns integer de cantidad de fichas adyascentes a la ficha analizada
+     */
     checkDiagonalIzquierda(columnActual, rowActual, fichaDeJugador) {
         let coincidenciaIzq = 0;
         let coincidenciaDer = 0;

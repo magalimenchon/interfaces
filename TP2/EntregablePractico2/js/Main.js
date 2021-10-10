@@ -1,3 +1,10 @@
+/**
+ * @since Octubre, 2021
+ * @version 1.0
+ * @supported Testado en Chrome Versión 94.0.4606.71
+ * @author Scaminaci, Luciano
+ * @author Menchón, Magalí
+ */
 document.addEventListener("DOMContentLoaded", () => {
 
     "use strict";
@@ -12,18 +19,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Manejo del menú
     let buttonJugar = document.querySelector('#js-btn-jugar');
 
-    // --
+    // Instancias de clase
     let tablero = new Tablero(ctx2);
     let juego = new Juego(tablero, canvas1);
 
+    //Control de eventos del DOM
     let creacionEventListeners = false;
 
+    //Activación del botón jugar
     buttonJugar.addEventListener('click', (e) => {
         activebuttonJugar();
 
     });
 
-    // inicia un nuevo juego
+    // Inicia un nuevo juego
     function activebuttonJugar() {
 
         juego.iniciarJuego();
