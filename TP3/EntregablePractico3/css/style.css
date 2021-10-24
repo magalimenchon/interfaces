@@ -22,17 +22,38 @@ body{
     margin: auto;
     width: calc(4150px / 10 / 3);
     height: calc(507px / 3);
-    background: url(../images/Run-spritesheet.png) repeat-x;
+    
     background-size: calc(4150px / 3);
-    animation: run 2s steps(calc(10 * 3)) infinite;
     position: relative;
     top: 100px;
 
 }
 
-@keyframes run {
+.running{
+    background: url(../images/Run-spritesheet.png) repeat-x;
+    animation: animateSprite 2s steps(calc(10 * 3)) infinite;
+}
+
+@keyframes animateSprite {
     0% { background-position: 0 }
     100% { background-position: -4150px }
+}
+
+.jumping{
+   background: url(../images/Jump-spritesheet.png) repeat-x;
+   animation: jump 1s ease-out, animateSprite 6s steps(calc(10 * 3)) infinite;
+}
+
+@keyframes jump {
+    0%{
+        top: 100px;
+    }
+    45%, 55%{
+        top: 25px;
+    }
+    100%{
+        top: 100px;
+    }
 }
 
 #background{
