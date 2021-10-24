@@ -1,94 +1,128 @@
-
 html, body {
     background: grey;
     margin: 0;
-	padding: 0;
-	list-style: none;
-	text-decoration: none;
-	border: none;
-	outline: none;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
     height: 100%;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#avatar{
+#avatar {
     border: 1px solid;
     margin: auto;
     width: calc(4150px / 10 / 3);
     height: calc(507px / 3);
-    background: url(../images/Run-spritesheet.png) repeat-x;
     background-size: calc(4150px / 3);
-    animation: run 2s steps(calc(10 * 3)) infinite;
     position: relative;
     top: 320px;
 }
 
-@keyframes run {
-    0% { background-position: 0 }
-    100% { background-position: -4150px }
+.running {
+    background: url(../images/Run-spritesheet.png) repeat-x;
+    animation: animateSprite 2s steps(calc(10 * 3)) infinite;
 }
 
-.layer{
+@keyframes animateSprite {
+    0% {
+        background-position: 0
+    }
+    100% {
+        background-position: -4150px
+    }
+}
+
+.jumping {
+    background: url(../images/Jump-spritesheet.png) repeat-x;
+    animation: jump 1s ease-out, animateSprite 6s steps(calc(10 * 3)) infinite;
+}
+
+@keyframes jump {
+    0% {
+        top: 100px;
+    }
+    45%, 55% {
+        top: 25px;
+    }
+    100% {
+        top: 100px;
+    }
+}
+
+.layer {
     width: calc(1920px / 2);
     height: calc(1080px / 2);
     border: 1px blue solid;
     position: absolute;
-
     background-repeat: repeat-x;
     background-size: cover;
-
     animation-name: scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-.layer-9{
+.layer-9 {
     background-image: url(../images/parallax/9-Background.png);
 }
-.layer-8{
+
+.layer-8 {
     background-image: url(../images/parallax/8-Stars.png);
     animation-duration: 400s;
 }
-.layer-7{
+
+.layer-7 {
     background-image: url(../images/parallax/7-Clouds.png);
     animation-duration: 100s;
 }
-.layer-6{
+
+.layer-6 {
     background-image: url(../images/parallax/6-Sun.png);
 }
-.layer-5{
+
+.layer-5 {
     background-image: url(../images/parallax/5-Mountains.png);
     animation-duration: 60s;
 }
-.layer-4{
+
+.layer-4 {
     background-image: url(../images/parallax/4-Layer4.png);
     animation-duration: 30s;
 }
-.layer-3{
+
+.layer-3 {
     background-image: url(../images/parallax/3-Layer3.png);
     animation-duration: 22s;
 }
-.layer-2{
+
+.layer-2 {
     background-image: url(../images/parallax/2-Layer2.png);
     animation-duration: 14s;
 }
-.layer-1{
+
+.layer-1 {
     background-image: url(../images/parallax/1-Layer1.png);
     animation-duration: 10s;
 }
 
 @keyframes scroll {
-    0% { background-position-x: 0px}
-    100% { background-position-x: -1920px}
+    0% {
+        background-position-x: 0px
+    }
+    100% {
+        background-position-x: -1920px
+    }
 }
 
-/* #background{
+/*
+#background{
     width: calc(5747px / 3);
     height: calc(1081px / 3);
     border: 1px red solid;
@@ -101,4 +135,3 @@ body{
     0% { background-position: 5747px}
     100% { background-position: 0}
 } */
-
