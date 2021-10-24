@@ -26,8 +26,7 @@ body{
     background-size: calc(4150px / 3);
     animation: run 2s steps(calc(10 * 3)) infinite;
     position: relative;
-    top: 100px;
-
+    top: 320px;
 }
 
 @keyframes run {
@@ -35,7 +34,61 @@ body{
     100% { background-position: -4150px }
 }
 
-#background{
+.layer{
+    width: calc(1920px / 2);
+    height: calc(1080px / 2);
+    border: 1px blue solid;
+    position: absolute;
+
+    background-repeat: repeat-x;
+    background-size: cover;
+
+    animation-name: scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.layer-9{
+    background-image: url(../images/parallax/9-Background.png);
+}
+.layer-8{
+    background-image: url(../images/parallax/8-Stars.png);
+    animation-duration: 400s;
+}
+.layer-7{
+    background-image: url(../images/parallax/7-Clouds.png);
+    animation-duration: 100s;
+}
+.layer-6{
+    background-image: url(../images/parallax/6-Sun.png);
+}
+.layer-5{
+    background-image: url(../images/parallax/5-Mountains.png);
+    animation-duration: 60s;
+}
+.layer-4{
+    background-image: url(../images/parallax/4-Layer4.png);
+    animation-duration: 30s;
+}
+.layer-3{
+    background-image: url(../images/parallax/3-Layer3.png);
+    animation-duration: 22s;
+}
+.layer-2{
+    background-image: url(../images/parallax/2-Layer2.png);
+    animation-duration: 14s;
+}
+.layer-1{
+    background-image: url(../images/parallax/1-Layer1.png);
+    animation-duration: 10s;
+}
+
+@keyframes scroll {
+    0% { background-position-x: 0px}
+    100% { background-position-x: -1920px}
+}
+
+/* #background{
     width: calc(5747px / 3);
     height: calc(1081px / 3);
     border: 1px red solid;
@@ -47,5 +100,5 @@ body{
 @keyframes movebg {
     0% { background-position: 5747px}
     100% { background-position: 0}
-}
+} */
 
