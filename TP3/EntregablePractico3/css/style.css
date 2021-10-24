@@ -1,0 +1,51 @@
+
+html, body {
+    background: grey;
+    margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	border: none;
+	outline: none;
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#avatar{
+    border: 1px solid;
+    margin: auto;
+    width: calc(4150px / 10 / 3);
+    height: calc(507px / 3);
+    background: url(../images/Run-spritesheet.png) repeat-x;
+    background-size: calc(4150px / 3);
+    animation: run 2s steps(calc(10 * 3)) infinite;
+    position: relative;
+    top: 100px;
+
+}
+
+@keyframes run {
+    0% { background-position: 0 }
+    100% { background-position: -4150px }
+}
+
+#background{
+    width: calc(5747px / 3);
+    height: calc(1081px / 3);
+    border: 1px red solid;
+    background: url(../images/background.png ) repeat-x;
+    animation: movebg 12s linear infinite;
+    position: relative;
+}
+
+@keyframes movebg {
+    0% { background-position: 5747px}
+    100% { background-position: 0}
+}
+
