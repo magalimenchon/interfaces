@@ -42,18 +42,18 @@ body {
 
 .jumping {
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1s ease-out, animateSprite 6s steps(calc(10 * 3)) infinite;
+    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 6s steps(calc(10 * 3)) infinite;
 }
 
 @keyframes jump {
     0% {
-        top: 100px;
+        top: 320px;
     }
-    45%, 55% {
-        top: 25px;
+    50% {
+        top: 150px;
     }
     100% {
-        top: 100px;
+        top: 320px;
     }
 }
 
