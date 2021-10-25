@@ -1,4 +1,4 @@
-html, body {
+html, body, main, .game, .general-info {
     background: grey;
     margin: 0;
     padding: 0;
@@ -9,7 +9,88 @@ html, body {
     height: 100%;
 }
 
-body {
+@font-face {
+    font-family: 'CF Cherokee Regular';
+    src: url('../assets/fonts/CFCherokeeRegular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Carnevalee Freakshow';
+    src: url('../assets/fonts/CarnevaleeFreakshow.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Rio Grande Striped';
+    src: url('../assets/fonts/RioGrandeStriped.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Vanilla Whale';
+    src: url('../assets/fonts/VanillaWhale.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+.general-info{
+    background-color: #fce970;
+    width: calc(1920px / 2);
+    height: calc(1080px / 2);
+}
+.information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.word-runner{
+    /*background-color: rgba(	252,	233,	112, 0.2);*/
+    background-color: rgba(		47, 0, 6, 0.2);
+    width:80%;
+    height:50px;
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    text-align: center;
+    color: #2f0006;
+    font-family: 'Carnevalee Freakshow';
+    font-size: 5vh;
+    padding: 2vh;
+    top: 60px;
+}
+
+button{
+    font-family: 'Carnevalee Freakshow';
+    font-size: 5.5vh;
+    background-color: #2f0006;
+    /*color: #bf869b;*/
+    /*color:#7e3d54;*/
+    color: #fce970;
+    /*color: #d74e1d;*/
+}
+.general-info h1{
+    font-family: 'Rio Grande Striped';
+    font-size: 20vh;
+}
+.hidden{
+    display: none;
+}
+
+footer{
+    text-align: center;
+    /*color: #ffffff;*/
+    /*color:#bf869b;*/
+    color: #fce970;
+    background-color:#2f0006;
+    font-family: 'Carnevalee Freakshow';
+    font-size: 5.5vh;
+}
+
+.game, .general-info, main{
     display: flex;
     flex-direction: column;
     justify-content: center;
