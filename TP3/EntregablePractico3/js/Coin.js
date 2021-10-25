@@ -1,4 +1,4 @@
-class Coin extends Object {
+class Coin extends Asset {
 
     constructor(img){
         super(img);
