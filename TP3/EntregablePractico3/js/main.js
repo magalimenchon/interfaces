@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     avatar.addEventListener('animationend', restartAnimation);
 
-    let nuevoJuego = new Game();
+    new Obstacle();
+    let nuevoJuego = Game();
 
     nuevoJuego.startGameLoop();
 
