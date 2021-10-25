@@ -4,16 +4,15 @@ class Game {
         this.objects = new Array();
         this.end = false;
         this.avatar = new Avatar();
-        this.containerMenu = document.querySelector('#menu-js');
-        this.containerGame = document.querySelector('#game-js');
+        this.DOMGame = document.querySelector('#game-js');
          
     }
 
     startGameLoop() {
         // startGame();
         console.log("empezo el juego");
-        this.changeMenuForGame();
-        
+        this.renderStartGame();
+
         let gameLoop = setInterval(function () {
             // processInput();
             // updateState();
@@ -33,15 +32,36 @@ class Game {
         // endGame();
     }
 
-    changeMenuForGame() {
-        this.containerMenu.classList.remove("general-info");
-        this.containerMenu.classList.add("hidden");
-        //lo siguiente seria crear una instancia de un nuevo juego:
-        //-----------
-        //Chequear que toma el evento de la tecla w igual, aunque no este el juego renderizado
-        //-------
-        this.containerGame.classList.remove("hidden");
-        this.containerGame.classList.add("game");
+    renderStartGame(){
+        this.renderRemoveMenu();
+        //Se agrega el avatar
+        this.renderAvatar();
+    }
+
+    renderRemoveMenu() {
+        this.DOMGame.classList.remove("general-info");
+        this.DOMGame.classList.add("game");
+        //Se modifica sector cartel runner
+        this.renderRemoveFlyerRunner();
+        //Se modifica el sector cartel principal info
+        this.renderRemoveFlyerPrincipal();
+    }
+
+    renderRemoveFlyerPrincipal(){
+        const flyerPrincipal = this.DOMGame.lastChild.previousSibling;
+        console.log(flyerPrincipal);
+        this.DOMGame.removeChild(flyerPrincipal);
+    }
+    renderRemoveFlyerRunner(){
+        const flyerRunner = this.DOMGame.firstChild.nextSibling;
+        flyerRunner.classList.remove("information");
+        flyerRunner.removeChild(flyerRunner.firstChild.nextSibling);
+    }
+
+    renderAvatar(){
+        const containerAvatar = document.querySelector('.layer-1');
+        const avatar = containerAvatar.lastChild.previousSibling;
+        avatar.classList.remove("hidden");
     }
 
     processInput(event) {
