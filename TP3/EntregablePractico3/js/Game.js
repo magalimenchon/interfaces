@@ -45,10 +45,11 @@ class Game {
     }
 
     processInput(event) {
-        console.log(event);
-        if (event != null && event.key.toLowerCase() == "w") {
+        if (event.key.toLowerCase() == "w") {
             this.avatar.jump();
         }
+
     }
+
 
 }

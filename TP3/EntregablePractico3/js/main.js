@@ -16,11 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let nuevoJuego = new Game();
 
     buttonPlay.addEventListener('click', () => {
-        
         nuevoJuego.startGameLoop();
         
     });
 
-    document.addEventListener('keydown', nuevoJuego.processInput());
+    document.addEventListener('keydown', (e) => {
+        nuevoJuego.processInput(e);
+    });
+
+    
+    
 
 });

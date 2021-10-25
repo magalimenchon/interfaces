@@ -132,23 +132,60 @@ footer{
         top: 320px;
     }
     50% {
-        top: 150px;
+        top: 0px;
     }
     100% {
         top: 320px;
     }
 }
 
+.asset {
+    border: 1px solid green;
+    background: url(../images/assets/Bush2.png) repeat-x;
+    position: absolute;
+    width: 131px;
+    height: 74px;
+    bottom: 45px;
+    right: -50px;
+    animation-name: asset;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+}
+@keyframes asset {
+    0% {
+        right: -50px;
+    }
+    100% {
+        right: 1000px;
+    }
+}
+
 .layer {
     width: calc(1920px / 2);
     height: calc(1080px / 2);
-    border: 1px blue solid;
     position: absolute;
     background-repeat: repeat-x;
     background-size: cover;
     animation-name: scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+}
+
+.coverLayer{
+    background: grey;
+    border: 1px solid red;
+    width: 200px;
+    height: 300px;
+    position: relative;
+}
+.L1{
+    bottom: -240px;
+    right: 580px;
+}
+.L2{
+    bottom: 60px;
+    left: 580px;
 }
 
 .layer-9 {
@@ -202,7 +239,6 @@ footer{
     bottom: 0;  
     width: 100%; 
     height: 50px; 
-    border: 1px solid red;
 }
 
 @keyframes scroll {
@@ -213,18 +249,3 @@ footer{
         background-position-x: -1920px
     }
 }
-
-/*
-#background{
-    width: calc(5747px / 3);
-    height: calc(1081px / 3);
-    border: 1px red solid;
-    background: url(../images/background.png ) repeat-x;
-    animation: movebg 12s linear infinite;
-    position: relative;
-}
-
-@keyframes movebg {
-    0% { background-position: 5747px}
-    100% { background-position: 0}
-} */
