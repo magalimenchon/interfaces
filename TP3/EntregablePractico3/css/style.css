@@ -42,7 +42,7 @@ body {
 
 .jumping {
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 6s steps(calc(10 * 3)) infinite;
+    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 4s steps(calc(10 * 3)) infinite;
 }
 
 @keyframes jump {
@@ -109,7 +109,18 @@ body {
 
 .layer-1 {
     background-image: url(../images/parallax/1-Layer1.png);
-    animation-duration: 10s;
+    animation-duration: 7s;
+}
+
+.layer-0 {
+    background-image: url(../images/assets/0-Floor.png);
+    animation-duration: 7s;
+    background-size: calc(1920px /2);
+    position: absolute; 
+    bottom: 0;  
+    width: 100%; 
+    height: 50px; 
+    border: 1px solid red;
 }
 
 @keyframes scroll {

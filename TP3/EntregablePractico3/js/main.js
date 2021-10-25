@@ -4,28 +4,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const avatar = document.querySelector('#avatar');
 
-    document.addEventListener('keyup', action);
+    document.addEventListener('keydown', processInput);
 
     avatar.addEventListener('animationend', restartAnimation);
 
-    function action(event){
-        if(event.key.toLowerCase() == "w"){
+    let nuevoJuego = new Game();
+
+    nuevoJuego.startGameLoop();
+
+    function processInput(event) {
+        if (event.key.toLowerCase() == "w") {
             jump();
         }
     }
 
-    function jump(){
+    function jump() {
         avatar.classList.add("jumping");
         console.log("saltando");
         console.log(avatar.getAttribute("background"));
 
     }
 
-    function restartAnimation(){
+    function restartAnimation() {
         avatar.classList.remove("jumping");
         console.log("deja de saltar");
         console.log(avatar.getAttribute("background"));
     }
 
-    
+
+
 });
