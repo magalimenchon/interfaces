@@ -66,9 +66,9 @@ class Game {
     }
 
     renderAvatar(){
-        const containerAvatar = document.querySelector('.layer-1');
-        const avatar = containerAvatar.lastChild.previousSibling;
+        const avatar = document.querySelector('#avatar');
         avatar.classList.remove("hidden");
+        console.log(avatar);
     }
 
     processInput(event) {
