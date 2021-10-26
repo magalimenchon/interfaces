@@ -141,17 +141,26 @@ footer{
 
 .asset {
     border: 1px solid green;
-    background: url(../images/assets/Bush2.png) repeat-x;
     position: absolute;
-    width: 131px;
-    height: 74px;
     bottom: 45px;
-    right: -50px;
+    right: -70px;
     animation-name: asset;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-duration: 3s;
 }
+
+.bush {
+    background: url(../images/assets/Bush2.png) repeat-x;
+    width: 131px;
+    height: 74px;
+}
+.cactus2{
+    background: url(../images/assets/Cactus2.png) repeat-x;
+    width: 70px;
+    height: 45px;
+}
+
 @keyframes asset {
     0% {
         right: -50px;

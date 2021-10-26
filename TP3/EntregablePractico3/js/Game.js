@@ -13,6 +13,12 @@ class Game {
         console.log("empezo el juego");
         this.renderStartGame();
 
+        setTimeout(() => { 
+            let obs = new Obstacle();
+            obs.init();
+            
+        }, 2000);
+
         let gameLoop = setInterval(function () {
             // processInput();
             // updateState();
@@ -24,6 +30,7 @@ class Game {
 
             setTimeout(() => { this.end = true }, 5000);
 
+            
             if (this.end) {
                 clearInterval(gameLoop);
                 console.log("termino el juego");
