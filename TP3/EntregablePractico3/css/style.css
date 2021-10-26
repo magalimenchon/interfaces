@@ -146,7 +146,7 @@ footer{
     right: -70px;
     animation-name: asset;
     animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    /*animation-iteration-count: infinite;*/
     animation-duration: 3s;
 }
 
