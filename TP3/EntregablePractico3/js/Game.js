@@ -35,18 +35,27 @@ class Game {
         //this.endGame();
     }
 
-    startGame(){
+    startGame() {
         console.log("empezo el juego");
         this.GUI.renderStartGame();
         this.createObstacles();
     }
-    
-    endGame(){
+
+    endGame() {
         this.goDieAvatar();
         this.GUI.renderGameOver();
+        this.stopObstacles();
     }
 
-    goDieAvatar(){
+    stopObstacles() {
+        this.obstacles.forEach((obstacle) => {
+            let DOMobstacle = document.getElementById(obstacle.id);
+            if (DOMobstacle)
+                DOMobstacle.style.animationPlayState = "paused";
+        })
+    }
+
+    goDieAvatar() {
         this.avatar.die();
     }
 
@@ -55,10 +64,13 @@ class Game {
         let min = 700;
         let randomTime = Math.floor(Math.random() * (max - min)) + min;
 
-        let obs = new Obstacle();
-        obs.init();
-        this.obstacles.push(obs);
-        if(!this.end){
+
+
+        if (!this.end) {
+            let obs = new Obstacle();
+            obs.init();
+            this.obstacles.push(obs);
+
             setTimeout(() => { this.createObstacles() }, randomTime);
         }
     }

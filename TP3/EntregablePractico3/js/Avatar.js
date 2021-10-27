@@ -28,7 +28,7 @@ class Avatar {
     updatePositions(){
         this.bottom = this.DOMavatar.getBoundingClientRect().bottom;
         this.right = this.DOMavatar.getBoundingClientRect().right - 40;
-        this.left = this.DOMavatar.getBoundingClientRect().left + 20;
+        this.left = this.DOMavatar.getBoundingClientRect().left + 30;
     }
 
 }
