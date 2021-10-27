@@ -24,7 +24,5 @@ document.addEventListener("DOMContentLoaded", () => {
         nuevoJuego.processInput(e);
     });
 
-    
-    
 
 });

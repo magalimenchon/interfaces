@@ -150,15 +150,29 @@ footer{
     animation-duration: 3s;
 }
 
+.colision{
+    border: 1px solid red;
+    margin-left: 20px;
+    margin-right: 40px;
+    height: 100%;
+}
+
 .bush {
     background: url(../images/assets/Bush2.png) repeat-x;
-    width: 131px;
-    height: 74px;
+    width: calc(131px * 0.70);
+    height: calc(74px * 0.70);
+    background-size: contain;
 }
 .cactus2{
     background: url(../images/assets/Cactus2.png) repeat-x;
     width: 70px;
     height: 45px;
+}
+.skeleton{
+    background: url(../images/assets/Skeleton.png) repeat-x;
+    width: calc(150px * 0.75);
+    height: calc(51px * 0.75);
+    background-size: contain;
 }
 
 @keyframes asset {
