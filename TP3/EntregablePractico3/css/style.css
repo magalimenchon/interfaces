@@ -48,19 +48,40 @@ html, body, main, .game, .general-info {
     align-items: center;
 }
 
-.word-runner{
+.word-runner, .word-congrats{
     /*background-color: rgba(	252,	233,	112, 0.2);*/
     background-color: rgba(		47, 0, 6, 0.2);
-    width:80%;
-    height:50px;
     border-bottom-left-radius:50%;
     border-bottom-right-radius:50%;
     text-align: center;
     color: #2f0006;
-    font-family: 'Carnevalee Freakshow';
-    font-size: 5vh;
     padding: 2vh;
     top: 60px;
+    font-family: 'Carnevalee Freakshow';
+}
+
+.word-runner{
+    width:80%;
+    height:50px;
+    font-size: 5vh;
+}
+
+h2{
+    font-family: 'CF Cherokee Regular';
+    font-size: 10vh;
+    margin: 0px;
+}
+
+.word-congrats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:80%;
+    height:80%;
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    font-size: 10vh;
 }
 
 button{
@@ -190,6 +211,8 @@ footer{
     position: absolute;
     background-repeat: repeat-x;
     background-size: cover;
+}
+.moving{
     animation-name: scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -202,11 +225,11 @@ footer{
     height: 300px;
     position: relative;
 }
-.L1{
+.cl-left{
     bottom: -240px;
     right: 580px;
 }
-.L2{
+.cl-right{
     bottom: 60px;
     left: 580px;
 }

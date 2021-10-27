@@ -6,14 +6,11 @@ class Game {
         this.end = false;
         this.avatar = new Avatar();
         this.obstacles = new Array();
-        this.DOMGame = document.querySelector('#game-js');
+        this.GUI = new GUI();
     }
 
-    startGameLoop() {
-        // startGame();
-        console.log("empezo el juego");
-        this.renderStartGame();
-        this.createObstacles();
+    playGame() {
+        this.startGame();
 
         let gameLoop = setInterval(() => {
             // processInput();
@@ -21,16 +18,36 @@ class Game {
             this.detectCollision();
             // draw();
 
-            setTimeout(() => { this.end = true }, 60000);
+            setTimeout(() => {
+                this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
+                this.end = true;
+            }, 60000);
 
             if (this.end) {
                 //clearInterval(generateObstaclesLoop);
+                //this.GUI.renderGameOver();
+                this.endGame();
                 clearInterval(gameLoop);
                 console.log("termino el juego");
             }
         }, 50);
 
-        // endGame();
+        //this.endGame();
+    }
+
+    startGame(){
+        console.log("empezo el juego");
+        this.GUI.renderStartGame();
+        this.createObstacles();
+    }
+    
+    endGame(){
+        this.goDieAvatar();
+        this.GUI.renderGameOver();
+    }
+
+    goDieAvatar(){
+        this.avatar.die();
     }
 
     createObstacles() {
@@ -38,24 +55,23 @@ class Game {
         let min = 700;
         let randomTime = Math.floor(Math.random() * (max - min)) + min;
 
-        let objMax = 4;
-        let objMin = 1;
-        let type = Math.floor(Math.random() * (objMax - objMin)) + objMin;
-
         let obs = new Obstacle();
-        obs.init(type);
+        obs.init();
         this.obstacles.push(obs);
-
-        setTimeout(() => { this.createObstacles() }, randomTime);
+        if(!this.end){
+            setTimeout(() => { this.createObstacles() }, randomTime);
+        }
     }
 
     detectCollision() {
 
         this.obstacles.forEach((obstacle) => {
-            if (this.avatar.right > obstacle.left 
-                && this.avatar.left < obstacle.right 
+            if (this.avatar.right > obstacle.left
+                && this.avatar.left < obstacle.right
                 && this.avatar.bottom > obstacle.top) {
                 console.log("colision");
+                this.end = true;
+                this.GUI.setMessage("GAME OVER");
                 // retornar obstaculo
             }
         })
@@ -72,42 +88,11 @@ class Game {
         })
     }
 
-    renderStartGame() {
-        this.renderRemoveMenu();
-        //Se agrega el avatar
-        this.renderAvatar();
-    }
-
-    renderRemoveMenu() {
-        this.DOMGame.classList.remove("general-info");
-        this.DOMGame.classList.add("game");
-        //Se modifica sector cartel runner
-        this.renderRemoveFlyerRunner();
-        //Se modifica el sector cartel principal info
-        this.renderRemoveFlyerPrincipal();
-    }
-
-    renderRemoveFlyerPrincipal() {
-        const flyerPrincipal = this.DOMGame.lastChild.previousSibling;
-        this.DOMGame.removeChild(flyerPrincipal);
-    }
-    renderRemoveFlyerRunner() {
-        const flyerRunner = this.DOMGame.firstChild.nextSibling;
-        flyerRunner.classList.remove("information");
-        flyerRunner.removeChild(flyerRunner.firstChild.nextSibling);
-    }
-
-    renderAvatar() {
-        const avatar = document.querySelector('#avatar');
-        avatar.classList.remove("hidden");
-    }
-
     processInput(event) {
         if (event.key.toLowerCase() == "w") {
             this.avatar.jump();
         }
     }
-
 
 }
 

@@ -8,24 +8,37 @@ class Obstacle {
         this.left = 0;
     }
 
-    init(type) {
+    init() {
         const newDiv = document.createElement("div");
+
         newDiv.classList.add('asset');
-        
-        if (type == 1)
-            newDiv.classList.add('cactus2');
-        else if (type == 2)
-            newDiv.classList.add('bush');
-        else
-            newDiv.classList.add('skeleton');
+        newDiv.classList.add(this.setTypeRandomObstacle());
 
         newDiv.setAttribute("id", this.id);
+
         document.querySelector("#draw-layer").appendChild(newDiv);
+
         this.DOMobstacle = document.getElementById(this.id);
         this.DOMobstacle.addEventListener('animationend', () => {
 
             this.destroyObstacle();
         });
+    }
+
+    setTypeRandomObstacle(){
+        let objMax = 4;
+        let objMin = 1;
+        let type = Math.floor(Math.random() * (objMax - objMin)) + objMin;
+
+        if (type == 1)
+            type = 'cactus2';
+        else if (type == 2) {
+            type = 'bush';
+        }
+        else
+            type = 'skeleton';
+
+        return type;
     }
 
     destroyObstacle() {

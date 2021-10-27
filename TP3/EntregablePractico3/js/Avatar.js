@@ -11,6 +11,9 @@ class Avatar {
         this.left = 0;
     }
 
+    die(){
+        this.DOMavatar.style.animationPlayState = "paused";
+    }
     jump() {
         this.DOMavatar.classList.remove("running");
         this.DOMavatar.classList.add("jumping");
