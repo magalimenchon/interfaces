@@ -82,7 +82,7 @@ class Game {
                 && this.avatar.left < obstacle.right
                 && this.avatar.bottom > obstacle.top) {
                 console.log("colision");
-                this.end = true;
+                // this.end = true;
                 this.GUI.setMessage("GAME OVER");
                 // retornar obstaculo
             }

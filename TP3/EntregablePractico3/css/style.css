@@ -145,7 +145,7 @@ footer{
 
 .jumping {
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 4s steps(calc(10 * 3)) infinite;
+    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 3s steps(calc(10 * 3)) infinite;
 }
 
 @keyframes jump {
@@ -160,6 +160,13 @@ footer{
     }
 }
 
+.colision{
+    border: 1px solid red;
+    margin-left: 30px;
+    margin-right: 40px;
+    height: 100%;
+}
+
 .asset {
     border: 1px solid green;
     position: absolute;
@@ -168,14 +175,7 @@ footer{
     animation-name: asset;
     animation-timing-function: linear;
     /*animation-iteration-count: infinite;*/
-    animation-duration: 3s;
-}
-
-.colision{
-    border: 1px solid red;
-    margin-left: 30px;
-    margin-right: 40px;
-    height: 100%;
+    animation-duration: 3.82s;
 }
 
 .bush {
@@ -212,26 +212,11 @@ footer{
     background-repeat: repeat-x;
     background-size: cover;
 }
+
 .moving{
     animation-name: scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-}
-
-.coverLayer{
-    background: grey;
-    border: 1px solid red;
-    width: 200px;
-    height: 300px;
-    position: relative;
-}
-.cl-left{
-    bottom: -240px;
-    right: 580px;
-}
-.cl-right{
-    bottom: 60px;
-    left: 580px;
 }
 
 .layer-9 {
@@ -294,4 +279,20 @@ footer{
     100% {
         background-position-x: -1920px
     }
+}
+
+.coverLayer{
+    background: grey;
+    border: 1px solid red;
+    width: 200px;
+    height: 300px;
+    position: relative;
+}
+.cl-left{
+    bottom: -240px;
+    right: 580px;
+}
+.cl-right{
+    bottom: 60px;
+    left: 580px;
 }
