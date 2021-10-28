@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let nuevoJuego = new Game();
 
     buttonPlay.addEventListener('click', () => {
-        nuevoJuego.playGame();
+        nuevoJuego.initGame();
     });
 
     document.addEventListener('keydown', (e) => {

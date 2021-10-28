@@ -11,8 +11,20 @@ class Avatar {
         this.left = 0;
     }
 
+    relive(){
+        this.DOMavatar.classList.remove("dying");
+    }
+
     die(){
-        this.DOMavatar.style.animationPlayState = "paused";
+        if(this.DOMavatar.classList.contains("running")){
+            this.DOMavatar.classList.remove("running"); 
+        }
+        else if(this.DOMavatar.classList.contains("jumping")){
+            this.DOMavatar.classList.remove("jumping");
+        }
+        this.DOMavatar.classList.add("dying");
+        console.log(this.DOMavatar.classList);
+        //this.DOMavatar.style.animationPlayState = "paused";
     }
     jump() {
         this.DOMavatar.classList.remove("running");

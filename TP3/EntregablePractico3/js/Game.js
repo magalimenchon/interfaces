@@ -9,6 +9,37 @@ class Game {
         this.GUI = new GUI();
     }
 
+    initGame(){
+        this.GUI.renderInitGame();
+        this.showChoiceStyleGame();
+    }
+
+    showChoiceStyleGame(){
+        this.GUI.renderChoicesOptionsGame();
+        const buttonPlay = document.querySelector('#button-finish-custom-js');
+        buttonPlay.addEventListener('click', () => {
+            this.showInstructions();
+        });
+        const buttonChangeBackground = document.querySelector('#button-custom-background-js');
+        buttonChangeBackground.addEventListener('click', () => {
+            this.GUI.toogleBackground(buttonChangeBackground);
+        });
+
+        const buttonChangeAvatar = document.querySelector('#button-custom-avatar-js');
+        buttonChangeAvatar.addEventListener('click', () => {
+            this.GUI.toogleAvatar(buttonChangeAvatar);
+        });
+    
+    }
+
+    showInstructions(){
+        this.GUI.renderInstructions();
+        const buttonStartGame = document.querySelector('#button-start-game-js');
+        buttonStartGame.addEventListener('click', () => {
+            this.playGame();
+        });
+    }
+
     playGame() {
         this.startGame();
 
@@ -45,6 +76,29 @@ class Game {
         this.goDieAvatar();
         this.GUI.renderGameOver();
         this.stopObstacles();
+
+        const buttonPlay = document.querySelector('#button-play-again-js');
+        buttonPlay.addEventListener('click', () => {
+            this.GUI.renderResetGame();
+            this.resetGame();
+        });
+    }
+
+    resetGame(){
+        this.GUI.renderResetGame();
+        this.resetFieldsGame();
+        this.showChoiceStyleGame();
+       // this.playGame();
+       
+
+    }
+
+    resetFieldsGame(){
+        this.objects = new Array();
+        this.end = false;
+        //this.avatar = new Avatar();
+        this.avatar = this.avatar.relive();
+        this.obstacles = new Array();
     }
 
     stopObstacles() {

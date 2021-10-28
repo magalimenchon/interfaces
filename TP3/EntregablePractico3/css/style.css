@@ -65,11 +65,37 @@ html, body, main, .game, .general-info {
     height:50px;
     font-size: 5vh;
 }
-
-h2{
+ul{
+    font-size: 5vh;
+}
+h2, h3{
     font-family: 'CF Cherokee Regular';
     font-size: 10vh;
     margin: 0px;
+}
+
+h3{
+    font-size: 7vh;
+}
+
+.button-custom-background, .button-custom-avatar{
+    margin: 0vh 13vh 10vh 4vh;
+    font-family: 'Vanilla Whale';
+    border-radius: 30%;
+}
+.button-color-init-background{
+    background-color: #4c0654;
+}
+.button-color-init-avatar{
+    background-color: #333333;
+}
+
+.button-color-toogle-background{
+    background-color: #d74e1d;
+}
+
+.button-color-toogle-avatar{
+    background-color: #3ed787;
 }
 
 .word-congrats{
@@ -167,6 +193,14 @@ footer{
     height: 100%;
 }
 
+.dying{
+    width: calc(5808px / 10 / 3);
+    height: calc(499px / 3);
+    background-size: calc(5808px / 3);
+    background: url(../images/Dead-spritesheet.png) repeat-x;
+    animation: animateSprite 3s steps(calc(10 * 3));
+}
+
 .asset {
     border: 1px solid green;
     position: absolute;
@@ -218,6 +252,76 @@ footer{
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
+
+.coverLayer{
+    background: grey;
+    border: 1px solid red;
+    width: 140px;
+    height: 360px;
+    position: relative;
+}
+.cl-left{
+    bottom: -300px;
+    right: 550px;
+}
+.cl-right{
+    bottom: 60px;
+    left: 550px;
+}
+
+.layer-night-9 {
+    background-image: url(../images/parallax/night/9-Background.png);
+}
+
+.layer-night-8 {
+    background-image: url(../images/parallax/night/8-Stars.png);
+    animation-duration: 400s;
+}
+
+.layer-night-7 {
+    background-image: url(../images/parallax/night/7-Clouds.png);
+    animation-duration: 100s;
+}
+
+.layer-night-6 {
+    background-image: url(../images/parallax/night/6-Sun.png);
+}
+
+.layer-night-5 {
+    background-image: url(../images/parallax/night/5-Mountains.png);
+    animation-duration: 60s;
+}
+
+.layer-night-4 {
+    background-image: url(../images/parallax/night/4-Layer4.png);
+    animation-duration: 30s;
+}
+
+.layer-night-3 {
+    background-image: url(../images/parallax/night/3-Layer3.png);
+    animation-duration: 22s;
+}
+
+.layer-night-2 {
+    background-image: url(../images/parallax/night/2-Layer2.png);
+    animation-duration: 14s;
+}
+
+.layer-night-1 {
+    background-image: url(../images/parallax/night/1-Layer1.png);
+    animation-duration: 7s;
+}
+
+.layer-night-0 {
+    background-image: url(../images/parallax/night/0-Floor.png);
+    animation-duration: 7s;
+    background-size: calc(1920px /2);
+    position: absolute; 
+    bottom: 0;  
+    width: 100%; 
+    height: 50px; 
+}
+
 
 .layer-9 {
     background-image: url(../images/parallax/9-Background.png);
@@ -281,18 +385,3 @@ footer{
     }
 }
 
-.coverLayer{
-    background: grey;
-    border: 1px solid red;
-    width: 200px;
-    height: 300px;
-    position: relative;
-}
-.cl-left{
-    bottom: -240px;
-    right: 580px;
-}
-.cl-right{
-    bottom: 60px;
-    left: 580px;
-}
