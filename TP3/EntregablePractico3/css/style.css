@@ -147,17 +147,17 @@ footer{
 #avatar {
     border: 1px solid;
     margin: auto;
-    width: calc(4150px / 10 / 3);
-    height: calc(507px / 3);
-    background-size: calc(4150px / 3);
     position: absolute;
-    bottom: 45px;
-    left: 100px;
 }
 
 .running {
     background: url(../images/Run-spritesheet.png) repeat-x;
+    width: calc(4150px / 10 / 3);
+    height: calc(507px / 3);
     animation: animateSprite 2s steps(calc(10 * 3)) infinite;
+    background-size: calc(4150px / 3);
+    bottom: 45px;
+    left: 100px;
 }
 
 @keyframes animateSprite {
@@ -170,8 +170,43 @@ footer{
 }
 
 .jumping {
+    
+    width: calc(4070px / 10 / 3);
+    height: calc(536px / 3);
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1s cubic-bezier(.24,.66,.62,.99), animateSprite 3s steps(calc(10 * 3)) infinite;
+    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSprite 3.6s steps(calc(10 * 3)) infinite;
+    background-size: calc(4070px / 3);
+    bottom: 45px;
+    left: 100px;
+}
+
+@keyframes jumpSprite {
+    0% {
+        background-position: 0
+    }
+    100% {
+        background-position: -4070px
+    }
+}
+
+.dying{
+    background: url(../images/chica/Dead-spritesheet.png);
+    width: calc(5880px / 10 / 3);
+    height: calc(600px / 3);
+    background-size: calc(5880px / 3);
+    animation: die 3s steps(calc(10 * 3));
+    animation-iteration-count: calc(1/3);
+    bottom: 25px;
+    left: 125px;
+}
+
+@keyframes die {
+    0% {
+        background-position: 0
+    }
+    100% {
+        background-position: -5880px
+    }
 }
 
 @keyframes jump {
@@ -179,7 +214,7 @@ footer{
         top: 320px;
     }
     50% {
-        top: 0px;
+        top: -50px;
     }
     100% {
         top: 320px;
@@ -191,14 +226,6 @@ footer{
     margin-left: 30px;
     margin-right: 40px;
     height: 100%;
-}
-
-.dying{
-    width: calc(5808px / 10 / 3);
-    height: calc(499px / 3);
-    background-size: calc(5808px / 3);
-    background: url(../images/Dead-spritesheet.png) repeat-x;
-    animation: animateSprite 3s steps(calc(10 * 3));
 }
 
 .asset {
@@ -235,7 +262,7 @@ footer{
         right: -50px;
     }
     100% {
-        right: 1000px;
+        right: 970px;
     }
 }
 

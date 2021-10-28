@@ -41,6 +41,7 @@ class Game {
     }
 
     playGame() {
+        
         this.startGame();
 
         let gameLoop = setInterval(() => {
@@ -49,7 +50,7 @@ class Game {
             this.detectCollision();
             // draw();
 
-            setTimeout(() => {
+            let timeOut = setTimeout(() => {
                 this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
                 this.end = true;
             }, 60000);
@@ -57,13 +58,13 @@ class Game {
             if (this.end) {
                 //clearInterval(generateObstaclesLoop);
                 //this.GUI.renderGameOver();
+                clearTimeout(timeOut);
                 this.endGame();
                 clearInterval(gameLoop);
                 console.log("termino el juego");
             }
         }, 50);
 
-        //this.endGame();
     }
 
     startGame() {
@@ -73,7 +74,7 @@ class Game {
     }
 
     endGame() {
-        this.goDieAvatar();
+        this.avatar.die();
         this.GUI.renderGameOver();
         this.stopObstacles();
 
@@ -85,20 +86,16 @@ class Game {
     }
 
     resetGame(){
-        this.GUI.renderResetGame();
         this.resetFieldsGame();
         this.showChoiceStyleGame();
-       // this.playGame();
-       
-
     }
 
     resetFieldsGame(){
-        this.objects = new Array();
-        this.end = false;
-        //this.avatar = new Avatar();
-        this.avatar = this.avatar.relive();
+        this.avatar = this.avatar.revive();
+        this.avatar = new Avatar();
         this.obstacles = new Array();
+        this.end = false;
+        
     }
 
     stopObstacles() {
@@ -107,10 +104,6 @@ class Game {
             if (DOMobstacle)
                 DOMobstacle.style.animationPlayState = "paused";
         })
-    }
-
-    goDieAvatar() {
-        this.avatar.die();
     }
 
     createObstacles() {
@@ -136,7 +129,7 @@ class Game {
                 && this.avatar.left < obstacle.right
                 && this.avatar.bottom > obstacle.top) {
                 console.log("colision");
-                // this.end = true;
+                this.end = true;
                 this.GUI.setMessage("GAME OVER");
                 // retornar obstaculo
             }

@@ -180,7 +180,7 @@ class GUI {
 
         //ul3
         let ul3 = document.createElement("ul");
-        ul3.innerHTML = "You can dodge them with a jumping by pressing the |w| key.";
+        ul3.innerHTML = "Use 'W' to jump!!";
 
         //li
         let li = document.createElement("li");
@@ -266,7 +266,6 @@ class GUI {
         //DIV PRINCIPAL
         let newDivPrincipal = this.createDivPrincipal();
 
-        console.log(newDivPrincipal);
         //DIV SECUNDARIO
         let newDivSec = this.createDivSecStatus();
 

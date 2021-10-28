@@ -1,6 +1,6 @@
 class Avatar {
 
-    constructor(){
+    constructor() {
         let DOMavatar = document.querySelector('#avatar');
         this.DOMavatar = DOMavatar;
         DOMavatar.addEventListener('animationend', () => {
@@ -11,33 +11,35 @@ class Avatar {
         this.left = 0;
     }
 
-    relive(){
+    revive() {
         this.DOMavatar.classList.remove("dying");
+        this.DOMavatar.classList.add("running");
     }
 
-    die(){
-        if(this.DOMavatar.classList.contains("running")){
-            this.DOMavatar.classList.remove("running"); 
-        }
-        else if(this.DOMavatar.classList.contains("jumping")){
-            this.DOMavatar.classList.remove("jumping");
-        }
+    die() { 
+        this.DOMavatar.classList.remove("running");
+        this.DOMavatar.classList.remove("jumping");
         this.DOMavatar.classList.add("dying");
+        
         console.log(this.DOMavatar.classList);
         //this.DOMavatar.style.animationPlayState = "paused";
     }
+
     jump() {
         this.DOMavatar.classList.remove("running");
         this.DOMavatar.classList.add("jumping");
     }
 
     restartAnimation() {
-        this.DOMavatar.classList.remove("jumping");
-        this.DOMavatar.classList.add("running");
+        if (this.DOMavatar.classList.contains("jumping")){
+            this.DOMavatar.classList.remove("jumping");
+            this.DOMavatar.classList.add("running");
+        }
+        
         // this.DOMavatar.style.animationPlayState = "paused";
     }
-    
-    updatePositions(){
+
+    updatePositions() {
         this.bottom = this.DOMavatar.getBoundingClientRect().bottom;
         this.right = this.DOMavatar.getBoundingClientRect().right - 40;
         this.left = this.DOMavatar.getBoundingClientRect().left + 30;
