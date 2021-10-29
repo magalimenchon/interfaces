@@ -117,6 +117,7 @@ class GUI {
     renderStartGame() {
         this.renderRemoveInfo();
         this.renderScore();
+        this.renderLimitTime();
     }
 
     /**
@@ -143,12 +144,42 @@ class GUI {
         divScore.appendChild(divQuantity);
         this.DOMGame.appendChild(divScore);
     }
+
     /**
      * actualiza el renderizado de la cantidad de coleccionables que tiene hasta el momento.
      * @param {int} score número de score de coleccionables acumulados
      */
      updateScoreInGame(score){
         document.querySelector('.number-score').innerHTML = score;
+     }
+
+     /**
+     * Crea un elemento en el DOM el tiempo transcurrido hasta el momento
+     */
+    renderLimitTime(){
+        let divLimitTime = this.createDivPrincipal();
+
+        divLimitTime.setAttribute("id", "limitTime");
+
+        let divQuantity = document.createElement("div");
+        divQuantity.classList.add("limit-time");
+
+        let h4 = document.createElement("h4");
+        h4.innerHTML = "Time: " + 50 + " s";
+        h4.classList.add("number-limit-time");
+
+
+        divQuantity.appendChild(h4);
+        divLimitTime.appendChild(divQuantity);
+        this.DOMGame.appendChild(divLimitTime);
+    }
+
+    /**
+     * actualiza el tiempo transcurrido hasta el momento
+     * @param {int} limitTime segundos transcurridos
+     */
+     updateLimitTimeInGame(limitTime){
+        document.querySelector('.number-limit-time').innerHTML = "Time: " + limitTime / 1000 + " s";
      }
 
     /**
@@ -173,6 +204,9 @@ class GUI {
         //eliminar div score
         let score = document.querySelector('#score');
         score.parentNode.removeChild(score);
+        //eliminar div limit time
+        let limitTime = document.querySelector('#limitTime');
+        limitTime.parentNode.removeChild(limitTime);
         //RESET DE OBSTACULOS Y COLECCIONES
         let objects = document.querySelectorAll('.asset');
         objects.forEach(asset => {
@@ -370,11 +404,9 @@ class GUI {
         //ul3
         let ul3 = document.createElement("ul");
         ul3.innerHTML = "Run and use 'W' to jump!!";
-        ul3.classList.add("ul3");
+
         //ul4
         let ul4 = document.createElement("ul");
-        ul4.innerHTML = "Win: survive until the time limit. Good luck!";
-        ul4.classList.add("ul4");
 
         //li
         let li = document.createElement("li");
@@ -429,7 +461,6 @@ class GUI {
             layer.style.animationPlayState = "paused";
         });
     }
-
 
     /**
      * Crea la información a renderizar en el DOM para indicar lo

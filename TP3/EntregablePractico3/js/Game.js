@@ -7,7 +7,7 @@ class Game {
         this.avatar = new Avatar();
         this.GUI = new GUI();
         this.timeOut;
-        this.timeLimit = 0;
+        this.timeLimit = 50000;
         this.score = 0;
         this.collectibleId;
     }
@@ -76,6 +76,7 @@ class Game {
             this.detectCollision();
 
             if (this.end) {
+                clearInterval(this.timeOut);
                 clearInterval(gameLoop);
                 this.endGame();
                 console.log("termino el juego");
@@ -100,18 +101,15 @@ class Game {
      * cuando se ejecuta el thread del setTimeOut
      */
     getLimitTime() {
-        // this.timeOut = setTimeout(() => {
-        //     this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
-        //     this.end = true;
-        // }, 50000);
-
         this.timeOut = setInterval(() => {
-            this.timeLimit += 1000;
-            if (this.timeLimit == 50000) {
+            this.timeLimit -= 1000;
+            if (this.timeLimit <= 0) {
                 this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
                 this.end = true;
-                clearInterval(this.timeOut);
-                
+                this.GUI.updateLimitTimeInGame();
+            }
+            if(!this.end){
+                this.GUI.updateLimitTimeInGame(this.timeLimit);  
             }
         }, 1000);
     }
@@ -155,7 +153,7 @@ class Game {
         this.assets = new Array();
         this.end = false;
         this.score = 0;
-        this.timeLimit = 0;
+        this.timeLimit = 50000;
     }
 
     /**
@@ -179,8 +177,6 @@ class Game {
         let min = 1000;
         let randomTime = Math.floor(Math.random() * (max - min)) + min;
 
-
-
         if (!this.end) {
             let asset = new Asset();
             asset.init();
@@ -190,6 +186,13 @@ class Game {
         }
     }
 
+    /**
+     * Por cada assets que se encuentra renderizandose, chequea que no sobrepase la
+     * posición donde se encuentra actualmente el ávatar.
+     * En caso que sea un elemento coleccionable y colisione, genera la animación correspondiente,
+     * y actualiza el score de coleccionables obtenidos.
+     * En el caso que colisione con un asset, actualiza lo necesario para informar que el juego terminó.
+     */
     detectCollision() {
 
         this.assets.forEach((asset) => {
@@ -210,6 +213,11 @@ class Game {
         })
     }
 
+    /**
+     * Chequea si ya colisionó con el asset coleccionable que recibe por parámetro y
+     * actualiza la cantidad de coleccionables del avatar en caso que no.
+     * @param {Asset} asset elemento de la clase Asset
+     */
     updateScore(asset) {
         if (asset.id != this.collectibleId) {
             this.score++;
@@ -218,6 +226,10 @@ class Game {
         }
     }
 
+    /**
+     * Actualiza las nuevas posiciones relativas con respecto
+     * a la pantalla de visualización del avatar y los assets.
+     */
     updateStates() {
         this.avatar.updatePositions();
 

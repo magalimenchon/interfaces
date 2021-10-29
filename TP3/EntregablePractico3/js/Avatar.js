@@ -29,12 +29,18 @@ class Avatar {
         }
     }
 
+    /**
+     * Chequea el estado actual del avatar, y cambia el estado de dying a running
+     */
     revive() {
         this.setFieldAvatar();
         this.DOMavatar.classList.remove("dying-" + this.avatar);
         this.DOMavatar.classList.add("running-" + this.avatar);
     }
 
+    /**
+     * Chequea el estado actual del avatar, y cambia el estado de running o jumping a dying
+     */
     die() {
         this.setFieldAvatar();
         this.DOMavatar.classList.remove("running-" + this.avatar);
@@ -43,12 +49,19 @@ class Avatar {
 
     }
 
+    /**
+     * Chequea el estado actual del avatar, y cambia el estado de running a jumping
+     */
     jump() {
         this.setFieldAvatar();
         this.DOMavatar.classList.remove("running-" + this.avatar);
         this.DOMavatar.classList.add("jumping-" + this.avatar);
     }
 
+    /**
+     * Chequea el estado actual del avatar, y cambia el estado de jumping a running en caso
+     * que esté saltando y tiene que dejar de saltar
+     */
     restartAnimation() {
         this.setFieldAvatar();
         if (this.DOMavatar.classList.contains("jumping-" + this.avatar)) {
@@ -57,7 +70,11 @@ class Avatar {
         }
 
     }
-
+    
+    /**
+     * Actualiza las posiciones relativas con respecto a la
+     * pantalla de visualización en las que se encuentra 
+     */
     updatePositions() {
         this.top = this.DOMavatar.getBoundingClientRect().top;
         this.right = this.DOMavatar.getBoundingClientRect().right - 40;

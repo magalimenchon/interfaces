@@ -10,6 +10,12 @@ class Asset {
         this.type = "";
     }
 
+    /**
+     * Crea un asset de tipo aleatorio (definido por la clase de la
+     * hoja de estilos aleatoria) en el DOM.
+     * Responde al evento de finalización de la animación de los elementos de esta clase,
+     * haciendo que se eliminen en el DOM.
+     */
     init() {
         const newDiv = document.createElement("div");
 
@@ -27,6 +33,10 @@ class Asset {
         });
     }
 
+    /**
+     * A partir de un random numérico define la clase de hoja de estilo que será el asset
+     * @returns el tipo de asset
+     */
     getTypeOf() {
         let objMax = 5;
         let objMin = 1;
@@ -49,10 +59,17 @@ class Asset {
         return this.type;
     }
 
+    /**
+     * Elimina del DOM a sí mismo (div que lo contiene)
+     */
     destroyAsset() {
         document.querySelector("#draw-layer").removeChild(this.DOMasset);
     }
 
+    /**
+     * Actualiza las posiciones relativas con respecto a la
+     * pantalla de visualización en las que se encuentra 
+     */
     updatePositions() {
         this.top = this.DOMasset.getBoundingClientRect().top;
         this.right = this.DOMasset.getBoundingClientRect().right;
