@@ -10,29 +10,51 @@ class Avatar {
         this.right = 0;
         this.left = 0;
         this.bottom = 0;
+        this.avatar;
+        this.setFieldAvatar();
+    }
+
+    /**
+     * Define el atributo conforme al modo de avatar elegido alternadamente
+     */
+    setFieldAvatar() {
+
+        if (document.querySelector('#avatar').classList.contains("running-cowgirl")
+        || document.querySelector('#avatar').classList.contains("jumping-cowgirl")
+        || document.querySelector('#avatar').classList.contains("dying-cowgirl")) {
+            this.avatar = "cowgirl";
+        }
+        else {
+            this.avatar = "cowboy";
+        }
+        console.log(this.avatar);
     }
 
     revive() {
-        this.DOMavatar.classList.remove("dying");
-        this.DOMavatar.classList.add("running");
+        this.setFieldAvatar();
+        this.DOMavatar.classList.remove("dying-" + this.avatar);
+        this.DOMavatar.classList.add("running-" + this.avatar);
     }
 
-    die() { 
-        this.DOMavatar.classList.remove("running");
-        this.DOMavatar.classList.remove("jumping");
-        this.DOMavatar.classList.add("dying");
+    die() {
+        this.setFieldAvatar();
+        this.DOMavatar.classList.remove("running-" + this.avatar);
+        this.DOMavatar.classList.remove("jumping-" + this.avatar);
+        this.DOMavatar.classList.add("dying-" + this.avatar);
 
     }
 
     jump() {
-        this.DOMavatar.classList.remove("running");
-        this.DOMavatar.classList.add("jumping");
+        this.setFieldAvatar();
+        this.DOMavatar.classList.remove("running-" + this.avatar);
+        this.DOMavatar.classList.add("jumping-" + this.avatar);
     }
 
     restartAnimation() {
-        if (this.DOMavatar.classList.contains("jumping")){
-            this.DOMavatar.classList.remove("jumping");
-            this.DOMavatar.classList.add("running");
+        this.setFieldAvatar();
+        if (this.DOMavatar.classList.contains("jumping-" + this.avatar)) {
+            this.DOMavatar.classList.remove("jumping-" + this.avatar);
+            this.DOMavatar.classList.add("running-" + this.avatar);
         }
 
     }

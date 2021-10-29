@@ -1,46 +1,151 @@
 "use strict";
 class GUI {
 
-    constructor(){
+    constructor() {
         this.DOMGame = document.querySelector('#game-js');
         this.info;
-        //"Thank you for playing";
         this.status;
+        this.background;
+        this.avatar;
+        this.setFieldBackground();
+        this.setFieldAvatar();
     }
 
-    setMessage(status, text = null){
+    /**
+     * Setea el mensaje que va a mostrarse por pantalla ante un cambio de estado del juego
+     * @param {} status 
+     * @param {*} text 
+     */
+    setMessage(status, text = null) {
 
         this.status = status;
-        if(text != null){
-            this.info = text; 
+        if (text != null) {
+            this.info = text;
         }
     }
 
     /**
-     * RENDERIZAR ESTILO DE JUEGO
+     * Define el atributo conforme al modo de fondo elegido alternadamente
      */
-    renderInitGame(){
+    setFieldBackground() {
+
+        if (document.querySelector('#draw-layer').classList.contains("layer-day-1")) {
+            this.background = "day";
+        }
+        else {
+            this.background = "night";
+        }
+    }
+    /**
+     * Define el atributo conforme al modo de avatar elegido alternadamente
+     */
+    setFieldAvatar() {
+
+        if (document.querySelector('#avatar').classList.contains("running-cowgirl")
+        || document.querySelector('#avatar').classList.contains("jumping-cowgirl")
+        || document.querySelector('#avatar').classList.contains("dying-cowgirl")) {
+            this.avatar = "cowgirl";
+        }
+        else {
+            this.avatar = "cowboy";
+        }
+    }
+    /**
+     * CAMBIO DE RENDERIZACIÓN DINÁMICA DE INICIO DE JUEGO
+     */
+
+    /**
+     * Renderizado inicial del sitio, para comenzar a jugar.
+     * Quita la pantalla principal de inicio y muestra un avatar que se encontraba oculto.
+     */
+    renderInitGame() {
         this.renderRemoveMenu();
         this.renderAvatar();
     }
 
-     renderResetGame(){
+    /**
+     * Borra la pantalla inicial para poder mostrar luego
+     * la pantalla de opciones de customizado
+     */
+    renderRemoveMenu() {
+        this.DOMGame.classList.remove("general-info");
+        this.DOMGame.classList.add("game");
+        //Se modifica sector cartel runner
+        this.renderRemoveFlyerRunner();
+        //Se modifica el sector cartel principal info
+        this.renderRemoveFlyerPrincipal();
+    }
+
+    /**
+     * Borra el div que contiene el título y el botón de la pantalla de juego inicial
+     */
+    renderRemoveFlyerPrincipal() {
+        const flyerPrincipal = this.DOMGame.lastChild.previousSibling;
+        this.DOMGame.removeChild(flyerPrincipal);
+    }
+
+    /**
+     * Borra banner de la pantalla de juego inicial
+     */
+    renderRemoveFlyerRunner() {
+        const flyerRunner = this.DOMGame.firstChild.nextSibling;
+        flyerRunner.classList.remove("information");
+        flyerRunner.removeChild(flyerRunner.firstChild.nextSibling);
+    }
+
+    /**
+     * Muestra en patalla el div del avatar que se encontraba oculto,
+     * luego de clickear el botón de play now de la pantalla de juego inicial
+     */
+    renderAvatar() {
+        const avatar = document.querySelector('#avatar');
+        avatar.classList.remove("hidden");
+    }
+
+    /**
+     * CAMBIO DE RENDERIZACIÓN DINÁMICA DE COMIENZO DE PARTIDA
+     */
+
+    /**
+     * Borra la pantalla de opciones de customización
+     * para poder renderizar luego el juego
+     */
+    renderStartGame() {
+        this.renderRemoveInfo();
+    }
+
+    /**
+     * CAMBIO DE RENDERIZACIÓN DINÁMICA DE RESET DE PARTIDA
+     */
+
+    /**
+     * Borra la pantalla que indicaba el fin de la partida,
+     * borra los objetos que quedaron estáticos/pausados,
+     * restaurando la pantalla para permitir customizar.
+     */
+    renderResetGame() {
         this.renderRemoveInfo();
         this.renderRemovePreviousGame();
-       // this.renderChoicesOptionsGame();
-     }
+    }
 
-     renderRemovePreviousGame(){
-         //RESET DE OBSTACULOS Y COLECCIONES
+    /**
+     * Elimina los objetos a interactuar de la pantalla,
+     * y reanuda el movimiento del fondo.
+     */
+    renderRemovePreviousGame() {
+        //RESET DE OBSTACULOS Y COLECCIONES
         let objects = document.querySelectorAll('.asset');
         objects.forEach(asset => {
             asset.parentNode.removeChild(asset);
         });
         //activar el fondo
         this.renderPlayBackground();
-     }
+    }
 
-     renderPlayBackground(){
+    /**
+     * Selecciona cada capa del DOM y reanuda la pausa del parallax
+     */
+    renderPlayBackground() {
         let background = document.querySelectorAll('.layer');
         //console.log(background);
 
@@ -49,8 +154,13 @@ class GUI {
         });
     }
 
-     //chequear si se puede pasar funcion por parametro (seria createDivSecOption, etc)
-     renderChoicesOptionsGame(){
+    /**
+     * PANTALLA DE OPCIONES DE CUSTOMIZACIÓN
+     */
+    /**
+     * Crea dinámicamente la pantalla de opciones de customización
+     */
+    renderChoicesOptionsGame() {
         let newDivPrincipal = this.createDivPrincipal();
 
         //DIV SECUNDARIO
@@ -61,63 +171,86 @@ class GUI {
         //de div principal a la seccion
         this.DOMGame.appendChild(newDivPrincipal);
     }
-    
-    toogleBackground(DOMButton){
 
-        DOMButton.classList.toggle("button-color-init-background");
-        DOMButton.classList.toggle("button-color-toogle-background");
+    /**
+     * Selecciona del DOM todas las capas de fondo, y alterna la de noche/día
+     * según corresponda el cambio.
+     * Modifica el color del botón que se clickeó, por el modo contrario al que
+     * se cambió, permitiendo al usuario saber que si clickea en este cambiará
+     * al de ese color (referenciando naranja == día / violeta == noche).
+     * Actualiza el atributo que guarda el modo actual del fondo.
+     * @param {button} DOMButton Botón para alternar fondo, que ha sido clickeado
+     */
+    toogleBackground(DOMButton) {
+
+        DOMButton.classList.toggle("button-color-background-with-day");
+        DOMButton.classList.toggle("button-color-background-with-night");
 
         let background = document.querySelectorAll('.layer');
-        //console.log(background);
 
         let indexLayer = 9;
         background.forEach(layer => {
-            layer.classList.toggle("layer-night-"+indexLayer);
-            layer.classList.toggle("layer-"+indexLayer);
+            layer.classList.toggle("layer-night-" + indexLayer);
+            layer.classList.toggle("layer-day-" + indexLayer);
             indexLayer--;
         });
+
+        console.log(this.background);
     }
 
-    toogleAvatar(DOMButton){
+    /**
+     * Selecciona el avatar del DOM y lo alterna por otro.
+     * Modifica el color del botón que se clickeó, por el modo contrario al que
+     * se cambió, permitiendo al usuario saber que si clickea en este cambiará
+     * al de ese color (referenciando green == cowboy / grey == cowgirl).
+     * Actualiza el atributo que guarda el avatar actual.
+     * @param {button} DOMButton Botón para alternar avatar, que ha sido clickeado 
+     */
+    toogleAvatar(DOMButton) {
 
-        DOMButton.classList.toggle("button-color-init-avatar");
-        DOMButton.classList.toggle("button-color-toogle-avatar");
+        this.se
+        DOMButton.classList.toggle("button-color-avatar-with-cowboy");
+        DOMButton.classList.toggle("button-color-avatar-with-cowgirl");
 
-        /*let avatar = document.querySelector('#avatar');
+        let avatar = document.querySelector('#avatar');
         //console.log(avatar);
 
-        avatar.classList.toggle("girl");
-        avatar.classList.toggle("boy");*/
+        avatar.classList.toggle("running-cowgirl");
+        avatar.classList.toggle("running-cowboy");
     }
 
-    createDivSecOptions(){
+    /**
+     * Crea el div con la información para la pantalla de opciones de customización
+     * @returns Div con el contenido agregado
+     */
+    createDivSecOptions() {
 
         let newDivSec = this.createDivSec();
 
         //H2
         let h3 = document.createElement("h3");
         h3.innerHTML = "Customizer";
-        
+
         //info
         let ul = document.createElement("ul");
         ul.innerHTML = "Click to toogle the style of the game:";
 
         //button custom background
-        let buttonCustomBackground =  document.createElement("button");
+        let buttonCustomBackground = document.createElement("button");
         buttonCustomBackground.setAttribute("id", "button-custom-background-js");
         buttonCustomBackground.innerHTML = "Change Background";
         buttonCustomBackground.classList.add('button-custom-background');
-        buttonCustomBackground.classList.add('button-color-init-background');
+        buttonCustomBackground.classList.add('button-color-background-with-' + this.background);
 
         //button custom avatar
-        let buttonCustomAvatar =  document.createElement("button");
+        let buttonCustomAvatar = document.createElement("button");
         buttonCustomAvatar.setAttribute("id", "button-custom-avatar-js");
         buttonCustomAvatar.innerHTML = "Change Avatar";
         buttonCustomAvatar.classList.add('button-custom-avatar');
-        buttonCustomAvatar.classList.add('button-color-init-avatar');
+        buttonCustomAvatar.classList.add('button-color-avatar-with-' + this.avatar);
 
         //button finish
-        let buttonFinish =  document.createElement("button");
+        let buttonFinish = document.createElement("button");
         buttonFinish.setAttribute("id", "button-finish-custom-js");
         buttonFinish.innerHTML = "Ready!";
 
@@ -139,18 +272,31 @@ class GUI {
     }
 
     /**
-     * RENDERIZAR INSTRUCCIONES
+     * PANTALLA DE INSTRUCCIONES
      */
-    renderInstructions(){
+
+    /**
+     * Crea dinámcicamente la pantalla de instrucciones,
+     * borrando la información anterior que se estaba mostrando
+     * y agregando la nueva que se quiere renderizar.
+     */
+    renderInstructions() {
         this.renderRemoveInfo();
         this.renderWindowInformation();
     }
 
-    renderRemoveInfo(){
+    /**
+     * Borra la pantalla con información, siendo esta
+     * el último div creado en la sección del DOM
+     */
+    renderRemoveInfo() {
         this.DOMGame.removeChild(this.DOMGame.lastChild);
     }
 
-    renderWindowInformation(){
+    /**
+     * Renderiza la información sobre las instrucciones en la pantalla
+     */
+    renderWindowInformation() {
         let newDivPrincipal = this.createDivPrincipal();
 
         //DIV SECUNDARIO
@@ -162,14 +308,19 @@ class GUI {
         this.DOMGame.appendChild(newDivPrincipal);
     }
 
-    createDivSecInstructions(){
+    /**
+     * Crea los elementos del DOM con la respectivas clases y contenidos
+     * para mostrar sobre las instrucciones dentro de un div
+     * @returns elemento del DOM del tipo DIV con el contenido ya asociado
+     */
+    createDivSecInstructions() {
 
         let newDivSec = this.createDivSec();
 
         //H2
         let h3 = document.createElement("h3");
         h3.innerHTML = "Instructions";
-        
+
         //ul1
         let ul1 = document.createElement("ul");
         ul1.innerHTML = "You must dodge the obstacles, and collect coins.";
@@ -180,13 +331,13 @@ class GUI {
 
         //ul3
         let ul3 = document.createElement("ul");
-        ul3.innerHTML = "Use 'W' to jump!!";
+        ul3.innerHTML = "Run and use 'W' to jump!!";
 
         //li
         let li = document.createElement("li");
 
         //button
-        let button =  document.createElement("button");
+        let button = document.createElement("button");
         button.setAttribute("id", "button-start-game-js");
         button.innerHTML = "Start";
 
@@ -199,7 +350,7 @@ class GUI {
         /**
          * INSERCION EN DOM
          */
-        //de button, li y h2 en div word-congrats
+        //de button, li y h3 en div word-congrats
         newDivSec.appendChild(h3);
         newDivSec.appendChild(li);
         newDivSec.appendChild(button);
@@ -208,48 +359,23 @@ class GUI {
     }
 
     /**
-     * RENDERIZACION INICIAL DE JUEGO
+     * PANTALLA FINAL PARTIDA
      */
-
-    renderStartGame() {
-        this.renderRemoveInfo();
-        //Se agrega el avatar
-        // this.renderAvatar();
-    }
-
-    renderRemoveMenu() {
-        this.DOMGame.classList.remove("general-info");
-        this.DOMGame.classList.add("game");
-        //Se modifica sector cartel runner
-        this.renderRemoveFlyerRunner();
-        //Se modifica el sector cartel principal info
-        this.renderRemoveFlyerPrincipal();
-    }
-
-    renderRemoveFlyerPrincipal() {
-        const flyerPrincipal = this.DOMGame.lastChild.previousSibling;
-        this.DOMGame.removeChild(flyerPrincipal);
-    }
-    renderRemoveFlyerRunner() {
-        const flyerRunner = this.DOMGame.firstChild.nextSibling;
-        flyerRunner.classList.remove("information");
-        flyerRunner.removeChild(flyerRunner.firstChild.nextSibling);
-    }
-
-    renderAvatar() {
-        const avatar = document.querySelector('#avatar');
-        avatar.classList.remove("hidden");
-    }
 
     /**
-     * RENDERIZACION FINAL
+     * Crea dinámicamente la pantalla de fin de partida.
+     * Frena la animación de movimiento de las capas de fondo, 
+     * y muestra la pantalla asociada con la información de fin de partida.
      */
-    renderGameOver(){
+    renderGameOver() {
         this.renderStopBackground();
         this.renderStatusGame();
     }
 
-    renderStopBackground(){
+    /**
+     * Frena y pausa el movimiento del fondo de parallax
+     */
+    renderStopBackground() {
         let background = document.querySelectorAll('.layer');
         //console.log(background);
 
@@ -259,7 +385,11 @@ class GUI {
     }
 
 
-    renderStatusGame(){
+    /**
+     * Crea la información a renderizar en el DOM para indicar lo
+     * sucedido al finalizar la partida.
+     */
+    renderStatusGame() {
         /**
          * CREACION DE ELEMENTOS
          */
@@ -276,7 +406,11 @@ class GUI {
 
     }
 
-    createDivPrincipal(){
+    /**
+     * Crea un div para colocar la información prinicpal de pantalla
+     * @returns elemento del DOM del tipo DIV con el contenido ya asociado
+     */
+    createDivPrincipal() {
         let newDivPrincipal = document.createElement("div");
 
         newDivPrincipal.classList.add('layer');
@@ -284,19 +418,23 @@ class GUI {
         return newDivPrincipal;
     }
 
-    createDivSecStatus(){
+    /**
+     * Crea un div para mostrar la información de finalización de partida
+     * @returns div con el contenido correspondiente
+     */
+    createDivSecStatus() {
 
         let newDivSec = this.createDivSec();
         //H2
         let h2 = document.createElement("h2");
         h2.innerHTML = this.status;
-        
+
         //P
         let p = document.createElement("p");
         p.innerHTML = this.info;
 
         //button
-        let button =  document.createElement("button");
+        let button = document.createElement("button");
         button.setAttribute("id", "button-play-again-js");
         button.innerHTML = "Play Again";
 
@@ -311,7 +449,11 @@ class GUI {
         return newDivSec;
     }
 
-    createDivSec(){
+    /**
+     * Crea un div con la estructura para la información de finalización de partida
+     * @returns div para insertar en el DOM
+     */
+    createDivSec() {
         let newDivSec = document.createElement("div");
         newDivSec.classList.add('word-congrats');
         return newDivSec;
