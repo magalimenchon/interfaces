@@ -3,9 +3,9 @@ class GUI {
 
     constructor(){
         this.DOMGame = document.querySelector('#game-js');
-        this.info = "Do you want to try again?";
+        this.info;
         //"Thank you for playing";
-        this.status = "playing";
+        this.status;
     }
 
     setMessage(status, text = null){
@@ -214,7 +214,7 @@ class GUI {
     renderStartGame() {
         this.renderRemoveInfo();
         //Se agrega el avatar
-        this.renderAvatar();
+        // this.renderAvatar();
     }
 
     renderRemoveMenu() {

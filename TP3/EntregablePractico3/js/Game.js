@@ -2,11 +2,11 @@
 class Game {
 
     constructor() {
-        this.objects = new Array();
+        this.assets = new Array();
         this.end = false;
         this.avatar = new Avatar();
-        this.obstacles = new Array();
         this.GUI = new GUI();
+        this.timeOut;
     }
 
     initGame(){
@@ -43,24 +43,20 @@ class Game {
     playGame() {
         
         this.startGame();
+        this.timeOut = setTimeout(() => {
+            this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
+            this.end = true;
+            
+        }, 50000);
 
         let gameLoop = setInterval(() => {
-            // processInput();
             this.updateStates();
             this.detectCollision();
-            // draw();
-
-            let timeOut = setTimeout(() => {
-                this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
-                this.end = true;
-            }, 60000);
 
             if (this.end) {
-                //clearInterval(generateObstaclesLoop);
-                //this.GUI.renderGameOver();
-                clearTimeout(timeOut);
-                this.endGame();
+                clearTimeout(this.timeOut);
                 clearInterval(gameLoop);
+                this.endGame();
                 console.log("termino el juego");
             }
         }, 50);
@@ -70,13 +66,15 @@ class Game {
     startGame() {
         console.log("empezo el juego");
         this.GUI.renderStartGame();
-        this.createObstacles();
+        this.createAssets();
     }
 
     endGame() {
-        this.avatar.die();
+        if(this.GUI.info != "Congratulations, you won!"){
+            this.avatar.die();
+        }
         this.GUI.renderGameOver();
-        this.stopObstacles();
+        this.stopAssets();
 
         const buttonPlay = document.querySelector('#button-play-again-js');
         buttonPlay.addEventListener('click', () => {
@@ -91,47 +89,53 @@ class Game {
     }
 
     resetFieldsGame(){
+        this.GUI = new GUI();
         this.avatar = this.avatar.revive();
         this.avatar = new Avatar();
-        this.obstacles = new Array();
+        this.assets = new Array();
         this.end = false;
-        
     }
 
-    stopObstacles() {
-        this.obstacles.forEach((obstacle) => {
-            let DOMobstacle = document.getElementById(obstacle.id);
-            if (DOMobstacle)
-                DOMobstacle.style.animationPlayState = "paused";
+    stopAssets() {
+        this.assets.forEach((asset) => {
+            let DOMasset = document.getElementById(asset.id);
+            if (DOMasset)
+                DOMasset.style.animationPlayState = "paused";
         })
     }
 
-    createObstacles() {
+    createAssets() {
         let max = 4000;
-        let min = 700;
+        let min = 1000;
         let randomTime = Math.floor(Math.random() * (max - min)) + min;
 
 
 
         if (!this.end) {
-            let obs = new Obstacle();
-            obs.init();
-            this.obstacles.push(obs);
+            let asset = new Asset();
+            asset.init();
+            this.assets.push(asset);
 
-            setTimeout(() => { this.createObstacles() }, randomTime);
+            setTimeout(() => { this.createAssets() }, randomTime);
         }
     }
 
     detectCollision() {
 
-        this.obstacles.forEach((obstacle) => {
-            if (this.avatar.right > obstacle.left
-                && this.avatar.left < obstacle.right
-                && this.avatar.bottom > obstacle.top) {
-                console.log("colision");
-                this.end = true;
-                this.GUI.setMessage("GAME OVER");
-                // retornar obstaculo
+        this.assets.forEach((asset) => {
+            if (this.avatar.right > asset.left
+                && this.avatar.left < asset.right
+                && this.avatar.bottom > asset.top
+                && this.avatar.top < asset.bottom) {
+
+                if (asset.type == "collectible"){
+                    asset.DOMasset.style.animation = "collect 1s ease-out, asset 3.82s linear forwards";
+                    // aca va el score ++
+                }
+                else{
+                    this.end = true;
+                    this.GUI.setMessage("GAME OVER", "Do you want to try again?");
+                }
             }
         })
     }
@@ -139,10 +143,10 @@ class Game {
     updateStates() {
         this.avatar.updatePositions();
 
-        this.obstacles.forEach((obstacle) => {
-            obstacle.updatePositions();
-            if (obstacle.left < 0) {
-                this.obstacles.shift();
+        this.assets.forEach((asset) => {
+            asset.updatePositions();
+            if (asset.left < 0) {
+                this.assets.shift();
             }
         })
     }

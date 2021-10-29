@@ -6,9 +6,10 @@ class Avatar {
         DOMavatar.addEventListener('animationend', () => {
             this.restartAnimation();
         });
-        this.bottom = 0;
+        this.top = 0;
         this.right = 0;
         this.left = 0;
+        this.bottom = 0;
     }
 
     revive() {
@@ -20,9 +21,7 @@ class Avatar {
         this.DOMavatar.classList.remove("running");
         this.DOMavatar.classList.remove("jumping");
         this.DOMavatar.classList.add("dying");
-        
-        console.log(this.DOMavatar.classList);
-        //this.DOMavatar.style.animationPlayState = "paused";
+
     }
 
     jump() {
@@ -35,14 +34,14 @@ class Avatar {
             this.DOMavatar.classList.remove("jumping");
             this.DOMavatar.classList.add("running");
         }
-        
-        // this.DOMavatar.style.animationPlayState = "paused";
+
     }
 
     updatePositions() {
-        this.bottom = this.DOMavatar.getBoundingClientRect().bottom;
+        this.top = this.DOMavatar.getBoundingClientRect().top;
         this.right = this.DOMavatar.getBoundingClientRect().right - 40;
         this.left = this.DOMavatar.getBoundingClientRect().left + 30;
+        this.bottom = this.DOMavatar.getBoundingClientRect().bottom;
     }
 
 }

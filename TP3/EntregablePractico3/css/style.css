@@ -174,7 +174,7 @@ footer{
     width: calc(4070px / 10 / 3);
     height: calc(536px / 3);
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSprite 3.6s steps(calc(10 * 3)) infinite;
+    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSprite 3.6s steps(calc(10 * 3)) forwards;
     background-size: calc(4070px / 3);
     bottom: 45px;
     left: 100px;
@@ -190,7 +190,7 @@ footer{
 }
 
 .dying{
-    background: url(../images/chica/Dead-spritesheet.png);
+    background: url(../images/Dead-spritesheet.png);
     width: calc(5880px / 10 / 3);
     height: calc(600px / 3);
     background-size: calc(5880px / 3);
@@ -231,27 +231,28 @@ footer{
 .asset {
     border: 1px solid green;
     position: absolute;
-    bottom: 45px;
     right: -70px;
     animation-name: asset;
     animation-timing-function: linear;
-    /*animation-iteration-count: infinite;*/
     animation-duration: 3.82s;
 }
 
 .bush {
     background: url(../images/assets/Bush2.png) repeat-x;
+    bottom: 45px;
     width: calc(131px * 0.70);
     height: calc(74px * 0.70);
     background-size: contain;
 }
 .cactus2{
     background: url(../images/assets/Cactus2.png) repeat-x;
+    bottom: 45px;
     width: 70px;
     height: 45px;
 }
 .skeleton{
     background: url(../images/assets/Skeleton.png) repeat-x;
+    bottom: 45px;
     width: calc(150px * 0.75);
     height: calc(51px * 0.75);
     background-size: contain;
@@ -264,6 +265,28 @@ footer{
     100% {
         right: 970px;
     }
+}
+
+@keyframes collect {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0,-50px) rotateY(1080deg);
+        
+    }
+}
+
+.collectible{
+    background: url(../images/assets/Trophy.png) repeat-x;
+    bottom: 340px;
+    width: calc(227px * 0.20);
+    height: calc(243px * 0.20);
+    background-size: contain;
 }
 
 .layer {
@@ -284,15 +307,15 @@ footer{
     background: grey;
     border: 1px solid red;
     width: 140px;
-    height: 360px;
+    height: 560px;
     position: relative;
 }
 .cl-left{
-    bottom: -300px;
+    top: 285px;
     right: 550px;
 }
 .cl-right{
-    bottom: 60px;
+    top: -285px;
     left: 550px;
 }
 
