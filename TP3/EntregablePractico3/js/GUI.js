@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * Interfaz gráfica de usuario. Maneja la parte de vista del juego
+ */
 class GUI {
 
     constructor() {
@@ -109,10 +112,44 @@ class GUI {
     /**
      * Borra la pantalla de opciones de customización
      * para poder renderizar luego el juego
+     * y genera los elementos del DOM para el score
      */
     renderStartGame() {
         this.renderRemoveInfo();
+        this.renderScore();
     }
+
+    /**
+     * Crea un elemento en el DOM para mostrar la cantidad
+     * de coleccionables que tiene hasta el momento
+     */
+    renderScore(){
+        let divScore = this.createDivPrincipal();
+
+        divScore.setAttribute("id", "score");
+
+        let divQuantity = document.createElement("div");
+        divQuantity.classList.add("score");
+
+        let h4 = document.createElement("h4");
+        h4.innerHTML = 0;
+        h4.classList.add("number-score");
+
+        let divCollectible = document.createElement("div");
+        divCollectible.classList.add("collectible-img");
+
+        divQuantity.appendChild(h4);
+        divQuantity.appendChild(divCollectible);
+        divScore.appendChild(divQuantity);
+        this.DOMGame.appendChild(divScore);
+    }
+    /**
+     * actualiza el renderizado de la cantidad de coleccionables que tiene hasta el momento.
+     * @param {int} score número de score de coleccionables acumulados
+     */
+     updateScoreInGame(score){
+        document.querySelector('.number-score').innerHTML = score;
+     }
 
     /**
      * CAMBIO DE RENDERIZACIÓN DINÁMICA DE RESET DE PARTIDA
@@ -129,10 +166,13 @@ class GUI {
     }
 
     /**
-     * Elimina los objetos a interactuar de la pantalla,
+     * Elimina los objetos del DOM a interactuar de la pantalla,
      * y reanuda el movimiento del fondo.
      */
     renderRemovePreviousGame() {
+        //eliminar div score
+        let score = document.querySelector('#score');
+        score.parentNode.removeChild(score);
         //RESET DE OBSTACULOS Y COLECCIONES
         let objects = document.querySelectorAll('.asset');
         objects.forEach(asset => {
@@ -323,7 +363,7 @@ class GUI {
 
         //ul1
         let ul1 = document.createElement("ul");
-        ul1.innerHTML = "You must dodge the obstacles, and collect coins.";
+        ul1.innerHTML = "You must dodge the obstacles and collect treasures";
 
         //ul2
         let ul2 = document.createElement("ul");

@@ -114,10 +114,7 @@ button{
     font-family: 'Carnevalee Freakshow';
     font-size: 5.5vh;
     background-color: #2f0006;
-    /*color: #bf869b;*/
-    /*color:#7e3d54;*/
     color: #fce970;
-    /*color: #d74e1d;*/
 }
 .general-info h1{
     font-family: 'Rio Grande Striped';
@@ -127,10 +124,30 @@ button{
     display: none;
 }
 
+.score{
+    background-color: rgba(		47, 0, 6, 0.2);
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    text-align: center;
+    color: #2f0006;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    padding: 2vh;
+    font-family: 'Carnevalee Freakshow';
+    align-self: flex-start;
+    margin-left: 4vh;
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    font-size: 7vh;
+}
+.number-score{
+    margin: 1vh;
+}
+
 footer{
     text-align: center;
-    /*color: #ffffff;*/
-    /*color:#bf869b;*/
     color: #fce970;
     background-color:#2f0006;
     font-family: 'Carnevalee Freakshow';
@@ -212,7 +229,7 @@ footer{
     width: calc(4014px / 10 / 3);
     height: calc(536px / 3);
     background: url(../images/chica/editadas/Jump-spritesheet.png) repeat-x;
-    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSpriteCowgirl 3.6s steps(calc(10 * 3)) forwards;
+    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSpriteCowgirl 3.6s steps(calc(10 * 3)) ;
     background-size: calc(4014px / 3);
     bottom: 45px;
     left: 100px;
@@ -267,7 +284,6 @@ footer{
 }
 
 .colision{
-    border: #857486 1px solid;
     margin-left: 30px;
     margin-right: 40px;
     height: 100%;
@@ -325,6 +341,15 @@ footer{
     }
 }
 
+.collectible-img{
+    background: url(../images/assets/Trophy.png) repeat-x;
+    width: calc(227px * 0.10);
+    height: calc(243px * 0.10);
+    background-size: contain;
+    margin-right: 1vh;
+    margin-top: 1vh;
+    filter: opacity(80%);
+}
 .collectible{
     background: url(../images/assets/Trophy.png) repeat-x;
     bottom: 340px;
