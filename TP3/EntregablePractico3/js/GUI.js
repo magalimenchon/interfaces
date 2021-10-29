@@ -234,8 +234,6 @@ class GUI {
             layer.classList.toggle("layer-day-" + indexLayer);
             indexLayer--;
         });
-
-        console.log(this.background);
     }
 
     /**

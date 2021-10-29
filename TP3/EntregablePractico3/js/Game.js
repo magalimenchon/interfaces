@@ -7,13 +7,15 @@ class Game {
         this.avatar = new Avatar();
         this.GUI = new GUI();
         this.timeOut;
+        this.timeLimit = 0;
         this.score = 0;
+        this.collectibleId;
     }
 
     /**
      * Renderiza el inicio del juego con la GUI y muestra la pantalla de opciones de customización
      */
-    initGame(){
+    initGame() {
         this.GUI.renderInitGame();
         this.showChoiceStyleGame();
     }
@@ -25,7 +27,7 @@ class Game {
      * 2. La alternancia del modo de fondo o escenario, cambiando a diurno o nocturno.
      * 3. La alternancia del tipo de avatar, cambiando a cowboy o cowgirl.
      */
-    showChoiceStyleGame(){
+    showChoiceStyleGame() {
         this.GUI.renderChoicesOptionsGame();
         const buttonReady = document.querySelector('#button-finish-custom-js');
         buttonReady.addEventListener('click', () => {
@@ -40,14 +42,14 @@ class Game {
         buttonChangeAvatar.addEventListener('click', () => {
             this.GUI.toogleAvatar(buttonChangeAvatar);
         });
-    
+
     }
 
     /**
      * Renderiza las pantalla de instrucciones por medio de la GUI y
      * responde al evento de click del botón para poner iniciar la nueva partida.
      */
-    showInstructions(){
+    showInstructions() {
         this.GUI.renderInstructions();
         const buttonStartGame = document.querySelector('#button-start-game-js');
         buttonStartGame.addEventListener('click', () => {
@@ -66,7 +68,7 @@ class Game {
      *                  y se notifica al usuario del estado del juego.
      */
     playGame() {
-        
+
         this.startGame();
 
         let gameLoop = setInterval(() => {
@@ -74,7 +76,6 @@ class Game {
             this.detectCollision();
 
             if (this.end) {
-                clearTimeout(this.timeOut);
                 clearInterval(gameLoop);
                 this.endGame();
                 console.log("termino el juego");
@@ -98,11 +99,21 @@ class Game {
      * Finaliza el juego y setea en la interfaz gráfica de usuario lo que debe notificar al usuario
      * cuando se ejecuta el thread del setTimeOut
      */
-    getLimitTime(){
-        this.timeOut = setTimeout(() => {
-            this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
-            this.end = true; 
-        }, 50000);
+    getLimitTime() {
+        // this.timeOut = setTimeout(() => {
+        //     this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
+        //     this.end = true;
+        // }, 50000);
+
+        this.timeOut = setInterval(() => {
+            this.timeLimit += 1000;
+            if (this.timeLimit == 50000) {
+                this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
+                this.end = true;
+                clearInterval(this.timeOut);
+                
+            }
+        }, 1000);
     }
 
     /**
@@ -111,7 +122,7 @@ class Game {
      * Responde al evento del click en botón de volver a jugar y genera una nueva partida.
      */
     endGame() {
-        if(this.GUI.info != "Congratulations, you won!"){
+        if (this.GUI.info != "Congratulations, you won!") {
             this.avatar.die();
         }
         this.GUI.renderGameOver();
@@ -128,7 +139,7 @@ class Game {
      * Reinicia los atributos de la clase y regresa nuevamente
      * al estado de la pantalla de opciones de custiomización
      */
-    resetGame(){
+    resetGame() {
         this.resetFieldsGame();
         this.showChoiceStyleGame();
     }
@@ -137,13 +148,14 @@ class Game {
      * Reinicia los atributos de la clase y restaura las clases de la hoja de estilos
      *  que hace que animen al avatar corriendo
      */
-    resetFieldsGame(){
+    resetFieldsGame() {
         this.GUI = new GUI();
         this.avatar = this.avatar.revive();
         this.avatar = new Avatar();
         this.assets = new Array();
         this.end = false;
         this.score = 0;
+        this.timeLimit = 0;
     }
 
     /**
@@ -186,11 +198,11 @@ class Game {
                 && this.avatar.bottom > asset.top
                 && this.avatar.top < asset.bottom) {
 
-                if (asset.type == "collectible"){
+                if (asset.type == "collectible") {
                     asset.DOMasset.style.animation = "collect 1s ease-out, asset 3.82s linear forwards";
-                    this.updateScore();
+                    this.updateScore(asset);
                 }
-                else{
+                else {
                     this.end = true;
                     this.GUI.setMessage("GAME OVER", "Do you want to try again?");
                 }
@@ -198,10 +210,12 @@ class Game {
         })
     }
 
-    updateScore(){
-        this.score++;
-        console.log(this.score);
-        this.GUI.updateScoreInGame(this.score);
+    updateScore(asset) {
+        if (asset.id != this.collectibleId) {
+            this.score++;
+            this.collectibleId = asset.id;
+            this.GUI.updateScoreInGame(this.score);
+        }
     }
 
     updateStates() {

@@ -29,5 +29,5 @@ document.addEventListener("DOMContentLoaded", () => {
         nuevoJuego.processInput(e);
     });
 
-
+    // document.getElementById('song').autoplay = true;
 });

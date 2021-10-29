@@ -27,7 +27,6 @@ class Avatar {
         else {
             this.avatar = "cowboy";
         }
-        console.log(this.avatar);
     }
 
     revive() {
