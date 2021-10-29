@@ -372,6 +372,11 @@ class GUI {
         //ul3
         let ul3 = document.createElement("ul");
         ul3.innerHTML = "Run and use 'W' to jump!!";
+        ul3.classList.add("ul3");
+        //ul4
+        let ul4 = document.createElement("ul");
+        ul4.innerHTML = "Win: survive until the time limit. Good luck!";
+        ul4.classList.add("ul4");
 
         //li
         let li = document.createElement("li");
@@ -384,9 +389,12 @@ class GUI {
         /**
          * INSERTAR UL EN LI
          */
+
+        li.appendChild(ul4);
         li.appendChild(ul1);
         li.appendChild(ul2);
         li.appendChild(ul3);
+        li.appendChild(ul4);
         /**
          * INSERCION EN DOM
          */

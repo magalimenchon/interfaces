@@ -47,6 +47,14 @@ html, body, main, .game, .general-info {
     flex-direction: column;
     align-items: center;
 }
+.ul3{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.ul4{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
 
 .word-runner, .word-congrats{
     /*background-color: rgba(	252,	233,	112, 0.2);*/
