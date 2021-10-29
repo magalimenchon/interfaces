@@ -111,7 +111,6 @@ class Game {
                 this.GUI.setMessage("GAME OVER", "Congratulations, you won!");
                 this.end = true;
                 clearInterval(this.timeOut);
-                
             }
         }, 1000);
     }
