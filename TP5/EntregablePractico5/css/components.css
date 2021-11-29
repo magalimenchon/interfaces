@@ -5,7 +5,9 @@
   align-items: center;
   padding: 7px;
   justify-content: space-evenly;
-  background-color:gold;
+  background-color: gold;
+  width: 180px;
+  height: 58px;
 }
 
 .username {
@@ -17,14 +19,19 @@
 /************   Buttons nav    ************/
 
 .button-nav {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 80px;
-  background-color: crimson;
+  margin: 0 0 0 10px;
+  /*background-color: crimson;*/
+  border: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* icon-home 1 */
@@ -33,23 +40,86 @@
   width: 30px;
   height: 30px;
   margin: 10px 0 0 0;
-  background-color:darkolivegreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.text-icon{
-    margin: 6px 8px 10px 8px;
+.text-icon {
+  margin: 6px 8px 10px 8px;
 }
 
 /****************************************/
 
 /************   logo-inverted    ************/
-.logo-inverted{
-    width: 69.52px;
-    height: 96px;
-    margin: 0 0 0 15px;
-    background-color: lightpink;
+.logo-inverted {
+  width: 69.52px;
+  height: 96px;
+  margin: 0 0 0 15px;
+  /*background-color: lightpink;*/
 }
 
 /****************************************/
 
 /************   Search Bar    ************/
+
+::placeholder {
+  /*  text-black  */
+  color: #2b2b2b;
+}
+
+input {
+  background: #f4f4f4;
+  width: 434px;
+  height: 40px;
+  border: 0.5px solid #2b2b2b;
+  box-sizing: border-box;
+  border-radius: 150px;
+  padding-left: 40px;
+  background-image: url(../images/components/nav/icons/search-bar.svg);
+  background-repeat: no-repeat;
+  background-position-x: 10px;
+  background-position-y: center;
+}
+
+/****************************************/
+
+/************   Nav    ************/
+
+nav {
+  width: 100%;
+  height: 96px;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+li {
+  list-style: none;
+}
+
+.icons {
+  height: 80px;
+  right: 15px;
+  top: calc(50% - 80px / 2);
+  margin-right: 15px;
+}
+
+/****************************************/
+
+/************   Buttons    ************/
+a button {
+  height: 40px;
+  width: 250px;
+  left: 920px;
+  top: 605px;
+  color: #f4f4f4;
+  background: #5e2d7b;
+  border-radius: 5px;
+  border: none;
+}
+
+/****************************************/
