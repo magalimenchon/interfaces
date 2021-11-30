@@ -5,7 +5,6 @@
   align-items: center;
   padding: 7px;
   justify-content: space-evenly;
-  background-color: gold;
   width: 180px;
   height: 58px;
 }
@@ -40,7 +39,6 @@
   background-color: crimson;
   border: none;
 } */
-
 
 a {
   text-decoration: none;
@@ -134,3 +132,32 @@ a button {
 }
 
 /****************************************/
+
+/************   CARD    ************/
+.card {
+  width: 88.8%;
+  background-color: var(--card);
+  height: 88%;
+  background: #eaeaea;
+
+  border: 1px solid var(--dark-grey);
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+main{
+  margin-top: 56px;
+  width: 903px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+/************   TRANSPARENT BUTTONS    ************/
+.button-interaction{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2%;
+  width: 30%;
+  border: none;
+}
