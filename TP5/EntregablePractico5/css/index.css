@@ -1,16 +1,26 @@
-body {
+/* body {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0.0625rem solid black;
   background-color: #f2f2f2;
-}
+  margin: 0;
+} */
+
 .background {
-  width: 83.75rem;
-  height: 58.3125rem;
-  background-color: #f2f2f2;
-  background-image: url(../images/home/SignUp.svg);
+  background-color: var(--primary);
+  /* background-image: url(../images/home/SignUp.svg); */
   background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-block {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 header {
@@ -20,17 +30,33 @@ header {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.block1 {
+  display: flex;
+  justify-content: center;
+}
+
+.block2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
   margin-top: 15px;
 }
 
-img {
-  margin: 50px 0 0 60px;
+.registration {
+  min-width: 360px;
+  margin-bottom: 10px;
+  padding: 5px 10px 0px 10px;
+  border: 1px solid var(--black);
+  border-radius: var(--main-radious);
 }
 
-.login{
+.login {
   background: #f4f4f4;
   /* Dark Grey */
 
@@ -45,7 +71,8 @@ img {
   width: 360px;
   height: 556px;
 }
-form, .register{
+
+form, .register {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +81,7 @@ form, .register{
 }
 
 form section {
-  margin-top: 23px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -78,42 +105,40 @@ form label {
 }
 
 form input {
-  /* White */
   height: 40px;
   width: 250px;
-  left: 55px;
-  top: 126px;
-  border-radius: 0px;
-
-  background: #f4f4f4;
-  /* Black */
-
-  border: 0.5px solid #2b2b2b;
-  box-sizing: border-box;
+  background: var(--white);
+  border: 0.5px solid var(--black);
   border-radius: 3px;
-
-  padding-left: 15px;
 }
 
-form a{
-    margin: 40px 0 23px 0;
+form a {
+  margin: 40px 0 23px 0;
 }
 
 .principal-info {
   display: flex;
 }
 
-section a{
-    color: #9C75B3;
-    
-}
-hr{
-    margin-top: 21px;
+section a {
+  color: #9C75B3;
+
 }
 
-.register button{
-    background-color: #0000EE;
+hr {
+  margin-top: 21px;
 }
-.register h4{
-    margin: 18px 0;
+
+.full-button{
+  background-color: var(--primary-dark);
+  width: 250px;
+  height: 35px;
+}
+
+.register button {
+  background-color: var(--blue-link);
+}
+
+.register h4 {
+  margin: 18px 0;
 }

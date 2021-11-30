@@ -44,6 +44,7 @@
 
 a {
   text-decoration: none;
+  cursor: pointer; 
 }
 
 /* icon-home 1 */
@@ -72,6 +73,9 @@ a {
   /*background-color: lightpink;*/
 }
 
+.main-logo img{
+  max-width: 350px;
+}
 /****************************************/
 
 /************   Search Bar    ************/
@@ -120,6 +124,7 @@ li {
 
 /************   Buttons    ************/
 a button {
+  cursor: pointer; 
   padding: 8px;
   margin: 3px;
   color: var(--white);

@@ -10,12 +10,10 @@
 
 /**********************************/
 
-@import url("https://fonts.googleapis.com/css2?family=Lato");
-
 * {
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif;
+  font-family: Lato, sans-serif;
 }
 
 
@@ -50,7 +48,6 @@ form label,
 button {
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
   line-height: 19px;
   letter-spacing: 0em;
   text-align: center;
@@ -73,12 +70,14 @@ button {
 /************   COLORS    ************/
 
 :root {
+  --main-radious: 5px;
+
   --black: #2b2b2b;
   --dark-grey: #575757;
   --light-grey: #bcbcbc;
   --very-light-grey: #eaeaea;
   --white: #f4f4f4;
-  
+
   --primary-dark: #5e2d7b;
   --primary: #9c75b3;
   --primary-light: #c2a6d3;
@@ -90,3 +89,6 @@ button {
   --edit: #d87e3c;
 }
 
+body{
+  background-color: var(--white);
+}
