@@ -10,7 +10,9 @@
 .background {
   background-color: var(--primary);
   /* background-image: url(../images/home/SignUp.svg); */
-  background-repeat: no-repeat;
+    background-image: url(../images/home/wallpapers/prueba3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
