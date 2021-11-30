@@ -18,10 +18,6 @@
   font-family: "Lato", sans-serif;
 }
 
-body {
-  width: 90rem;
-  height: 64rem;
-}
 
 /************   TEXTS   SIZE    ************/
 h1 {
@@ -74,102 +70,23 @@ button {
   border-radius: 50%;
 }
 
-/************   FILLS   COLORS    ************/
+/************   COLORS    ************/
 
-.fill-black {
-  background-color: #2b2b2b;
+:root {
+  --black: #2b2b2b;
+  --dark-grey: #575757;
+  --light-grey: #bcbcbc;
+  --very-light-grey: #eaeaea;
+  --white: #f4f4f4;
+  
+  --primary-dark: #5e2d7b;
+  --primary: #9c75b3;
+  --primary-light: #c2a6d3;
+  --primary-whitish: #e4d5ed;
+
+  --secondary-whitish: #e4e3ff;
+
+  --blue-link: #0000ee;
+  --edit: #d87e3c;
 }
 
-.fill-dark-grey {
-  background-color: #575757;
-}
-
-.fill-light-grey {
-  background-color: #bcbcbc;
-}
-
-.fill-white {
-  background-color: #f4f4f4;
-}
-
-.fill-secondary-whitish {
-  background-color: #e4e3ff;
-}
-
-.fill-primary-dark {
-  background-color: #5e2d7b;
-}
-
-.fill-primary {
-  background-color: #9c75b3;
-}
-
-.fill-primary-whitish {
-  background-color: #e4d5ed;
-}
-
-.fill-primary-light {
-  background-color: #c2a6d3;
-}
-
-.fill-blue-link {
-  background-color: #0000ee;
-}
-
-.fill-edit {
-  background-color: #d87e3c;
-}
-
-.fill-very-light-grey {
-  background-color: #eaeaea;
-}
-
-/************   TEXTS   COLORS    ************/
-
-.text-black {
-  color: #2b2b2b;
-}
-
-.text-dark-grey {
-  color: #575757;
-}
-
-.text-light-grey {
-  color: #bcbcbc;
-}
-
-.text-white {
-  color: #f4f4f4;
-}
-
-.text-secondary-whitish {
-  color: #e4e3ff;
-}
-
-.text-primary-dark {
-  color: #5e2d7b;
-}
-
-.text-primary {
-  color: #9c75b3;
-}
-
-.text-primary-whitish {
-  color: #e4d5ed;
-}
-
-.text-primary-light {
-  color: #c2a6d3;
-}
-
-.text-blue-link {
-  color: #0000ee;
-}
-
-.text-edit {
-  color: #d87e3c;
-}
-
-.text-very-light-grey {
-  color: #eaeaea;
-}
