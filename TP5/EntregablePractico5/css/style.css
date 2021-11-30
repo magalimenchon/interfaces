@@ -68,6 +68,7 @@ button {
   width: 3.625rem;
   height: 3.625rem;
   border-radius: 50%;
+  background-color: var(--light-grey);
 }
 
 /************   COLORS    ************/
@@ -88,5 +89,7 @@ button {
 
   --blue-link: #0000ee;
   --edit: #d87e3c;
+
+  --card: #EAEAEA;
 }
 

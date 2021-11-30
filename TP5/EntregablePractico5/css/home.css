@@ -49,7 +49,7 @@ section {
   justify-content: space-between;
 }
 
-.famous-vet{
+.famous-vet {
   padding: 46px 0 0 0;
   width: 329px;
   height: 474px;
@@ -97,7 +97,7 @@ h3 {
   padding: 0 12px;
 }
 
-.trending-topic{
+.trending-topic {
   margin-top: 46px;
   padding-top: 30px;
   display: flex;
@@ -105,4 +105,145 @@ h3 {
   width: 329px;
   height: 409px;
   margin-bottom: 13%;
+}
+
+.post {
+  color: var(--black);
+  /* width: 100%;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header-post {
+  width: 100%;
+}
+span {
+  color: var(--primary-dark);
+  font-weight: bold;
+}
+
+.text {
+  padding: 18px;
+  align-self: center;
+}
+/*
+.gallery {
+  width: 95.5%;
+  height: 62%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 18px;
+  background-color:chocolate;
+overflow-x:auto;
+ -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  margin: 0 auto 0 auto;
+  cursor: grab;
+}*/
+/*
+.gallery::-webkit-scrollbar {
+  display: none; 
+  -webkit-overflow-scrolling:touch;
+}*/
+
+.gallery{
+
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+.pic-pet {
+  background-image: url(../images/components/pets/unsplash_Sg3XwuEpybU.svg);
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+.interaction-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 12%;
+}
+
+.icon {
+  margin: 0px;
+  margin-right: 5%;
+}
+.comment {
+  height: 0%;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.text-comment {
+  background-image: none;
+  padding-left: 2%;
+  width: 90%;
+}
+
+.buttons-post{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
 }
