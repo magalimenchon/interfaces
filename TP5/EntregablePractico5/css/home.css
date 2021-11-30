@@ -82,12 +82,9 @@ h3 {
   display: flex;
 }
 
-a button {
-  width: 130%;
-  margin: 8px 2px;
-}
 .button-see-profile {
-  margin-left: 16%;
+  /* margin-left: 16%; */
+  background-color: var(--primary);
 }
 
 .trendings {

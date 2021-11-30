@@ -29,7 +29,7 @@
   border: none;
 }
 
-.button-nav.selected {
+/* .button-nav.selected {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@
   margin: 0 0 0 10px;
   background-color: crimson;
   border: none;
-}
+} */
 
 
 a {
@@ -116,23 +116,14 @@ li {
   list-style: none;
 }
 
-/* .icons {
-  height: 80px;
-  right: 15px;
-  top: calc(50% - 80px / 2);
-  margin-right: 15px;
-} */
-
 /****************************************/
 
 /************   Buttons    ************/
 a button {
-  height: 40px;
-  width: 250px;
-  left: 920px;
-  top: 605px;
-  color: #f4f4f4;
-  background: #5e2d7b;
+  padding: 8px;
+  margin: 3px;
+  color: var(--white);
+  background: var(--primary-dark);
   border-radius: 5px;
   border: none;
 }
