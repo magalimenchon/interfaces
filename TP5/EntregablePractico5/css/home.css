@@ -1,0 +1,111 @@
+aside {
+  width: 417px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 898px;
+}
+
+.advertising-aside {
+  width: 237px;
+  padding: 46px 50px 0 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 898px;
+}
+
+.advertising,
+.advertising-2,
+.advertising-3 {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.advertising {
+  height: 403px;
+  background: url(../images/muro/advertising/736.png);
+}
+
+.advertising-2 {
+  height: 218px;
+  margin: 54px 0;
+  background: url(../images/muro/advertising/Destartraje_y_salud_bucal_para_mis_perros_clinica_veterinaria_chicureo_600x600.png);
+  background-size: cover;
+}
+
+.advertising-3 {
+  height: 123px;
+  left: 46px;
+  top: 775px;
+  background: url(../images/muro/advertising/terminado.png);
+  background-size: cover;
+  background-position-x: -12px;
+}
+
+section {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.famous-vet{
+  padding: 46px 0 0 0;
+  width: 329px;
+  height: 474px;
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  margin-bottom: 20px;
+}
+.suggests {
+  height: 390px;
+  display: flex;
+  flex-direction: column;
+}
+
+.suggest-vet {
+  height: 30%;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.options {
+  width: 55%;
+}
+.options-buttons {
+  display: flex;
+}
+
+a button {
+  width: 130%;
+  margin: 8px 2px;
+}
+.button-see-profile {
+  margin-left: 16%;
+}
+
+.trendings {
+  display: flex;
+  flex-direction: column;
+  background: #e4e3ff;
+  border-radius: 10px;
+  height: 277px;
+  justify-content: space-evenly;
+  padding: 0 12px;
+}
+
+.trending-topic{
+  margin-top: 46px;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 329px;
+  height: 409px;
+  margin-bottom: 13%;
+}

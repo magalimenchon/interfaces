@@ -1,0 +1,16 @@
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+h1{
+    padding: 2%;
+    align-self: center;
+    margin-bottom: 12%;
+}
+
+figure{
+    align-self: flex-end;
+}
