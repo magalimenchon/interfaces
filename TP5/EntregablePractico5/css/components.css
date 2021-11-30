@@ -135,13 +135,7 @@ a button {
 
 /************   CARD    ************/
 .card {
-  width: 88.8%;
-  background-color: var(--card);
-  height: 88%;
-  background: #eaeaea;
-
-  border: 1px solid var(--dark-grey);
-  box-sizing: border-box;
+  background: var(--very-light-grey);
   border-radius: 10px;
 }
 
@@ -157,7 +151,5 @@ main{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 2%;
-  width: 30%;
   border: none;
 }

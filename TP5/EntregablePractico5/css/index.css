@@ -106,7 +106,7 @@ form label {
 
 form input {
   height: 40px;
-  width: 250px;
+  width: 300px;
   background: var(--white);
   border: 0.5px solid var(--black);
   border-radius: 3px;

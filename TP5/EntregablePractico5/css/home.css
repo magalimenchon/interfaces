@@ -1,5 +1,8 @@
+.home-container {
+  margin: 40px 20px 10px 20px;
+}
+
 aside {
-  width: 417px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,12 +10,10 @@ aside {
 }
 
 .advertising-aside {
-  width: 237px;
-  padding: 46px 50px 0 56px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 898px;
 }
 
 .advertising,
@@ -44,72 +45,68 @@ aside {
 }
 
 section {
-  height: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.famous-vet {
-  padding: 46px 0 0 0;
-  width: 329px;
-  height: 474px;
-  display: flex;
-  flex-direction: column;
+section .post {
+  max-width: 660px;
 }
 
 h3 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
+main {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .suggests {
-  height: 390px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .suggest-vet {
-  height: 30%;
-  width: 100%;
-  border-radius: 10px;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  width: 320px;
+  margin-bottom: 5px;
+  background-color: var(--secondary-whitish);
+}
+
+.trending-topic p {
+  margin-bottom: 20px;
 }
 
 .options {
-  width: 55%;
+  margin-left: 10px;
+  padding-top: 10px;
 }
+
+.options a { 
+  margin-right: 5px;
+}
+
 .options-buttons {
   display: flex;
 }
 
 .button-see-profile {
-  /* margin-left: 16%; */
   background-color: var(--primary);
 }
 
-.trendings {
-  display: flex;
-  flex-direction: column;
-  background: #e4e3ff;
-  border-radius: 10px;
-  height: 277px;
-  justify-content: space-evenly;
-  padding: 0 12px;
-}
 
 .trending-topic {
-  margin-top: 46px;
-  padding-top: 30px;
+  background-color: var(--secondary-whitish);
   display: flex;
   flex-direction: column;
-  width: 329px;
-  height: 409px;
-  margin-bottom: 13%;
+  padding: 10px;
+  max-width: 300px;
 }
 
 .post {
   color: var(--black);
-  /* width: 100%;*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -118,6 +115,7 @@ h3 {
 .header-post {
   width: 100%;
 }
+
 span {
   color: var(--primary-dark);
   font-weight: bold;
@@ -127,30 +125,11 @@ span {
   padding: 18px;
   align-self: center;
 }
-/*
+
+
 .gallery {
-  width: 95.5%;
-  height: 62%;
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0 18px;
-  background-color:chocolate;
-overflow-x:auto;
- -ms-overflow-style: none; 
-  scrollbar-width: none; 
-  margin: 0 auto 0 auto;
-  cursor: grab;
-}*/
-/*
-.gallery::-webkit-scrollbar {
-  display: none; 
-  -webkit-overflow-scrolling:touch;
-}*/
-
-.gallery{
-
   position: relative;
-  margin: auto;
+  margin: 0 auto;
 }
 
 /* Next & previous buttons */
@@ -160,38 +139,28 @@ overflow-x:auto;
   top: 50%;
   width: auto;
   padding: 16px;
-  margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 5px;
   user-select: none;
+  background-color: rgba(87, 87, 87, 0.425);
+}
+
+.prev {
+  left: 1px;
 }
 /* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+  right: 1px;
 }
 
-.active, .dot:hover {
-  background-color: #717171;
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(48, 48, 48, 0.8);
 }
+
 
 /* Fading animation */
 .fade {
@@ -202,48 +171,54 @@ overflow-x:auto;
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+
+  to {
+    opacity: 1
+  }
 }
 
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
+  from {
+    opacity: .4
+  }
 
-.pic-pet {
-  background-image: url(../images/components/pets/unsplash_Sg3XwuEpybU.svg);
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
+  to {
+    opacity: 1
+  }
 }
 
 .interaction-post {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  height: 12%;
+  margin: 0 10px 5px 10px;
+
 }
 
-.icon {
-  margin: 0px;
-  margin-right: 5%;
-}
 .comment {
-  height: 0%;
   display: flex;
-  justify-content: space-evenly;
-
+  justify-content: space-between;
+  margin: 15px 5px 5px 5px;
 }
 
 .text-comment {
   background-image: none;
-  padding-left: 2%;
-  width: 90%;
+  margin-left: 10px;
+  width: 100%;
 }
 
-.buttons-post{
+.buttons-post {
   display: flex;
   justify-content: space-between;
-  margin: 0 10px;
+  margin: 10px 5px 5px 5px
+}
+
+.button-interaction{
+  background-color: var(--very-light-grey);
+}
+
+.button-interaction .icon {
+  margin: 0;
 }
