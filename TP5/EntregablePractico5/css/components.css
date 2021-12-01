@@ -3,8 +3,8 @@
 .profile-pic-username {
   display: flex;
   align-items: center;
-  padding: 7px;
-  justify-content: space-evenly;
+  margin: 20px 7px 7px 20px;
+  justify-content: flex-start;
   width: 180px;
   height: 58px;
 }

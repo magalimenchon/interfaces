@@ -50,12 +50,11 @@ button {
   font-size: 16px;
   font-style: normal;
   line-height: 19px;
-  letter-spacing: 0em;
   text-align: center;
 }
 
-button{
-  cursor: pointer; 
+button {
+  cursor: pointer;
 }
 
 .description {
@@ -64,13 +63,14 @@ button{
 }
 
 /************   CIRCLES    ************/
+.circle-small img {
+  max-width: 50px;
+  height: 100%;
+}
 
-.circle {
-  /* w & h = 58 * 58 px */
-  width: 3.625rem;
-  height: 3.625rem;
-  border-radius: 50%;
-  background-color: var(--light-grey);
+.circle img {
+  max-width: 60px;
+  height: 100%;
 }
 
 /************   COLORS    ************/
@@ -96,6 +96,7 @@ button{
 
   --card: #EAEAEA;
 }
+
 
 /* body{
   background-color: var(--white);

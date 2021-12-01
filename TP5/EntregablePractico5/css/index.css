@@ -52,40 +52,29 @@ h2 {
   margin-top: 15px;
 }
 
-.registration {
+.registration, .login {
   min-width: 360px;
   margin-bottom: 10px;
   padding: 5px 10px 0px 10px;
-  border: 1px solid var(--black);
   border-radius: var(--main-radious);
   background-color: var(--white);
 }
 
-.registration h2, label {
+.login{
+  border: 1px solid var(--black);
+}
+
+
+.registration, .login h2, label {
   color: var(--black);
 }
 
-.registration div {
+.registration, .login div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login {
-  background: #f4f4f4;
-  /* Dark Grey */
-
-  border: 1px solid #575757;
-  box-sizing: border-box;
-  border-radius: 3px;
-  margin: 108px 220px 0px 270px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 360px;
-  height: 556px;
-}
 
 form, .register {
   display: flex;
@@ -191,4 +180,40 @@ hr {
 
 .layer-4 {
   background-image: url(../images/home/wallpapers/parallax/4.png);
+}
+
+body{
+  background-color: var(--white);
+}
+
+header h1{
+  background-color: rgba(244, 244, 244, 0.7);
+  border-radius: 5px;
+  padding: 0 4px 3px 4px;;
+}
+
+@media only screen and (max-width: 900px) {
+
+  
+
+  header{
+    margin: 10px 0 10px 0;
+  }
+
+  .main-block {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .main-logo img{
+    max-height: 150px;
+    margin-bottom: 10px;
+  }
+
+  .login{
+    width: 100%;
+    border: none;
+    border-radius: none;
+    margin-bottom: 0;
+  }
 }

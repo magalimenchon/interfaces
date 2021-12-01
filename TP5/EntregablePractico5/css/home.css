@@ -64,6 +64,8 @@ h3 {
 main {
   margin-left: 10px;
   margin-right: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .suggests {
@@ -77,6 +79,7 @@ main {
   width: 320px;
   margin-bottom: 5px;
   background-color: var(--secondary-whitish);
+  padding-left: 5px;
 }
 
 .trending-topic p {
@@ -85,7 +88,8 @@ main {
 
 .options {
   margin-left: 10px;
-  padding-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 3px;
 }
 
 .options a {
@@ -94,6 +98,19 @@ main {
 
 .options-buttons {
   display: flex;
+}
+
+.profile-pic-comment, .comment-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.comment-div{
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .button-see-profile {
@@ -114,6 +131,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-bottom: 25px;
 }
 
 .header-post {
@@ -130,6 +148,15 @@ span {
   align-self: center;
 }
 
+.hidden {
+  display: none;
+}
+
+.comments {
+  flex-direction: column;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 .gallery {
   position: relative;
@@ -198,8 +225,12 @@ span {
 .interaction-post {
   display: flex;
   flex-direction: column;
-  margin: 0 10px 5px 10px;
+  margin: 0 20px 5px 20px;
 
+}
+
+.comment-text{
+  margin: 0 0 0 10px;
 }
 
 .comment {
