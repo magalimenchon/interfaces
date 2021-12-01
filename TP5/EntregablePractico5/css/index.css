@@ -1,11 +1,3 @@
-/* body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0.0625rem solid black;
-  background-color: #f2f2f2;
-  margin: 0;
-} */
 
 .background {
   background-color: var(--primary);
@@ -33,6 +25,14 @@ header {
   margin-bottom: 20px;
 }
 
+header h1, h2 {
+  color: var(--primary-dark);
+}
+
+.principal-info h2 {
+  color: var(--black);
+}
+
 .block1 {
   display: flex;
   justify-content: center;
@@ -54,6 +54,16 @@ h2 {
   padding: 5px 10px 0px 10px;
   border: 1px solid var(--black);
   border-radius: var(--main-radious);
+}
+
+.registration h2, label{
+  color: var(--black);
+}
+
+.registration div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login {
@@ -80,26 +90,24 @@ form, .register {
 
 }
 
+.register {
+  margin-bottom: 20px;
+}
+
 form section {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
 }
 
 form label {
-  height: 40px;
+  height: 30px;
   width: 189px;
-  left: 56px;
-  top: 88px;
-  border-radius: nullpx;
-
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 19px;
-  letter-spacing: 0em;
   text-align: left;
-  color: #575757;
+  color: var(--black);
   display: flex;
   align-items: center;
 }
@@ -121,8 +129,7 @@ form a {
 }
 
 section a {
-  color: #9C75B3;
-
+  color: var(--blue-link)
 }
 
 hr {
@@ -137,6 +144,8 @@ hr {
 
 .register button {
   background-color: var(--blue-link);
+  width: 250px;
+  height: 35px;
 }
 
 .register h4 {

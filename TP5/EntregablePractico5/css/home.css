@@ -10,7 +10,7 @@ aside {
 }
 
 .advertising-aside {
-  width: 300px;
+  min-width: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,25 +23,22 @@ aside {
   border-radius: 5px;
 }
 
+.advertising-plus {
+  max-height: 300px;
+  width: 250px;
+}
+
 .advertising {
-  height: 403px;
-  background: url(../images/muro/advertising/736.png);
+  max-height: 200px;
+  width: 250px;
 }
 
-.advertising-2 {
-  height: 218px;
-  margin: 54px 0;
-  background: url(../images/muro/advertising/Destartraje_y_salud_bucal_para_mis_perros_clinica_veterinaria_chicureo_600x600.png);
-  background-size: cover;
+.advertising-aside figure{
+  margin-bottom: 20px;
 }
-
-.advertising-3 {
-  height: 123px;
-  left: 46px;
-  top: 775px;
-  background: url(../images/muro/advertising/terminado.png);
-  background-size: cover;
-  background-position-x: -12px;
+.advertising-aside img {
+  height: 100%;
+  width: 100%;;
 }
 
 section {
@@ -221,4 +218,8 @@ span {
 
 .button-interaction .icon {
   margin: 0;
+}
+
+.button-interaction p{
+  margin-left: 3px;
 }

@@ -53,6 +53,10 @@ button {
   text-align: center;
 }
 
+button{
+  cursor: pointer; 
+}
+
 .description {
   /* size: 10px; */
   font-size: 0.625rem;
