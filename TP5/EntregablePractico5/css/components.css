@@ -28,18 +28,6 @@
   border: none;
 }
 
-/* .button-nav.selected {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  margin: 0 0 0 10px;
-  background-color: crimson;
-  border: none;
-} */
-
 a {
   text-decoration: none;
   cursor: pointer; 
@@ -139,13 +127,6 @@ a button {
   border-radius: 10px;
 }
 
-main{
-  margin-top: 56px;
-  width: 903px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
 /************   TRANSPARENT BUTTONS    ************/
 .button-interaction{
   display: flex;
