@@ -96,9 +96,9 @@ button{
   --card: #EAEAEA;
 }
 
-body{
+/* body{
   background-color: var(--white);
-}
+} */
 
 /* figure{
   display: block;

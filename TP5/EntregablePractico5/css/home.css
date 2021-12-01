@@ -23,6 +23,11 @@ aside {
   border-radius: 5px;
 }
 
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
 .advertising-plus {
   max-height: 300px;
   width: 250px;
@@ -33,12 +38,14 @@ aside {
   width: 250px;
 }
 
-.advertising-aside figure{
+.advertising-aside figure {
   margin-bottom: 20px;
 }
+
 .advertising-aside img {
   height: 100%;
-  width: 100%;;
+  width: 100%;
+  ;
 }
 
 section {
@@ -81,7 +88,7 @@ main {
   padding-top: 10px;
 }
 
-.options a { 
+.options a {
   margin-right: 5px;
 }
 
@@ -148,6 +155,7 @@ span {
 .prev {
   left: 1px;
 }
+
 /* Position the "next button" to the right */
 .next {
   right: 1px;
@@ -212,7 +220,7 @@ span {
   margin: 10px 5px 5px 5px
 }
 
-.button-interaction{
+.button-interaction {
   background-color: var(--very-light-grey);
 }
 
@@ -220,6 +228,6 @@ span {
   margin: 0;
 }
 
-.button-interaction p{
+.button-interaction p {
   margin-left: 3px;
 }

@@ -61,6 +61,8 @@ a {
 
 .main-logo img{
   max-width: 350px;
+  /* background-color: var(--white); */
+  border-radius: var(--main-radious);
 }
 /****************************************/
 
@@ -72,8 +74,8 @@ a {
 }
 
 input {
-  background: #f4f4f4;
-  width: 434px;
+  background: var(--white);
+  width: 300px;
   height: 40px;
   border: 0.5px solid var(--black);
   box-sizing: border-box;
