@@ -120,6 +120,11 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.contact img {
+    padding: 4px 0 0 4px;
 }
 
 figure.icon img {
@@ -166,4 +171,8 @@ figure.icon img {
 .contacts-item .tex{
     padding-top: 20px;
     text-align: start;
+}
+
+.contacts-item.button{
+    margin-bottom: 0px;
 }

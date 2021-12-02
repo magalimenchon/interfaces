@@ -4,7 +4,7 @@
   flex-direction: row;
 }
 
-.justify-content{
+.justify-content {
   justify-content: center;
 }
 
@@ -73,6 +73,11 @@ main {
   flex-direction: column;
 }
 
+/* main.home{
+  max-height: 800px;
+  overflow-y: auto;
+} */
+
 .suggests {
   display: flex;
   flex-direction: column;
@@ -91,6 +96,10 @@ main {
   margin-bottom: 20px;
 }
 
+.trending-topic h4 {
+  margin-bottom: 10px;
+}
+
 .options {
   margin-left: 10px;
   padding-top: 5px;
@@ -105,13 +114,13 @@ main {
   display: flex;
 }
 
-.profile-pic-comment, .comment-div{
+.profile-pic-comment, .comment-div {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.comment-div{
+.comment-div {
   margin-top: 14px;
   display: flex;
   justify-content: flex-start;
@@ -139,8 +148,36 @@ main {
   margin-bottom: 25px;
 }
 
+.post.promoted button {
+  background-color: transparent;
+}
+
+.post.card.promoted {
+  background-color: #FFFFE4;
+  border: 2px solid var(--primary);
+}
+
+.button-prom {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button-prom *{
+  cursor: pointer;
+}
+
+.button-prom label {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .header-post {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 span {
@@ -234,7 +271,7 @@ span {
 
 }
 
-.comment-text{
+.comment-text {
   margin: 0 0 0 10px;
 }
 

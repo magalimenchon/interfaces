@@ -92,6 +92,10 @@ input {
 /************   Nav    ************/
 
 nav {
+  /* z-index: 1;
+  top: 0px;
+  width: 100%;
+  position:fixed; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -127,6 +131,7 @@ a button {
 .card {
   background: var(--very-light-grey);
   border-radius: 10px;
+
 }
 
 /************   TRANSPARENT BUTTONS    ************/

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 container.innerHTML = t;
                 initChat();
                 initChatContacts();
+                initContacts();
                 container.classList.remove("justify-content");
             }
             else
@@ -71,6 +72,24 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // -------------- chat contacts ------------------- //
+
+    function initContacts() {
+        let list = document.querySelectorAll(".contact");
+
+        list.forEach(item => {
+            item.addEventListener("click", () => {
+                list.forEach(item => {
+                    if (item.classList.contains("selected")) {
+                        item.classList.remove("selected");
+                    }
+                });
+                if (!item.classList.contains("selected")) {
+                    item.classList.add("selected");
+                }
+            });
+        })
+    }
 
 
 });
