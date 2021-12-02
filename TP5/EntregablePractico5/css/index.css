@@ -194,8 +194,10 @@ header h1{
 
 @media only screen and (max-width: 900px) {
 
+  .parrallax{
+    display: none;
+  }
   
-
   header{
     margin: 10px 0 10px 0;
   }
@@ -210,7 +212,7 @@ header h1{
     margin-bottom: 10px;
   }
 
-  .login{
+  .login, .registration{
     width: 100%;
     border: none;
     border-radius: none;

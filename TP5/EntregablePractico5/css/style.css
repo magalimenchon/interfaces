@@ -16,6 +16,9 @@
   font-family: Lato, sans-serif;
 }
 
+a *{
+  cursor: pointer;
+}
 
 /************   TEXTS   SIZE    ************/
 h1 {
@@ -95,17 +98,29 @@ button {
   --edit: #d87e3c;
 
   --card: #EAEAEA;
+  --chat: #C2A6D3;
 }
-
-
-/* body{
-  background-color: var(--white);
-} */
-
-/* figure{
+.lds-dual-ring {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+.lds-dual-ring:after {
+  content: " ";
   display: block;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-} */
+  width: 50px;
+  height: 50px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 10px solid var(--black);
+  border-color: var(--black) transparent var(--black) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -62,12 +62,53 @@ document.addEventListener("DOMContentLoaded", () => {
         showCommentButton.addEventListener("click", () => {
             if (comments.classList.contains("hidden")) {
                 comments.classList.remove("hidden");
-                console.log(comments.classList);
             }
             else
                 comments.classList.add("hidden");
-                console.log(comments.classList);
         });
     });
+
+    // -------------- chat ------------------- //
+
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+
+        let input = document.querySelector('.text-message');
+        let text = input.value
+
+        input.value = '';
+        input.focus();
+
+        let newDiv = document.createElement("div");
+
+        let textNode = document.createTextNode(text);
+        let p = document.createElement("p");
+        p.appendChild(textNode);
+
+        newDiv.appendChild(p);
+
+        newDiv.classList.add("message-out")
+        document.querySelector(".chat-center").appendChild(newDiv);
+    }
+
+    document.getElementById('chat').addEventListener('submit', onFormSubmit);
+
+    // -------------- chat contacts ------------------- //
+
+    let chatList = document.querySelectorAll(".chat-item");
+
+    chatList.forEach(item => {
+        item.addEventListener("click", () =>{ 
+            chatList.forEach(item => {
+                if(item.classList.contains("selected")){
+                    item.classList.remove("selected");
+                }
+            });
+            if(!item.classList.contains("selected")){
+                item.classList.add("selected");
+            }
+        });
+    })
+
 
 });
