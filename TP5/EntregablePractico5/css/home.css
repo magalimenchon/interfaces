@@ -86,7 +86,7 @@ main {
 .suggest-vet {
   display: flex;
   width: 320px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   background-color: var(--secondary-whitish);
   padding-left: 5px;
 }
