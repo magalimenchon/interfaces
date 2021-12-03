@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = t;
         initGalleries();
         initShowComments();
-        initPromotePost();
         initSearchFilter();
         container.classList.remove("justify-content");
       }
@@ -23,20 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setTimeout(TraerProductos, 1500);
-
-  // -------------- Promote post ------------------- //
-
-  function initPromotePost() {
-    let posts = document.querySelectorAll(".post");
-
-    posts.forEach(post => {
-      let button = post.querySelector(".button-prom");
-      button.addEventListener("click", () => {
-        post.classList.add("promoted");
-      })
-    })
-
-  }
 
   // -------------- Galleries ------------------- //
 

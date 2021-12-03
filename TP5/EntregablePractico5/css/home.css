@@ -305,6 +305,11 @@ span {
   margin-bottom: 20px;
 }
 
+.button-interaction{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .button-interaction .icon {
   margin: 0;
 }
