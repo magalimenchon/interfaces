@@ -27,34 +27,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // -------------- Promote post ------------------- //
 
-    function initPromotePost(){
+    function initPromotePost() {
         let posts = document.querySelectorAll(".post");
-        
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        let close = document.querySelector(".button-cancel");
+        let send = document.querySelector(".button-send");
+
         posts.forEach(post => {
             let button = post.querySelector(".button-prom");
-            button.addEventListener("click", ()=>{
+
+            button.onclick = function () {
+                modal.style.display = "block";
+            }
+            
+            send.onclick = function () {
                 post.classList.add("promoted");
-            console.log(post.firstChild.nextSibling.lastChild);
-               post.firstChild.nextSibling.lastChild = "Promocionada";
-            })
+                button.innerHTML = "";
+                modal.style.display = "none";
+            }
+
+            close.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
         })
-        
     }
 
     // -------------- Galleries ------------------- //
 
-    function initGalleries(){
+    function initGalleries() {
         let galleries = document.querySelectorAll(".gallery");
 
         galleries.forEach(item => {
-    
+
             let slideIndex = 1;
             showSlides(slideIndex);
-    
+
             function plusSlides(n) {
                 showSlides(slideIndex += n);
             }
-    
+
             function showSlides(n) {
                 let i;
                 let slides = item.querySelectorAll(".fade");
@@ -65,19 +87,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 slides[slideIndex - 1].style.display = "block";
             }
-    
+
             let nextButton = item.querySelector(".next");
-    
+
             nextButton.addEventListener('click', () => {
                 plusSlides(1);
             });
-    
+
             let prevButton = item.querySelector(".prev");
-    
+
             prevButton.addEventListener('click', () => {
                 plusSlides(-1);
             });
-    
+
         });
     }
 
