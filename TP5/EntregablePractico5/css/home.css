@@ -50,7 +50,6 @@ aside {
 .advertising-aside img {
   height: 100%;
   width: 100%;
-  ;
 }
 
 section {
@@ -164,7 +163,8 @@ main {
   justify-content: center;
   align-items: center;
 }
-.button-prom *{
+
+.button-prom * {
   cursor: pointer;
 }
 
@@ -202,8 +202,14 @@ span {
 
 .gallery {
   position: relative;
-  margin: 0 auto;
 }
+
+
+.fade img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 
 /* Next & previous buttons */
 .prev, .next {
@@ -242,6 +248,7 @@ span {
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
+
 }
 
 @-webkit-keyframes fade {

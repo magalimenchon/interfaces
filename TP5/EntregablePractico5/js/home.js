@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
             function showSlides(n) {
                 let i;
-                let slides = item.querySelectorAll(".mySlides");
+                let slides = item.querySelectorAll(".fade");
                 if (n > slides.length) { slideIndex = 1 }
                 if (n < 1) { slideIndex = slides.length }
                 for (i = 0; i < slides.length; i++) {
