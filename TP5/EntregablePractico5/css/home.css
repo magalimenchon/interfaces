@@ -191,7 +191,7 @@ span {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .comments {
@@ -302,6 +302,9 @@ span {
 
 .button-interaction {
   background-color: var(--very-light-grey);
+  border-radius: 5px;
+  padding: 4px 5px;
+  margin-top: 0;
 }
 
 .button-interaction .icon {
@@ -310,4 +313,12 @@ span {
 
 .button-interaction p {
   margin-left: 3px;
+}
+
+.button-interaction:hover{
+  background-color: rgba(48, 48, 48, 0.15);
+}
+
+.button-nav:hover{
+  background-color: rgba(48, 48, 48, 0.15);
 }

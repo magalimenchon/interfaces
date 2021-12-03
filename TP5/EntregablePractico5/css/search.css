@@ -3,13 +3,21 @@
   justify-content: space-between;
 }
 
+.advertising-left{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 /*se repite en css de home*/
 .advertising-4,
-.advertising-5 {
+.advertising-5,
+.advertising-6 {
   width: 100%;
   border-radius: 5px;
 }
-.advertising-4 {
+
+.advertising-4, .advertising-6 {
   background: url(../images/search/p1.svg) no-repeat;
   height: 489px;
 }
@@ -19,8 +27,12 @@
 }
 
 .left-side {
-  background-color: cadetblue;
   width: 25%;
+  align-items: flex-start;
+}
+
+.left-side h2{
+  margin-bottom: 12%;
 }
 
 main{
@@ -78,4 +90,22 @@ div a button{
 
 .user-data figure{
     margin-right: 15px;
+}
+
+.filter{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: 25%;
+}
+
+.button-filter{
+ width: 250px;
+ padding: 1rem 3rem;
+}
+
+.selected-button{
+  background-color:var(--primary-light);
+  color: var(--dark);
 }

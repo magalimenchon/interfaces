@@ -115,7 +115,7 @@ li {
 /****************************************/
 
 /************   Buttons    ************/
-a button {
+a button, .button-filter {
   cursor: pointer; 
   padding: 8px;
   margin: 3px;
