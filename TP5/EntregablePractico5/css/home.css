@@ -21,13 +21,6 @@ aside {
   align-items: center;
 }
 
-.advertising,
-.advertising-2,
-.advertising-3 {
-  width: 100%;
-  border-radius: 5px;
-}
-
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -48,7 +41,6 @@ aside {
 }
 
 .advertising-aside img {
-  height: 100%;
   width: 100%;
 }
 
@@ -159,9 +151,10 @@ main {
 .button-prom {
   cursor: pointer;
   display: flex;
-  flex-direction: column;
+ /* flex-direction: column;*/
   justify-content: center;
   align-items: center;
+  margin-right: 15px;
 }
 
 .button-prom * {
@@ -288,11 +281,16 @@ span {
   margin: 15px 5px 5px 5px;
 }
 
-.text-comment {
+.text-comment, .text-message {
   background-image: none;
-  margin-left: 10px;
   width: 100%;
+  padding-left: 3%;
 }
+
+.text-comment{
+  margin-left: 10px;
+}
+
 
 .buttons-post {
   display: flex;
@@ -300,8 +298,7 @@ span {
   margin: 10px 5px 5px 5px
 }
 
-.button-interaction {
-  background-color: var(--very-light-grey);
+.button-interaction, .button-prom {
   border-radius: 5px;
   padding: 4px 5px;
   margin-top: 0;
@@ -315,10 +312,13 @@ span {
   margin-left: 3px;
 }
 
-.button-interaction:hover{
+.button-interaction:hover,
+.button-prom:hover,
+.button-nav:hover {
   background-color: rgba(48, 48, 48, 0.15);
 }
 
-.button-nav:hover{
-  background-color: rgba(48, 48, 48, 0.15);
+.gallery{
+  display: flex;
+  justify-content: center;
 }

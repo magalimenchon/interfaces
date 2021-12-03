@@ -1,6 +1,7 @@
 .advertising-aside {
   display: flex;
   justify-content: space-between;
+  height: 100%;
 }
 
 .advertising-left{
@@ -9,34 +10,29 @@
   justify-content: center;
 }
 
-/*se repite en css de home*/
-.advertising-4,
-.advertising-5,
-.advertising-6 {
-  width: 100%;
-  border-radius: 5px;
+.search-persons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.advertising-4, .advertising-6 {
-  background: url(../images/search/p1.svg) no-repeat;
-  height: 489px;
-}
-.advertising-5 {
-  background: url(../images/search/p2.svg) no-repeat;
-  height: 313px;
+.card h2{
+  align-self: center;
+  color: var(--primary-dark);
+  padding: 5%;
 }
 
-.left-side {
-  width: 25%;
-  align-items: flex-start;
+.left-side h3{
+  align-self: flex-start;
 }
 
-.left-side h2{
-  margin-bottom: 12%;
+.post:hover{
+  box-shadow:inset 0 13px 0 0 var(--primary-light) !important;
 }
 
 main{
-  width: 50%;
+  width: 40%;
+  height: 100%;
 }
 .card {
   height: 100%;
@@ -62,7 +58,7 @@ main{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4%;
+  padding: 0 4% 8.5%;
 }
 
 .user-data {
@@ -96,8 +92,12 @@ div a button{
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: center;
-  height: 25%;
+  justify-content: space-evenly;
+ /* align-items: center;*/
+  height: 30%;
+  padding: 2% 0;
+  /*ver*/
+  background-color: transparent;
 }
 
 .button-filter{
@@ -108,4 +108,19 @@ div a button{
 .selected-button{
   background-color:var(--primary-light);
   color: var(--dark);
+}
+
+.left-side{
+  width: 20%;
+  display: initial;
+  height: 100%;
+}
+
+.advertising {
+  max-height: none !important;
+  width: 250px;
+}
+
+.space-advertising{
+align-items: initial !important;
 }

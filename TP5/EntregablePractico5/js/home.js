@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let button = post.querySelector(".button-prom");
             button.addEventListener("click", ()=>{
                 post.classList.add("promoted");
+            console.log(post.firstChild.nextSibling.lastChild);
+               post.firstChild.nextSibling.lastChild = "Promocionada";
             })
         })
         

@@ -1,0 +1,22 @@
+body{
+    background-color: white;
+}
+
+button{
+    font-size: larger;
+    padding: 20%;
+    text-decoration: none;
+    cursor: pointer; 
+    padding: 8px;
+    margin: 3px;
+    color: var(--white);
+    background: var(--primary-dark);
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover{
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: bolder;
+}

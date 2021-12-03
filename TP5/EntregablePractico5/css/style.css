@@ -155,3 +155,7 @@ main::-webkit-scrollbar-thumb:active {
   background: rgb(68, 68, 68);
   border-radius: 10px;
 } */
+
+.fixed{
+  position: sticky;
+}
