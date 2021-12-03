@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let comments = post.querySelector(".comments");
 
         showCommentButton.addEventListener("click", () => {
+
             if (comments.classList.contains("hidden")) {
                 comments.classList.remove("hidden");
                 console.log(comments.classList);
@@ -70,4 +71,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // -------------- change page search ------------------- //
+
+    let searchBar = document.querySelector('.search-bar');
+
+    searchBar.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            //set time Out de carga
+            	
+            location.assign('search.html');
+        }
+    });
+
+
+    // -------------- filter search ------------------- //
+
+    let buttonsFilter = document.querySelectorAll('.button-filter');
+    let sections = document.querySelectorAll('.card-search');
+
+    buttonsFilter.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            sections.forEach(section => {
+                if(section.id === button.id){
+                    if(section.classList.contains("hidden")){
+                        section.classList.remove("hidden");
+                    }
+                }
+                else{
+                    if(!section.classList.contains("hidden")){
+                        section.classList.add("hidden");
+                    }
+                }
+            });
+            buttonsFilter.forEach(buttonColor => {
+                if(buttonColor.id === button.id){
+                    if(!buttonColor.classList.contains("selected-button")){
+                        buttonColor.classList.add("selected-button");
+                    }
+                }
+                else{
+                    if(buttonColor.classList.contains("selected-button")){
+                        buttonColor.classList.remove("selected-button");
+                    }
+                }
+            });
+        });
+    });
 });
