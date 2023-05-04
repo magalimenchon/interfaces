@@ -9,6 +9,13 @@ html, body, main, .game, .general-info {
     height: 100%;
 }
 
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 @font-face {
     font-family: 'CF Cherokee Regular';
     src: url('../assets/fonts/CFCherokeeRegular.ttf') format('truetype');
@@ -37,137 +44,158 @@ html, body, main, .game, .general-info {
     font-weight: normal;
 }
 
-.general-info{
+.general-info {
     background-color: #fce970;
     width: calc(1920px / 2);
     height: calc(1080px / 2);
 }
-.information{
+
+.information {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.word-runner, .word-congrats{
-    background-color: rgba(		47, 0, 6, 0.2);
-    border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%;
+.word-runner, .word-congrats {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
     text-align: center;
     color: #2f0006;
-    padding: 2vh;
+    padding: 1.5rem;
     top: 60px;
     font-family: 'Carnevalee Freakshow';
 }
 
-.word-runner{
-    width:80%;
-    height:50px;
-    font-size: 5vh;
+.word-runner {
+    width: 80%;
+    height: 50px;
+    font-size: 2.5rem;
 }
-ul{
-    font-size: 5vh;
+
+ul {
+    font-size: 2.5rem;
+    margin: 1.5rem 0;
 }
-h2, h3{
+
+/* 5vh = 3rem */
+h2, h3 {
     font-family: 'CF Cherokee Regular';
-    font-size: 10vh;
+    font-size: 6rem;
     margin: 0px;
 }
 
-h3{
-    font-size: 7vh;
+h3 {
+    font-size: 3rem;
 }
 
-.button-custom-background, .button-custom-avatar{
-    margin: 0vh 13vh 10vh 4vh;
+.button-custom-background, .button-custom-avatar {
+    margin: 3rem;
     font-family: 'Vanilla Whale';
     border-radius: 30%;
 }
-.button-color-background-with-day{
+
+.button-color-background-with-day {
     background-color: #4c0654;
 }
-.button-color-avatar-with-cowboy{
+
+.button-color-avatar-with-cowboy {
     background-color: #333333;
 }
 
-.button-color-background-with-night{
+.button-color-background-with-night {
     background-color: #d74e1d;
 }
 
-.button-color-avatar-with-cowgirl{
+.button-color-avatar-with-cowgirl {
     background-color: #3ed787;
 }
 
-.word-congrats{
+.word-congrats {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    width:80%;
-    height:80%;
-    border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%;
-    font-size: 10vh;
+    width: 80%;
+    height: 80%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    font-size: 3rem;
 }
 
-button{
+button {
     font-family: 'Carnevalee Freakshow';
-    font-size: 5.5vh;
+    font-size: 3rem;
     background-color: #2f0006;
     color: #fce970;
 }
-.general-info h1{
+
+.general-info h1 {
     font-family: 'Rio Grande Striped';
-    font-size: 20vh;
+    font-size: 8rem;
+    text-align: center;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
 
-.score, .limit-time{
-    background-color: rgba(		47, 0, 6, 0.2);
-    border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%;
+.score, .limit-time {
+    background-color: rgba(47, 0, 6, 0.2);
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
     text-align: center;
     color: #2f0006;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row-reverse;
-    padding: 2vh;
+    padding: 1rem;
     font-family: 'Carnevalee Freakshow';
     align-self: flex-start;
-    margin-left: 4vh;
-    border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%;
-    font-size: 7vh;
+    margin-left: 2rem;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    font-size: 3rem;
 }
 
-.limit-time{
+.limit-time {
     margin-left: 21vh;
     font-size: 5vh;
     font-family: 'CF Cherokee Regular';
     flex-direction: row;
 }
-.number-limit-time{
+
+.number-limit-time {
     font-family: 'CF Cherokee Regular'
 }
-.number-score, .number-limit-time{
+
+.number-score, .number-limit-time {
     margin: 1vh;
 }
 
-footer{
+footer {
     text-align: center;
     color: #fce970;
-    background-color:#2f0006;
+    background-color: #2f0006;
     font-family: 'Carnevalee Freakshow';
     font-size: 5.5vh;
 }
 
-.game, .general-info, main{
+footer p {
+    margin: 1rem;
+}
+
+.game, .general-info, main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.game, .general-info {
+    width: calc(1920px / 2);
+    height: calc(1080px / 2);
 }
 
 #avatar {
@@ -175,7 +203,7 @@ footer{
     position: absolute;
 }
 
-.running-cowboy{
+.running-cowboy {
     background: url(../images/Run-spritesheet.png) repeat-x;
     width: calc(4150px / 10 / 3);
     height: calc(507px / 3);
@@ -189,12 +217,13 @@ footer{
     0% {
         background-position: 0
     }
+
     100% {
         background-position: calc(-4150px /3)
     }
 }
 
-.running-cowgirl{
+.running-cowgirl {
     background: url(../images/chica/editadas/Run-spritesheet.png) repeat-x;
     width: calc(3307px / 8 / 3);
     height: calc(507px / 3);
@@ -208,17 +237,18 @@ footer{
     0% {
         background-position: 0
     }
+
     100% {
         background-position: calc(-3307px / 3)
     }
 }
 
 .jumping-cowboy {
-    
+
     width: calc(4070px / 10 / 3);
     height: calc(536px / 3);
     background: url(../images/Jump-spritesheet.png) repeat-x;
-    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSpriteCowboy 1.2s steps(10) forwards;
+    animation: jump 1.2s cubic-bezier(.24, .66, .62, .99), jumpSpriteCowboy 1.2s steps(10) forwards;
     background-size: calc(4070px / 3);
     bottom: 45px;
     left: 100px;
@@ -228,17 +258,18 @@ footer{
     0% {
         background-position: 0
     }
+
     100% {
         background-position: calc(-4070px / 3)
     }
 }
 
 .jumping-cowgirl {
-    
+
     width: calc(4014px / 10 / 3);
     height: calc(536px / 3);
     background: url(../images/chica/editadas/Jump-spritesheet.png) repeat-x;
-    animation: jump 1.2s cubic-bezier(.24,.66,.62,.99), jumpSpriteCowgirl 1.2s steps(10) ;
+    animation: jump 1.2s cubic-bezier(.24, .66, .62, .99), jumpSpriteCowgirl 1.2s steps(10);
     background-size: calc(4014px / 3);
     bottom: 45px;
     left: 100px;
@@ -248,20 +279,21 @@ footer{
     0% {
         background-position: 0
     }
+
     100% {
         background-position: calc(-4014px / 3)
     }
 }
 
-.dying-cowgirl{
+.dying-cowgirl {
     background: url(../images/chica/editadas/Dead-spritesheet.png) repeat-x;
 }
 
-.dying-cowboy{
+.dying-cowboy {
     background: url(../images/Dead-spritesheet.png) repeat-x;
 }
 
-.dying-cowboy, .dying-cowgirl{
+.dying-cowboy, .dying-cowgirl {
     width: calc(5880px / 10 / 3);
     height: calc(600px / 3);
     background-size: calc(5880px / 3);
@@ -276,6 +308,7 @@ footer{
     0% {
         background-position: 0
     }
+
     100% {
         background-position: -5880px
     }
@@ -285,15 +318,17 @@ footer{
     0% {
         top: 320px;
     }
+
     50% {
         top: -50px;
     }
+
     100% {
         top: 320px;
     }
 }
 
-.colision{
+.colision {
     margin-left: 30px;
     margin-right: 40px;
     height: 100%;
@@ -314,13 +349,15 @@ footer{
     height: calc(74px * 0.70);
     background-size: contain;
 }
-.cactus2{
+
+.cactus2 {
     background: url(../images/assets/Cactus2.png) repeat-x;
     bottom: 45px;
     width: 70px;
     height: 45px;
 }
-.skeleton{
+
+.skeleton {
     background: url(../images/assets/Skeleton.png) repeat-x;
     bottom: 45px;
     width: calc(150px * 0.75);
@@ -332,6 +369,7 @@ footer{
     0% {
         right: -50px;
     }
+
     100% {
         right: 970px;
     }
@@ -341,17 +379,19 @@ footer{
     0% {
         opacity: 1;
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
-        transform: translate(0,-50px) rotateY(1080deg);
-        
+        transform: translate(0, -50px) rotateY(1080deg);
+
     }
 }
 
-.collectible-img{
+.collectible-img {
     background: url(../images/assets/Trophy.png) repeat-x;
     width: calc(227px * 0.10);
     height: calc(243px * 0.10);
@@ -360,7 +400,8 @@ footer{
     margin-top: 1vh;
     filter: opacity(80%);
 }
-.collectible{
+
+.collectible {
     background: url(../images/assets/Trophy.png) repeat-x;
     bottom: 340px;
     width: calc(227px * 0.20);
@@ -376,25 +417,33 @@ footer{
     background-size: cover;
 }
 
-.moving{
+.moving {
     animation-name: scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-.coverLayer{
-    background: grey;
-    width: 140px;
-    height: 560px;
+.cover {
+    width: 100%;
+    height: 100%;
     position: relative;
 }
-.cl-left{
-    top: 285px;
-    right: 550px;
+
+.coverLayer {
+    position: absolute;
+    background: grey;
+    width: 140px;
+    height: 640px;
 }
-.cl-right{
-    top: -285px;
-    left: 550px;
+
+.cl-left {
+    top: -40px;
+    left: -140px;
+}
+
+.cl-right {
+    top: -40px;
+    right: -140px;
 }
 
 .layer-night-9 {
@@ -444,10 +493,10 @@ footer{
     background-image: url(../images/parallax/night/0-Floor.png);
     animation-duration: 7s;
     background-size: calc(1920px /2);
-    position: absolute; 
-    bottom: 0;  
-    width: 100%; 
-    height: 50px; 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
 }
 
 
@@ -498,18 +547,18 @@ footer{
     background-image: url(../images/assets/0-Floor.png);
     animation-duration: 7s;
     background-size: calc(1920px /2);
-    position: absolute; 
-    bottom: 0;  
-    width: 100%; 
-    height: 50px; 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
 }
 
 @keyframes scroll {
     0% {
         background-position-x: 0px
     }
+
     100% {
         background-position-x: -1920px
     }
 }
-
