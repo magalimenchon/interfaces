@@ -1,94 +1,93 @@
 document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
 
-    "use strict";
+  //---Elements---
 
+  //Canvas
+  let canvas = document.querySelector("#js-canvas");
+  const ctx = canvas.getContext("2d");
 
-    //---Elements---
+  //Selector color
+  const selectorColor = document.querySelector("#js-input-color");
 
+  //Stroke thickness
+  const range = document.querySelector("#js-input-thickness");
 
-    //Canvas
-    let canvas = document.querySelector('#js-canvas');
-    const ctx = canvas.getContext("2d");
+  //Lapiz
+  const buttonPencil = document.querySelector("#js-button-pencil");
+  let isMouseDown = false; //si está presionando el mouse para dibujar
 
-    //Selector color
-    const selectorColor = document.querySelector('#js-input-color');
+  //Goma
+  const buttonErase = document.getElementById("js-button-erase");
+  let borrar = false;
 
-    //Stroke thickness
-    const range = document.querySelector('#js-input-thickness');
+  //---Functions---
 
-    //Lapiz
-    const buttonPencil = document.querySelector('#js-button-pencil');
-    let isMouseDown = false;    //si está presionando el mouse para dibujar
+  //#regionDraw
 
-    //Goma
-    const buttonErase = document.getElementById("js-button-erase");
-    let borrar = false;
+  //Arranca a dibujar:
+  function startDraw(e) {
+    isMouseDown = true;
+    //Dibuja también cuando clickea
+    draw(e);
+  }
 
-    //---Functions---
+  //Termina de dibujar:
+  function endDraw() {
+    isMouseDown = false;
+    //Corta la continuación del trazado de la línea.
+    ctx.beginPath();
+  }
 
-    //#regionDraw
+  //Está dibujando una linea:
+  function draw(e) {
+    console.log(e.srcElement.offsetTop, e.srcElement.offsetLeft);
+    if (isMouseDown) {
+      //Caracteristicas de la línea
 
-    //Arranca a dibujar:
-    function startDraw(e) {
-        isMouseDown = true;
-        //Dibuja también cuando clickea
-        draw(e);
-    };
+      // si tiene que borrar pinta de blanco, si no selecciona el color
+      if (borrar) ctx.strokeStyle = "#FFFFFF";
+      else ctx.strokeStyle = selectorColor.value;
 
-    //Termina de dibujar:
-    function endDraw() {
-        isMouseDown = false;
-        //Corta la continuación del trazado de la línea.
-        ctx.beginPath();
-    };
+      // define grosor de la linea
+      ctx.lineWidth = range.value;
+      //Grafica con el color del selector.
+      ctx.lineCap = "round"; //Para que dibuje en redondo
 
-    //Está dibujando una linea:
-    function draw(e) {
+      //Se define el ancho de la linea (simulando un punto)
+      ctx.lineTo(
+        e.layerX - e.srcElement.offsetLeft,
+        e.layerY - e.srcElement.offsetTop
+      ); //El trazo de la línea es el de las posiciones del mouse dentro del canvas.
+      ctx.stroke(); //Obligatorio para que grafique la línea
 
-        if (isMouseDown) {
-            //Caracteristicas de la línea
+      //Se agrega la ruta para que se  vea menos pixeleado, definida desde las coordenadas dadas.
+      ctx.beginPath();
+      ctx.moveTo(
+        e.layerX - e.srcElement.offsetLeft,
+        e.layerY - e.srcElement.offsetTop
+      );
+    }
+  }
+  //#endRegion
 
-            // si tiene que borrar pinta de blanco, si no selecciona el color
-            if(borrar)
-            ctx.strokeStyle = "#FFFFFF"; 
-            else
-            ctx.strokeStyle = selectorColor.value; 
+  //#regionEventsListeners
 
-            // define grosor de la linea
-            ctx.lineWidth = range.value;
-              //Grafica con el color del selector.
-            ctx.lineCap = "round"; //Para que dibuje en redondo
+  //Define eventos para dibujar sobre el canvas cuando se usa el botón del lapiz.
+  buttonPencil.addEventListener("click", () => {
+    borrar = false;
+    canvas.addEventListener("mousedown", startDraw);
+    window.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("mousemove", draw);
+  });
 
-            //Se define el ancho de la linea (simulando un punto)
-            ctx.lineTo(e.layerX, e.layerY); //El trazo de la línea es el de las posiciones del mouse dentro del canvas.
-            ctx.stroke();   //Obligatorio para que grafique la línea
+  //Define eventos para dibujar sobre el canvas cuando se usa el botón del Goma de borrar.
+  buttonErase.addEventListener("click", () => {
+    borrar = true;
+    canvas.addEventListener("mousedown", startDraw);
+    window.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("mousemove", draw);
+  });
 
-            //Se agrega la ruta para que se  vea menos pixeleado, definida desde las coordenadas dadas.
-            ctx.beginPath();
-            ctx.moveTo(e.layerX, e.layerY);
-        }
-
-    };
-    //#endRegion
-
-    //#regionEventsListeners
-
-    //Define eventos para dibujar sobre el canvas cuando se usa el botón del lapiz.
-    buttonPencil.addEventListener('click', () => {
-        borrar = false;
-        canvas.addEventListener('mousedown', startDraw);
-        window.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mousemove', draw);
-    });
-
-    //Define eventos para dibujar sobre el canvas cuando se usa el botón del Goma de borrar.
-    buttonErase.addEventListener('click', () => {
-        borrar = true;
-        canvas.addEventListener('mousedown', startDraw);
-        window.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mousemove', draw);
-    });
-
-    //#endRegion
-
+  //#endRegion
 });
